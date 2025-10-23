@@ -25,7 +25,8 @@ docs/
 │   └── short.md                  # PRD 摘要/提要
 └── tdd/                          # 技术设计文档（TDD/HLD，待补充）
 └── adr/                          # Architecture Decision Records 规范
-
+└── Prism-xOS/                    # iOS 、macOS 项目工程目录
+└── Prism-Android/                # Android 项目工程目录
 ```
 
 最新 PRD：

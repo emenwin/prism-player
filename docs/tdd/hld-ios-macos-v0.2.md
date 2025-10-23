@@ -9,6 +9,7 @@
 
 - 产品目标（摘自 PRD）：
   - 本地媒体播放 + 端侧 ASR（离线）→ 生成带时间戳字幕，边播边出字；
+  - 可选字幕翻译（离线优先，首批英→中），与播放同步展示与导出；
   - 字幕呈现（样式、开关）与导出（SRT 必选，VTT 选）；
   - 模型管理（下载/导入/删除）、语言选择、缓存与设置；
   - i18n/a11y 与隐私合规（默认离线）。
@@ -21,6 +22,7 @@
 - 时间同步偏差 ≤ ±200ms（以播放器当前时间为唯一时钟源）。
 - 端侧处理率 RTF：高端 ≥ 1.0；中端 ≥ 0.5；入门 ≥ 0.3。
 - 稳定性：播放中字幕连续可见；导出成功率 ≥ 99%。
+- 翻译延迟：自 ASR 段产生到译文段渲染的耗时 P95 ≤ 2s（基础版目标）。
 
 技术手段：
 - 预加载 30s 音频（可配 10/30/60s），首帧优先采用 5–10s 极速窗口并行抽取与推理；
@@ -67,10 +69,16 @@
   - 职责：音频片段与中间产物缓存（≤10MB），内存警告响应；
   - 实现：基于文件缓存 + SQLite 索引；LRU 淘汰；收到内存警告仅保留“当前播放 ±15s”。
 - ExportService（SRT/VTT 导出）
-  - 职责：汇总片段、格式化时间戳、UTF-8 编码、空间检查、文件命名与分享；
-  - 实现：SRT 必选、VTT 可选；<源文件名>.<locale>.srt。
+  - 职责：汇总片段（支持选择原文轨或译文轨），格式化时间戳、UTF-8 编码、空间检查、文件命名与分享；
+  - 实现：SRT 必选、VTT 可选；<源文件名>.<locale>.srt；双语导出（可选，后续版本）。
 - MetricsService（离线指标与诊断）
   - 职责：首帧时间、段耗时、失败率、模型选择分布；诊断包（配置/设备/时序日志，脱敏）。
+ - TranslationEngine（翻译引擎，协议 + 多后端）
+  - 职责：将 ASR 原文片段翻译为目标语言；支持取消与批量；返回与原片段对齐的译文文本。
+  - 后端（候选）：
+    - 本地 NMT（如 Marian/NLLB 的精简/量化版）经 Swift 封装（MLX 优先在 macOS）。
+    - 量化小型通用 LLM 翻译（实验，受体积与质量约束）。
+  - 路径：默认离线；当本地不支持所选语对时，提示下载对应模型；（可选）用户显式同意后可启用联网文本翻译后端（仅上传转写文本）。
 
 ### 2.2 并发与调度
 
@@ -102,10 +110,12 @@
 
 ### 4.1 领域模型（Swift 类型示意）
 
-- Segment：{ id, mediaId, startMs, endMs, text, confidence [0..1], lang, createdAt }
+- Segment：{ id, mediaId, trackId, startMs, endMs, text, confidence [0..1], lang, originSegmentId?, createdAt }
 - WindowIndex：{ id, mediaId, rangeStartMs, rangeEndMs, status (pending/running/done/failed), lastTriedAt }
 - ModelMetadata：{ id, displayName, langSet, sizeBytes, quantization, sha256, version, installedAt }
-- Settings：{ subtitleOn, fontScale (small/medium/large), theme (light/dark/auto), bgOpacity, preloadSec (10/30/60), lang (auto|locale), lastModelId }
+- SubtitleTrack：{ id, mediaId, kind (original|translation), lang, displayName }
+- TranslationJob：{ id, mediaId, originSegmentId, targetLang, status, lastError? }
+- Settings：{ subtitleOn, fontScale (small/medium/large), theme (light/dark/auto), bgOpacity, preloadSec (10/30/60), asrLang (auto|code), subtitleLang (original|code), lastAsrModelId, lastTransModelId }
 - Metrics（局部匿名）：{ key, value, ts }；Logs（诊断按需收集）。
 
 ### 4.2 存储与路径
@@ -131,6 +141,34 @@
   - 调度优先识别“当前点起后 60s（可调）”，取消过期任务。
 - 失败重试与降级：
   - 段失败标记可重试；连续失败触发降级策略（缩小窗口/更小模型）。
+
+### 5.2 翻译流水线（原文→译文）
+
+- 触发：ASR 产出原文 Segment 后，由 ViewModel/UseCase 将片段送入 TranslationEngine 队列；
+- 优先级：与识别相同的窗口策略（抢占 > 当前窗口滚动 > 预加载），保障“看得懂”；
+- 存储：译文作为独立 `SubtitleTrack(kind: .translation, lang: target)` 下的 Segment，`originSegmentId` 关联原文；
+- 渲染：当目标语言被选择时，优先查询译文轨；缺失片段显示“翻译中…”；双语模式下按两行显示；
+- 失败与重试：记录错误并支持按段重试；连续失败可提醒更改模型或切换为原文轨。
+
+```mermaid
+sequenceDiagram
+  participant VM as PlayerViewModel
+  participant ASR as AsrEngine
+  participant TE as TranslationEngine
+  participant SS as SubtitleStore
+
+  VM->>ASR: transcribe(buffer, t)
+  ASR-->>VM: segments(origin)
+  VM->>SS: persist origin segments (track: original)
+  alt 字幕语言=翻译
+    loop 当前窗口优先
+      VM->>TE: translate(segment, targetLang)
+      TE-->>VM: translatedSegment
+      VM->>SS: persist translated (track: translation)
+      VM-->>VM: 渲染译文（或双语）
+    end
+  end
+```
 
 ### 5.1 时序（Mermaid）
 
@@ -251,6 +289,26 @@ public enum AsrLanguage { case auto, code(String) }
 - 非时间戳模型的对齐精度：需要 VAD + 简易对齐，可能影响 ±200ms 指标 → UI 弱提示并建议选择支持时间戳的模型或回退 WhisperCpp；
 - 维护成本：双后端代码与测试矩阵扩大 → 用统一协议、契约测试与金样本音频回归降低成本。
 
+### 6.9 翻译引擎（概述）
+
+```swift
+public protocol TranslationEngine {
+  func loadModel(at url: URL, metadata: ModelMetadata, options: TranslationOptions) throws
+  func translate(text: String, sourceLang: String, targetLang: String) async throws -> String
+  func translateBatch(_ items: [(id: String, text: String, sourceLang: String, targetLang: String)]) async throws -> [String: String]
+  func cancelAll() async
+}
+
+public struct TranslationOptions {
+  public var temperature: Float
+  public var beamSize: Int
+}
+```
+
+- 时序：译文生成不影响 ASR 主路径；
+- 资源：低端设备建议批量/合并句子以降低开销；
+- 兼容：当 ASR 支持直接翻译模式（且目标语可用）时，可绕过 TranslationEngine，直接以 ASR 输出作为译文轨。
+
 ## 7. 内存与缓存策略
 
 - 音频缓存：≤ 10MB，总量 LRU；优先保留“当前播放 ±15s”；
@@ -299,10 +357,11 @@ public enum AsrLanguage { case auto, code(String) }
   - 状态：currentTime, bufferedWindows, currentSegments, status（统一状态机），warnings（性能/落后提示）。
 - ModelManagerView：展示与操作模型列表（下载/导入/删除/默认选择）。
 - SettingsView：预加载时长、语言选择、缓存清理、字幕样式。
+  - 新增：字幕语言（原文/翻译〈目标语言选择〉/双语 可选），默认跟随上次选择；当目标语对未安装翻译模型时，提供下载入口与体积提示。
 
 ## 12. 导出（SRT/VTT）
 
-- 命名：<源文件名>.<language/locale>.srt，避免覆盖；
+- 命名：<源文件名>.<language/locale>.srt，避免覆盖；支持选择导出原文轨或译文轨；
 - 格式：UTF-8，无 BOM；时间戳 00:00:00,000 → 00:00:02,000；
 - 空间检查：导出前评估可用空间；失败可重试；
 - macOS 支持保存面板；iOS 使用分享面板/文件保存。
@@ -336,6 +395,7 @@ public enum AsrLanguage { case auto, code(String) }
 - 语言检测误差：允许手动指定并持久化；
 - 热与能耗：段间节流、后台降速；
 - 许可合规：模型哈希校验，来源可信；不内置大模型。
+- 翻译质量与体积：首批限定语对与小模型；必要时提示联网翻译（仅上传转写文本，需显式同意）；提供回退到原文字幕。
 
 ## 16. 开放问题（进入详细 TDD/HLD 迭代）
 
