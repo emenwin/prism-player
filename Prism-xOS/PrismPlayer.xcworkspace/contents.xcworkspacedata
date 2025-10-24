@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:apps/PrismPlayer-iOS/PrismPlayer-iOS.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:apps/PrismPlayer-macOS/PrismPlayer-macOS.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:packages/PrismASR">
+   </FileRef>
+   <FileRef
+      location = "group:packages/PrismCore">
+   </FileRef>
+   <FileRef
+      location = "group:packages/PrismKit">
+   </FileRef>
+</Workspace>

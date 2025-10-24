@@ -4,6 +4,10 @@
 
 提出新决策时，复制 `template.md` 并填
 
+## 新增（当前）
+
+- [0002-player-view-ui-stack.md](./0002-player-view-ui-stack.md)：播放页 UI 技术栈选择（SwiftUI 外壳 + UIKit/AppKit 渲染面板）— 已接受（2025-10-24）
+
  
 ## 目录结构
 
