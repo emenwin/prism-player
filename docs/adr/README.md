@@ -6,6 +6,7 @@
 
 ## 新增（当前）
 
+- [0003-sqlite-storage-solution.md](./0003-sqlite-storage-solution.md)：SQLite 存储方案选择（SQLite + GRDB）— 已接受（2025-10-24）
 - [0002-player-view-ui-stack.md](./0002-player-view-ui-stack.md)：播放页 UI 技术栈选择（SwiftUI 外壳 + UIKit/AppKit 渲染面板）— 已接受（2025-10-24）
 
  
@@ -15,13 +16,15 @@
 docs/adr/
 ├── README.md                           # ADR 索引与使用指南
 ├── template.md                         # ADR 模板
-├── 0001-adr-process.md                # 元决策：ADR 流程本身
-├── 0002-di-strategy.md                # DI 方案选择
-├── 0003-dual-backend-strategy.md      # 双后端策略（whisper.cpp + MLX）
-├── 0004-state-machine-design.md       # 播放器与识别状态机设计
-├── 0005-cache-strategy.md             # 音频缓存与 LRU 策略
-├── 0006-background-processing.md      # 后台处理策略（iOS/macOS）
-├── 0007-translation-pipeline.md       # 字幕翻译流水线架构
+├── 0001-multiplatform-architecture.md # 多平台架构选择
+├── 0002-player-view-ui-stack.md       # 播放页 UI 技术栈
+├── 0003-sqlite-storage-solution.md    # SQLite 存储方案（新增）
+├── 0004-di-strategy.md                # DI 方案选择（待创建）
+├── 0005-dual-backend-strategy.md      # 双后端策略（whisper.cpp + MLX）
+├── 0006-state-machine-design.md       # 播放器与识别状态机设计
+├── 0007-cache-strategy.md             # 音频缓存与 LRU 策略
+├── 0008-background-processing.md      # 后台处理策略（iOS/macOS）
+├── 0009-translation-pipeline.md       # 字幕翻译流水线架构
 └── superseded/                         # 已废弃的决策（保留历史）
     └── 0002-old-di-strategy.md
 ```
