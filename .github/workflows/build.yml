@@ -1,0 +1,206 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - "Prism-xOS/**"
+      - ".github/workflows/build.yml"
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - "Prism-xOS/**"
+      - ".github/workflows/build.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-ios:
+    name: Build iOS
+    runs-on: macos-14
+
+    strategy:
+      matrix:
+        scheme: [PrismPlayer-iOS]
+        destination:
+          - "platform=iOS Simulator,name=iPhone 15,OS=17.5"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Cache Swift Package Manager
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+            Prism-xOS/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Build iOS
+        working-directory: Prism-xOS
+        run: |
+          xcodebuild build \
+            -workspace PrismPlayer.xcworkspace \
+            -scheme ${{ matrix.scheme }} \
+            -destination '${{ matrix.destination }}' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Run tests
+        working-directory: Prism-xOS
+        run: |
+          xcodebuild test \
+            -workspace PrismPlayer.xcworkspace \
+            -scheme ${{ matrix.scheme }} \
+            -destination '${{ matrix.destination }}' \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults-iOS.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-ios
+          path: Prism-xOS/TestResults-iOS.xcresult
+          retention-days: 7
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-14
+
+    strategy:
+      matrix:
+        scheme: [PrismPlayer-macOS]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Cache Swift Package Manager
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+            Prism-xOS/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Build macOS
+        working-directory: Prism-xOS
+        run: |
+          xcodebuild build \
+            -workspace PrismPlayer.xcworkspace \
+            -scheme ${{ matrix.scheme }} \
+            -destination 'platform=macOS' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Run tests
+        working-directory: Prism-xOS
+        run: |
+          xcodebuild test \
+            -workspace PrismPlayer.xcworkspace \
+            -scheme ${{ matrix.scheme }} \
+            -destination 'platform=macOS' \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults-macOS.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-macos
+          path: Prism-xOS/TestResults-macOS.xcresult
+          retention-days: 7
+
+  test-packages:
+    name: Test Swift Packages
+    runs-on: macos-14
+
+    strategy:
+      matrix:
+        package: [PrismCore, PrismASR, PrismKit]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Cache Swift Package Manager
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+            Prism-xOS/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Test ${{ matrix.package }}
+        working-directory: Prism-xOS/packages/${{ matrix.package }}
+        run: |
+          swift test --enable-code-coverage
+
+      - name: Generate coverage report
+        if: matrix.package == 'PrismCore'
+        working-directory: Prism-xOS/packages/${{ matrix.package }}
+        run: |
+          xcrun llvm-cov export -format="lcov" \
+            .build/debug/${{ matrix.package }}PackageTests.xctest/Contents/MacOS/${{ matrix.package }}PackageTests \
+            -instr-profile .build/debug/codecov/default.profdata > coverage.lcov || true
+
+      - name: Upload coverage to Codecov
+        if: matrix.package == 'PrismCore'
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./Prism-xOS/packages/${{ matrix.package }}/coverage.lcov
+          flags: ${{ matrix.package }}
+          fail_ci_if_error: false
+
+  summary:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [build-ios, build-macos, test-packages]
+    if: always()
+
+    steps:
+      - name: Check status
+        run: |
+          if [[ "${{ needs.build-ios.result }}" == "success" && \
+                "${{ needs.build-macos.result }}" == "success" && \
+                "${{ needs.test-packages.result }}" == "success" ]]; then
+            echo "✅ All checks passed!"
+            exit 0
+          else
+            echo "❌ Some checks failed"
+            echo "iOS: ${{ needs.build-ios.result }}"
+            echo "macOS: ${{ needs.build-macos.result }}"
+            echo "Packages: ${{ needs.test-packages.result }}"
+            exit 1
+          fi

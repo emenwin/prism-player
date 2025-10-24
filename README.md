@@ -1,4 +1,10 @@
-# README
+# Prism Player
+
+[![Build & Test](https://github.com/yourusername/prism-player/workflows/Build%20%26%20Test/badge.svg)](https://github.com/yourusername/prism-player/actions)
+[![SwiftLint](https://github.com/yourusername/prism-player/workflows/SwiftLint/badge.svg)](https://github.com/yourusername/prism-player/actions)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+音视频播放器，支持实时离线语音转文字字幕功能。
 
 ## 项目代号：Project Rosetta（罗塞塔计划）
 
@@ -25,9 +31,18 @@ docs/
 │   └── short.md                  # PRD 摘要/提要
 └── tdd/                          # 技术设计文档（TDD/HLD，待补充）
 └── adr/                          # Architecture Decision Records 规范
+└── scrum/                        # Scrum 敏捷开发流程与任务
+└── ci-cd.md                      # CI/CD 文档
 └── Prism-xOS/                    # iOS 、macOS 项目工程目录
 └── Prism-Android/                # Android 项目工程目录
 ```
+
+### 关键文档
+
+- **需求**: [PRD v0.2](./docs/requirements/prd_v0.2.md)
+- **Sprint 计划**: [Sprint Plan v0.2](./docs/scrum/sprint-plan-v0.2-updated.md)
+- **CI/CD**: [CI/CD 文档](./docs/ci-cd.md)
+- **代码规范**: [Prism-xOS README](./Prism-xOS/README.md)
 
 最新 PRD：
 - v0.2（当前）：[docs/requirements/prd_v0.2.md](./docs/requirements/prd_v0.2.md)
