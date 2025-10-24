@@ -86,6 +86,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE4028C12EAB689B0072C873 /* Build configuration list for PBXNativeTarget "PrismPlayer-macOS" */;
 			buildPhases = (
+				EE274BDB2EAB702E00E68734 /* ShellScript */,
 				EE4028B12EAB689A0072C873 /* Sources */,
 				EE4028B22EAB689A0072C873 /* Frameworks */,
 				EE4028B32EAB689A0072C873 /* Resources */,
@@ -155,6 +156,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EE274BDB2EAB702E00E68734 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${PROJECT_DIR}/scripts/swiftlint.sh\"\nsh \"${PROJECT_DIR}/scripts/swiftlint.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EE4028B12EAB689A0072C873 /* Sources */ = {
@@ -302,6 +323,7 @@
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -331,6 +353,7 @@
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

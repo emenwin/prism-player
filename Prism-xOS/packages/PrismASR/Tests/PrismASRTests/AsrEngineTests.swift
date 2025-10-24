@@ -4,7 +4,6 @@ import XCTest
 @testable import PrismASR
 
 final class AsrEngineTests: XCTestCase {
-
     // MARK: - AsrOptions Tests
 
     func testAsrOptionsDefaultValues() {

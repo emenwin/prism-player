@@ -83,6 +83,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE40288E2EAB670E0072C873 /* Build configuration list for PBXNativeTarget "PrismPlayer-iOS" */;
 			buildPhases = (
+				EE4028E22EAB6EE80072C873 /* ShellScript */,
 				EE40287F2EAB670C0072C873 /* Sources */,
 				EE4028802EAB670C0072C873 /* Frameworks */,
 				EE4028812EAB670C0072C873 /* Resources */,
@@ -151,6 +152,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EE4028E22EAB6EE80072C873 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${PROJECT_DIR}/scripts/swiftlint.sh\"\nsh \"${PROJECT_DIR}/scripts/swiftlint.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EE40287F2EAB670C0072C873 /* Sources */ = {
@@ -295,6 +316,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -325,6 +347,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

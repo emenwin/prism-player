@@ -3,7 +3,6 @@ import XCTest
 @testable import PrismCore
 
 final class PrismCoreTests: XCTestCase {
-
     // MARK: - AsrSegment Tests
 
     func testAsrSegmentCreation() {

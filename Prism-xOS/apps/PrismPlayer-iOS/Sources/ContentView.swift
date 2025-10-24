@@ -6,13 +6,13 @@ struct ContentView: View {
             Image(systemName: "play.circle.fill")
                 .font(.system(size: 80))
                 .foregroundStyle(.blue)
-                .accessibilityLabel("app.icon.player")
+                .accessibilityLabel(String(localized: "app.icon.player"))
 
-            Text("app.name")
+            Text(String(localized: "app.name"))
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("app.welcome")
+            Text(String(localized: "app.welcome"))
                 .font(.body)
                 .foregroundStyle(.secondary)
         }

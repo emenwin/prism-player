@@ -1,0 +1,42 @@
+name: SwiftLint
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - "Prism-xOS/**/*.swift"
+      - "Prism-xOS/.swiftlint.yml"
+      - ".github/workflows/swiftlint.yml"
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - "Prism-xOS/**/*.swift"
+      - "Prism-xOS/.swiftlint.yml"
+      - ".github/workflows/swiftlint.yml"
+
+jobs:
+  swiftlint:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install SwiftLint
+        run: |
+          brew install swiftlint
+
+      - name: SwiftLint version
+        run: swiftlint version
+
+      - name: Run SwiftLint
+        working-directory: Prism-xOS
+        run: |
+          swiftlint lint --strict --reporter github-actions-logging
+
+      - name: SwiftLint Report (on failure)
+        if: failure()
+        working-directory: Prism-xOS
+        run: |
+          echo "## SwiftLint Issues" >> $GITHUB_STEP_SUMMARY
+          swiftlint lint --reporter markdown >> $GITHUB_STEP_SUMMARY

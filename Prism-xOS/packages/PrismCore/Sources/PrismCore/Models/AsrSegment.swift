@@ -42,14 +42,14 @@ public struct AsrSegment: Identifiable, Codable, Sendable {
 }
 
 // MARK: - Computed Properties
-extension AsrSegment {
+public extension AsrSegment {
     /// 片段时长（秒）
-    public var duration: TimeInterval {
+    var duration: TimeInterval {
         endTime - startTime
     }
 
     /// 是否为高置信度（>= 0.8）
-    public var isHighConfidence: Bool {
+    var isHighConfidence: Bool {
         confidence ?? 0.0 >= 0.8
     }
 }

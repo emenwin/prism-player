@@ -6,6 +6,6 @@ struct PrismPlayerApp: App {
         WindowGroup {
             ContentView()
         }
-        .defaultSize(width: 1024, height: 768)
+        .defaultSize(width: 1_024, height: 768)
     }
 }
