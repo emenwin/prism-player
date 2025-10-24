@@ -6,6 +6,7 @@
 
 ## 新增（当前）
 
+- [0004-logging-metrics-strategy.md](./0004-logging-metrics-strategy.md)：日志与性能指标方案（OSLog + 本地存储）— 已接受（2025-10-24）
 - [0003-sqlite-storage-solution.md](./0003-sqlite-storage-solution.md)：SQLite 存储方案选择（SQLite + GRDB）— 已接受（2025-10-24）
 - [0002-player-view-ui-stack.md](./0002-player-view-ui-stack.md)：播放页 UI 技术栈选择（SwiftUI 外壳 + UIKit/AppKit 渲染面板）— 已接受（2025-10-24）
 
