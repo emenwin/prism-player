@@ -10,5 +10,33 @@
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>LSMinimumSystemVersion</key>
     <string>14.0</string>
+    
+    <!-- ============================================ -->
+    <!-- 权限描述（Privacy - Permission Descriptions） -->
+    <!-- ============================================ -->
+    
+    <!-- 麦克风访问：未来用于录音和实时字幕 -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Prism Player needs microphone access to record audio and generate real-time subtitles</string>
+    
+    <!-- 媒体库访问：播放音频文件 -->
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Prism Player needs access to your media library to play audio files</string>
+    
+    <!-- 语音识别：ASR 字幕生成 -->
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Prism Player uses speech recognition to generate subtitles from audio content</string>
+    
+    <!-- 桌面文件夹访问：导入媒体文件（macOS 特有） -->
+    <key>NSDesktopFolderUsageDescription</key>
+    <string>Prism Player needs access to the Desktop folder to import media files</string>
+    
+    <!-- 文档文件夹访问：导入和导出文件 -->
+    <key>NSDocumentsFolderUsageDescription</key>
+    <string>Prism Player needs access to the Documents folder to import media files and export subtitles</string>
+    
+    <!-- 下载文件夹访问：导入媒体文件 -->
+    <key>NSDownloadsFolderUsageDescription</key>
+    <string>Prism Player needs access to the Downloads folder to import media files</string>
 </dict>
 </plist>

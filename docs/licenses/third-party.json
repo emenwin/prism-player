@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Third-Party Licenses",
+  "description": "Prism Player 第三方依赖许可证清单",
+  "lastUpdated": "2025-10-24",
+  "dependencies": [
+    {
+      "name": "GRDB.swift",
+      "version": "6.29.0",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/groue/GRDB.swift/blob/master/LICENSE",
+      "author": "Gwendal Roué",
+      "repository": "https://github.com/groue/GRDB.swift",
+      "purpose": "SQLite database wrapper for Swift",
+      "usage": "Core data persistence layer",
+      "licenseText": "MIT License\n\nCopyright (c) 2015-2024 Gwendal Roué\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+    },
+    {
+      "name": "whisper.cpp",
+      "version": "TBD",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/ggerganov/whisper.cpp/blob/master/LICENSE",
+      "author": "Georgi Gerganov",
+      "repository": "https://github.com/ggerganov/whisper.cpp",
+      "purpose": "Port of OpenAI's Whisper model in C/C++",
+      "usage": "On-device speech recognition engine",
+      "status": "pending",
+      "notes": "将在 Sprint 1 集成 / To be integrated in Sprint 1"
+    },
+    {
+      "name": "mlx-swift",
+      "version": "TBD",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/ml-explore/mlx-swift/blob/main/LICENSE",
+      "author": "Apple ML Explore",
+      "repository": "https://github.com/ml-explore/mlx-swift",
+      "purpose": "Apple Silicon ML framework for Swift",
+      "usage": "Alternative ASR backend for Apple Silicon optimization",
+      "status": "pending",
+      "notes": "可选依赖，未来用于 M 系列芯片优化 / Optional dependency for M-series optimization"
+    }
+  ],
+  "notes": {
+    "complianceStatus": "fully-compliant",
+    "lastReviewDate": "2025-10-24",
+    "reviewers": ["Prism Player Team"],
+    "knownIssues": [],
+    "recommendations": [
+      "所有当前依赖均采用 MIT 许可证，完全兼容闭源商业应用",
+      "All current dependencies use MIT license, fully compatible with closed-source commercial apps"
+    ]
+  }
+}

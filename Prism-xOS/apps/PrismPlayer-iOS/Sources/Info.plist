@@ -8,8 +8,12 @@
     <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
+    
+    <!-- 启动屏幕 -->
     <key>UILaunchScreen</key>
     <dict/>
+    
+    <!-- 支持的界面方向 -->
     <key>UISupportedInterfaceOrientations</key>
     <array>
         <string>UIInterfaceOrientationPortrait</string>
@@ -23,5 +27,29 @@
         <string>UIInterfaceOrientationLandscapeLeft</string>
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
+    
+    <!-- ============================================ -->
+    <!-- 权限描述（Privacy - Permission Descriptions） -->
+    <!-- ============================================ -->
+    
+    <!-- 麦克风访问：未来用于录音和实时字幕 -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Prism Player needs microphone access to record audio and generate real-time subtitles</string>
+    
+    <!-- 照片库访问：导入视频文件 -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Prism Player needs access to your photo library to import video files</string>
+    
+    <!-- 照片库添加：导出字幕文件（可选） -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Prism Player needs permission to save exported subtitle files to your photo library</string>
+    
+    <!-- 媒体库访问：播放音频文件 -->
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Prism Player needs access to your media library to play audio files</string>
+    
+    <!-- 语音识别：ASR 字幕生成 -->
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Prism Player uses speech recognition to generate subtitles from audio content</string>
 </dict>
 </plist>
