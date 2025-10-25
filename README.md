@@ -40,9 +40,13 @@ docs/
 ### 关键文档
 
 - **需求**: [PRD v0.2](./docs/requirements/prd_v0.2.md)
-- **Sprint 计划**: [Sprint Plan v0.2](./docs/scrum/sprint-plan-v0.2-updated.md)
+- **Sprint 计划**: 
+  - iOS/macOS: [Sprint Plan v0.2](./docs/scrum/iOS-macOS/sprint-plan-v0.2-updated.md)
+  - Android: [Sprint Plan v0.2](./docs/scrum/Android/sprint-plan-v0.2.md)
 - **CI/CD**: [CI/CD 文档](./docs/ci-cd.md)
-- **代码规范**: [Prism-xOS README](./Prism-xOS/README.md)
+- **代码规范**: 
+  - iOS/macOS: [Prism-xOS README](./Prism-xOS/README.md)
+  - Android: [Prism-Android README](./Prism-Android/README.md)（待创建）
 
 最新 PRD：
 - v0.2（当前）：[docs/requirements/prd_v0.2.md](./docs/requirements/prd_v0.2.md)

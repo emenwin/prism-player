@@ -30,6 +30,7 @@
 
 ## 3. 总体架构概览
 - 技术栈：Kotlin、Jetpack Compose、Media3(ExoPlayer)、Hilt DI、Coroutines/Flow、Room(SQLite)、WorkManager/DownloadManager、NDK(Whisper.cpp / Vosk)、ONNX Runtime Mobile（翻译可选）。
+- 最低 API 级别：Android 9.0 (API 28)，目标 API 34。
 
 ```mermaid
 flowchart LR
