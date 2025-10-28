@@ -43,6 +43,12 @@ final class PlayerViewModel: ObservableObject {
     /// 当前加载的媒体 URL
     @Published private(set) var currentMediaURL: URL?
 
+    /// AVPlayer 实例（用于视频渲染）
+    /// - Note: 仅在 PlayerService 为 AVPlayerService 时可用
+    var avPlayer: AVPlayer? {
+        (playerService as? AVPlayerService)?.avPlayer
+    }
+
     // MARK: - Dependencies
 
     private let playerService: PlayerService
@@ -69,9 +75,11 @@ final class PlayerViewModel: ObservableObject {
     func selectAndLoadMedia() async {
         do {
             // 1. 选择文件
-            guard let url = try await mediaPicker.selectMedia(
-                allowedTypes: supportedMediaTypes
-            ) else {
+            guard
+                let url = try await mediaPicker.selectMedia(
+                    allowedTypes: supportedMediaTypes
+                )
+            else {
                 // 用户取消，不做任何操作
                 Logger.player.debug("用户取消选择媒体")
                 return
@@ -145,8 +153,9 @@ final class PlayerViewModel: ObservableObject {
             throw PlayerError.fileNotFound
         }
 
-        // 检查是否可播放
-        guard asset.isPlayable else {
+        // 检查是否可播放（使用新的异步 API）
+        let isPlayable = try await asset.load(.isPlayable)
+        guard isPlayable else {
             throw PlayerError.unsupportedFormat
         }
     }

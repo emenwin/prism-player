@@ -54,6 +54,13 @@ public final class AVPlayerService: PlayerService {
     // MARK: - Private Properties
 
     private let player: AVPlayer
+
+    /// 暴露 AVPlayer 实例供视频渲染使用
+    /// - Note: 仅用于视频图层绑定，不应直接调用 AVPlayer 方法
+    public var avPlayer: AVPlayer {
+        player
+    }
+
     private let logger = Logger(subsystem: "com.prismplayer.core", category: "AVPlayerService")
 
     private let timeSubject = PassthroughSubject<TimeInterval, Never>()

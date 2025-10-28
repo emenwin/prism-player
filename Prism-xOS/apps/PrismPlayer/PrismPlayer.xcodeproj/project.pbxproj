@@ -32,6 +32,8 @@
 		EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
 		EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDF82EB0CA500039163B /* PlayerView.swift */; };
 		EE09EDFA2EB0CA500039163B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDF82EB0CA500039163B /* PlayerView.swift */; };
+		EE09EDFC2EB0CC1C0039163B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */; };
+		EE09EDFE2EB0CC300039163B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerMac.swift; sourceTree = "<group>"; };
 		EE09EDEF2EB0C6660039163B /* PrismPlayer-macOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PrismPlayer-macOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09EDF82EB0CA500039163B /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -125,6 +129,7 @@
 		EE09ED9D2EB0975A0039163B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */,
 				EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */,
 			);
 			path = Platform;
@@ -143,6 +148,7 @@
 		EE09EDA02EB0975A0039163B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */,
 				EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */,
 			);
 			path = Platform;
@@ -396,6 +402,7 @@
 				EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */,
 				EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */,
+				EE09EDFC2EB0CC1C0039163B /* VideoPlayerView.swift in Sources */,
 				EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */,
 				EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */,
@@ -413,6 +420,7 @@
 				EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */,
 				EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */,
+				EE09EDFE2EB0CC300039163B /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

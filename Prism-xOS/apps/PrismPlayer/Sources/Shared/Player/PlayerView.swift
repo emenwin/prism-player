@@ -106,26 +106,48 @@ struct PlayerView: View {
         .padding()
     }
 
-    /// 视频渲染占位符（PR4 将替换为真实的 AVPlayerLayer）
+    /// 视频渲染区域
+    @ViewBuilder
     private var videoPlaceholder: some View {
-        RoundedRectangle(cornerRadius: 12)
-            .fill(Color.secondary.opacity(0.1))
-            .frame(height: 300)
-            .overlay {
-                if viewModel.state == .idle {
-                    Text(String(localized: "player.no_media"))
-                        .foregroundColor(.secondary)
-                } else if let url = viewModel.currentMediaURL {
-                    VStack(spacing: 8) {
+        ZStack {
+            // 背景色
+            Color.black
+
+            // 视频渲染（如果有 AVPlayer）
+            if let player = viewModel.avPlayer {
+                VideoPlayerView(player: player, videoGravity: .resizeAspect)
+            } else {
+                // 占位内容
+                VStack(spacing: 12) {
+                    if viewModel.state == .idle {
                         Image(systemName: "film")
-                            .font(.system(size: 40))
+                            .font(.system(size: 60))
+                            .foregroundColor(.secondary)
+                        Text(String(localized: "player.no_media"))
+                            .foregroundColor(.secondary)
+                    } else if viewModel.state == .loading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(1.5)
+                        Text(String(localized: "player.status.loading"))
+                            .foregroundColor(.secondary)
+                            .padding(.top, 8)
+                    } else if let url = viewModel.currentMediaURL {
+                        Image(systemName: "music.note")
+                            .font(.system(size: 60))
                             .foregroundColor(.secondary)
                         Text(url.lastPathComponent)
                             .font(.caption)
                             .foregroundColor(.secondary)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
                 }
             }
+        }
+        .frame(height: 300)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     /// 时间进度显示
@@ -232,7 +254,6 @@ struct PlayerView: View {
     PlayerView()
 }
 
-#Preview("PlayerView - Landscape") {
+#Preview("PlayerView - Landscape", traits: .landscapeLeft) {
     PlayerView()
-        .previewInterfaceOrientation(.landscapeLeft)
 }
