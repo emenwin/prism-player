@@ -102,6 +102,18 @@ dependencies {
 }
 ```
 
+## 相关 TDD
+- [tdd/Android/hld-android-v0.2.md](../../../../tdd/Android/hld-android-v0.2.md) — 约束：Jetpack Compose + MVVM，禁止硬编码字符串
+
+## 相关 ADR
+- （待补充）Android 平台 ADR 列表（如 Logging/DI/存储 等），若共用跨端决策请在 Android 侧建立对应 ADR 或引用通用 ADR
+
+## 定义完成（DoD）
+- [ ] CI 通过（构建/测试/Lint）
+- [ ] 无硬编码字符串（国际化）
+- [ ] 文档/变更日志更新（PRD/TDD/ADR/Scrum）
+- [ ] 关键路径测试覆盖与可观测埋点到位
+
 ### 包结构示例
 ```
 com.prism.player/

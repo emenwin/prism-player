@@ -19,23 +19,7 @@
 
 ### 文档目录 [./docs](./docs/)
 
-推荐使用树形结构展示，清晰标注用途和关键文件：
-
-```text
-docs/
-├── requirements/                 # 需求文档
-│   ├── prd_v0.2.md               # 当前 PRD（最新）
-│   ├── prd_v0.1.md               # PRD 历史版本
-│   ├── prd_review-claude4.5.md   # PRD 评审报告（Claude 4.5）
-│   ├── prd_review_gemini2.5.md   # PRD 评审报告（Gemini 2.5）
-│   └── short.md                  # PRD 摘要/提要
-└── tdd/                          # 技术设计文档（TDD/HLD，待补充）
-└── adr/                          # Architecture Decision Records 规范
-└── scrum/                        # Scrum 敏捷开发流程与任务
-└── ci-cd.md                      # CI/CD 文档
-└── Prism-xOS/                    # iOS 、macOS 项目工程目录
-└── Prism-Android/                # Android 项目工程目录
-```
+[./docs/文档目录详细说明](./docs/文档目录详细说明.md)
 
 ### 关键文档
 
@@ -52,15 +36,24 @@ docs/
 - v0.2（当前）：[docs/requirements/prd_v0.2.md](./docs/requirements/prd_v0.2.md)
 - v0.1（存档）：[docs/requirements/prd_v0.1.md](./docs/requirements/prd_v0.1.md)
 
-### PRD vs TDD 
 
-PRD 文档应该聚焦于"做什么"（What）和"为什么"（Why），而不是"怎么做"（How）。架构图、线程模型、DI 策略等属于**技术设计文档（Technical Design Document, TDD）**的范畴，不应该出现在 PRD 中。
+## 工程目录
 
-### PRD vs TDD 的职责分离
+```
+.
+├── Prism-xOS/                # iOS / macOS 工程与 Swift Packages（Xcode Workspace）
+│   ├── apps/
+│   │   ├── PrismPlayer-iOS/
+│   │   └── PrismPlayer-macOS/
+│   └── packages/
+│       ├── PrismCore/
+│       ├── PrismASR/
+│       └── PrismKit/
+└── Prism-Android/            # Android 工程（Jetpack Compose + MVVM）
+```
+## 工程目录说明
 
-| 文档类型 | 核心职责 | 典型内容 | 负责人 |
-|---------|---------|---------|--------|
-| **PRD** | 定义产品需求 | 用户故事、功能列项、验收标准、成功指标 | PM/产品经理 |
-| **TDD** | 定义技术方案 | 架构设计、API 设计、数据模型、技术选型细节 | 技术负责人/架构师 |
-
- 
+- Prism-xOS：iOS 与 macOS 平台的应用工程与 Swift Packages 集合（Xcode Workspace），包含应用目录 `apps/` 和可复用模块 `packages/`（PrismCore/PrismASR/PrismKit）。
+- Prism-Android：Android 平台工程，采用 Jetpack Compose + MVVM 架构与 Android Gradle 构建。
+- Tests：跨模块共享的测试资源（Mocks、Fixtures）。
+- scripts：仓库脚本与 CI 辅助文件。

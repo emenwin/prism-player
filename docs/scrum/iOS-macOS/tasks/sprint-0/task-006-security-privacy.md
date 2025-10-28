@@ -118,16 +118,29 @@ docs/
 - 磁盘空间访问（E174.1）
 - 系统启动时间（35F9.1）
 
-### 2. 权限描述（Info.plist）
-
 ✅ 已完成：
+## 任务信息
+
+## 相关 TDD
+- [tdd/iOS-macOS/hld-ios-macos-v0.2.md](../../../../tdd/iOS-macOS/hld-ios-macos-v0.2.md) — 约束：SwiftUI + MVVM，SwiftLint 严格模式，国际化无硬编码
+
+## 相关 ADR
+- [docs/adr/iOS-macOS/0001-multiplatform-architecture.md](../../../../adr/iOS-macOS/0001-multiplatform-architecture.md) — Accepted
+- [docs/adr/iOS-macOS/0002-player-view-ui-stack.md](../../../../adr/iOS-macOS/0002-player-view-ui-stack.md) — Accepted
+- [docs/adr/iOS-macOS/0003-sqlite-storage-solution.md](../../../../adr/iOS-macOS/0003-sqlite-storage-solution.md) — Accepted
+- [docs/adr/iOS-macOS/0004-logging-metrics-strategy.md](../../../../adr/iOS-macOS/0004-logging-metrics-strategy.md) — Accepted
+- [docs/adr/iOS-macOS/0005-testing-di-strategy.md](../../../../adr/iOS-macOS/0005-testing-di-strategy.md) — Accepted
+
+## 定义完成（DoD）
+- [ ] CI 通过（构建/测试/SwiftLint 严格模式）
+- [ ] 无硬编码字符串（使用国际化）
+- [ ] 文档/变更日志更新（PRD/TDD/ADR/Scrum）
+- [ ] 关键路径测试覆盖与可观测埋点到位
 - iOS Info.plist 添加 5 个权限描述
 - macOS Info.plist 添加 6 个权限描述（含文件夹访问）
 
 ### 3. 本地化文本（Localizable.xcstrings）
 
-✅ 已完成（中英文双语）：
-- 权限标题和描述（麦克风、照片库、媒体库、语音识别、文件访问）
 - 设置页面文本（关于、许可证、隐私政策）
 - 占位提示文本
 

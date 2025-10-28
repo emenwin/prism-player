@@ -65,6 +65,22 @@
 建立清晰的测试目录结构：
 
 ```
+
+## 相关 TDD
+- [tdd/iOS-macOS/hld-ios-macos-v0.2.md](../../../../tdd/iOS-macOS/hld-ios-macos-v0.2.md) — 约束：SwiftUI + MVVM，SwiftLint 严格模式，国际化无硬编码
+
+## 相关 ADR
+- [docs/adr/iOS-macOS/0001-multiplatform-architecture.md](../../../../adr/iOS-macOS/0001-multiplatform-architecture.md) — Accepted
+- [docs/adr/iOS-macOS/0002-player-view-ui-stack.md](../../../../adr/iOS-macOS/0002-player-view-ui-stack.md) — Accepted
+- [docs/adr/iOS-macOS/0003-sqlite-storage-solution.md](../../../../adr/iOS-macOS/0003-sqlite-storage-solution.md) — Accepted
+- [docs/adr/iOS-macOS/0004-logging-metrics-strategy.md](../../../../adr/iOS-macOS/0004-logging-metrics-strategy.md) — Accepted
+- [docs/adr/iOS-macOS/0005-testing-di-strategy.md](../../../../adr/iOS-macOS/0005-testing-di-strategy.md) — Accepted
+
+## 定义完成（DoD）
+- [ ] CI 通过（构建/测试/SwiftLint 严格模式）
+- [ ] 无硬编码字符串（使用国际化）
+- [ ] 文档/变更日志更新（PRD/TDD/ADR/Scrum）
+- [ ] 关键路径测试覆盖与可观测埋点到位
 Prism-xOS/
 ├── packages/
 │   ├── PrismCore/
