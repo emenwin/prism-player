@@ -16,6 +16,7 @@ import OSLog
 /// Sprint 1 目标：编译通过，不崩溃
 /// Sprint 2 计划：基于 NSOpenPanel 完整实现
 final class MediaPickerMac: MediaPicker {
+ 
     private let logger = Logger(subsystem: "com.prismplayer.app", category: "MediaPicker")
 
     /// 选择媒体文件（占位实现）

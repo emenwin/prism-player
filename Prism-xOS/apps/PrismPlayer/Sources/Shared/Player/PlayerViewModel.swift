@@ -8,6 +8,7 @@
 import AVFoundation
 import Combine
 import Foundation
+import OSLog
 import PrismCore
 
 /// 播放器 ViewModel
@@ -69,7 +70,7 @@ final class PlayerViewModel: ObservableObject {
         do {
             // 1. 选择文件
             guard let url = try await mediaPicker.selectMedia(
-                allowedTypes: MediaPicker.supportedMediaTypes
+                allowedTypes: supportedMediaTypes
             ) else {
                 // 用户取消，不做任何操作
                 Logger.player.debug("用户取消选择媒体")
@@ -89,7 +90,7 @@ final class PlayerViewModel: ObservableObject {
             currentMediaURL = url
             errorMessage = nil
 
-            Logger.player.info("媒体加载成功，时长: \(playerService.duration)s")
+            Logger.player.info("媒体加载成功，时长: \(self.playerService.duration)s")
         } catch {
             handleError(error)
         }

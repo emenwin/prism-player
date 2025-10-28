@@ -1,4 +1,5 @@
 import OSLog
+@_exported import OSLog
 
 /// 日志分类枚举
 /// Log category enumeration for different subsystems

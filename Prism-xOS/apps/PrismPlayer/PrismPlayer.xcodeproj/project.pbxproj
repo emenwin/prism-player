@@ -13,7 +13,6 @@
 		EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
 		EE09EDC62EB098470039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC02EB098470039163B /* Localizable.xcstrings */; };
 		EE09EDC82EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
-		EE09EDCA2EB0986D0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDC92EB0986D0039163B /* ContentView.swift */; };
 		EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
 		EE09EDD02EB0B7BA0039163B /* PrismASR in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDCF2EB0B7BA0039163B /* PrismASR */; };
 		EE09EDD22EB0B7BA0039163B /* PrismCore in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD12EB0B7BA0039163B /* PrismCore */; };
@@ -21,6 +20,16 @@
 		EE09EDD62EB0B7C00039163B /* PrismASR in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD52EB0B7C00039163B /* PrismASR */; };
 		EE09EDD82EB0B7C00039163B /* PrismCore in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD72EB0B7C00039163B /* PrismCore */; };
 		EE09EDDA2EB0B7C00039163B /* PrismKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD92EB0B7C00039163B /* PrismKit */; };
+		EE09EDDF2EB0BCC20039163B /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */; };
+		EE09EDE02EB0BCC20039163B /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */; };
+		EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */; };
+		EE09EDE22EB0BCC20039163B /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */; };
+		EE09EDE32EB0BCC20039163B /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */; };
+		EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */; };
+		EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */; };
+		EE09EDE82EB0C13E0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
+		EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
+		EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +40,13 @@
 		EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09EDC02EB098470039163B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		EE09EDC92EB0986D0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE09EDCB2EB0987B0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE09EDDB2EB0B88E0039163B /* PrismPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer.entitlements; sourceTree = "<group>"; };
+		EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
+		EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIntegrationDemoView.swift; sourceTree = "<group>"; };
+		EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickeriOS.swift; sourceTree = "<group>"; };
+		EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerMac.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +94,7 @@
 		EE09ED9D2EB0975A0039163B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				EE09EDC92EB0986D0039163B /* ContentView.swift */,
+				EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -99,7 +112,7 @@
 		EE09EDA02EB0975A0039163B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				EE09EDCB2EB0987B0039163B /* ContentView.swift */,
+				EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -117,6 +130,9 @@
 		EE09EDA42EB0975A0039163B /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */,
+				EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */,
+				EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -133,6 +149,7 @@
 			children = (
 				EE09EDA42EB0975A0039163B /* Player */,
 				EE09EDA52EB0975A0039163B /* Resources */,
+				EE09EDCB2EB0987B0039163B /* ContentView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -307,7 +324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE09EDCA2EB0986D0039163B /* ContentView.swift in Sources */,
+				EE09EDDF2EB0BCC20039163B /* MediaPicker.swift in Sources */,
+				EE09EDE02EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
+				EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */,
+				EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */,
+				EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */,
+				EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +338,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE09EDE82EB0C13E0039163B /* MediaPickerMac.swift in Sources */,
+				EE09EDE22EB0BCC20039163B /* MediaPicker.swift in Sources */,
+				EE09EDE32EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
+				EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */,
 				EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */,
 			);
