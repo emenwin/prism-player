@@ -32,6 +32,16 @@
 		EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EE09EDF32EB0C6660039163B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE09ED862EB0972A0039163B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE09EDB02EB097D70039163B;
+			remoteInfo = "PrismPlayer-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		EE09ED8E2EB0972A0039163B /* PrismPlayer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerApp.swift; sourceTree = "<group>"; };
@@ -47,7 +57,16 @@
 		EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickeriOS.swift; sourceTree = "<group>"; };
 		EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerMac.swift; sourceTree = "<group>"; };
+		EE09EDEF2EB0C6660039163B /* PrismPlayer-macOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PrismPlayer-macOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EE09EDF02EB0C6660039163B /* PrismPlayer-macOS-Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "PrismPlayer-macOS-Tests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EE09ED8B2EB0972A0039163B /* Frameworks */ = {
@@ -70,6 +89,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE09EDEC2EB0C6660039163B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -77,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				EE09EDAC2EB0975A0039163B /* Sources */,
+				EE09EDF02EB0C6660039163B /* PrismPlayer-macOS-Tests */,
 				EE09EDCE2EB0B7BA0039163B /* Frameworks */,
 				EE09ED8F2EB0972A0039163B /* Products */,
 			);
@@ -87,6 +114,7 @@
 			children = (
 				EE09ED8E2EB0972A0039163B /* PrismPlayer-iOS.app */,
 				EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */,
+				EE09EDEF2EB0C6660039163B /* PrismPlayer-macOS-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,6 +288,29 @@
 			productReference = EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EE09EDEE2EB0C6660039163B /* PrismPlayer-macOS-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE09EDF72EB0C6660039163B /* Build configuration list for PBXNativeTarget "PrismPlayer-macOS-Tests" */;
+			buildPhases = (
+				EE09EDEB2EB0C6660039163B /* Sources */,
+				EE09EDEC2EB0C6660039163B /* Frameworks */,
+				EE09EDED2EB0C6660039163B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE09EDF42EB0C6660039163B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EE09EDF02EB0C6660039163B /* PrismPlayer-macOS-Tests */,
+			);
+			name = "PrismPlayer-macOS-Tests";
+			packageProductDependencies = (
+			);
+			productName = "PrismPlayer-macOS-Tests";
+			productReference = EE09EDEF2EB0C6660039163B /* PrismPlayer-macOS-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -275,6 +326,10 @@
 					};
 					EE09EDB02EB097D70039163B = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					EE09EDEE2EB0C6660039163B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = EE09EDB02EB097D70039163B;
 					};
 				};
 			};
@@ -294,6 +349,7 @@
 			targets = (
 				EE09ED8D2EB0972A0039163B /* PrismPlayer-iOS */,
 				EE09EDB02EB097D70039163B /* PrismPlayer-macOS */,
+				EE09EDEE2EB0C6660039163B /* PrismPlayer-macOS-Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -314,6 +370,13 @@
 			files = (
 				EE09EDC32EB098470039163B /* Localizable.xcstrings in Resources */,
 				EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE09EDED2EB0C6660039163B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +410,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE09EDEB2EB0C6660039163B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EE09EDF42EB0C6660039163B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE09EDB02EB097D70039163B /* PrismPlayer-macOS */;
+			targetProxy = EE09EDF32EB0C6660039163B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EE09ED982EB0972C0039163B /* Debug */ = {
@@ -610,6 +688,44 @@
 			};
 			name = Release;
 		};
+		EE09EDF52EB0C6660039163B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prismplayer.PrismPlayer-macOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismPlayer-macOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrismPlayer-macOS";
+			};
+			name = Debug;
+		};
+		EE09EDF62EB0C6660039163B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prismplayer.PrismPlayer-macOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismPlayer-macOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrismPlayer-macOS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -636,6 +752,15 @@
 			buildConfigurations = (
 				EE09EDBB2EB097D80039163B /* Debug */,
 				EE09EDBC2EB097D80039163B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE09EDF72EB0C6660039163B /* Build configuration list for PBXNativeTarget "PrismPlayer-macOS-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE09EDF52EB0C6660039163B /* Debug */,
+				EE09EDF62EB0C6660039163B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
