@@ -343,7 +343,28 @@
 
     },
     "player.select_media" : {
-
+      "comment" : "选择按钮文本",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select Media"
+          }
+        }
+      }
+    },
+    "player.select_media_prompt" : {
+      "comment" : "文件选择器提示信息",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select a media file to play"
+          }
+        }
+      }
     },
     "player.status.error" : {
 

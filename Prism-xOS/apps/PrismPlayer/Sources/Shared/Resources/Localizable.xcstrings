@@ -18,6 +18,23 @@
         }
       }
     },
+    "player.select_media_prompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please select a media file to play"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请选择要播放的媒体文件"
+          }
+        }
+      }
+    },
     "player.play": {
       "extractionState": "manual",
       "localizations": {
