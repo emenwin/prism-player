@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EE4028822EAB670C0072C873"
+               BlueprintIdentifier = "EE09ED8D2EB0972A0039163B"
                BuildableName = "PrismPlayer-iOS.app"
                BlueprintName = "PrismPlayer-iOS"
-               ReferencedContainer = "container:PrismPlayer-iOS.xcodeproj">
+               ReferencedContainer = "container:PrismPlayer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EE4028822EAB670C0072C873"
+            BlueprintIdentifier = "EE09ED8D2EB0972A0039163B"
             BuildableName = "PrismPlayer-iOS.app"
             BlueprintName = "PrismPlayer-iOS"
-            ReferencedContainer = "container:PrismPlayer-iOS.xcodeproj">
+            ReferencedContainer = "container:PrismPlayer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EE4028822EAB670C0072C873"
+            BlueprintIdentifier = "EE09ED8D2EB0972A0039163B"
             BuildableName = "PrismPlayer-iOS.app"
             BlueprintName = "PrismPlayer-iOS"
-            ReferencedContainer = "container:PrismPlayer-iOS.xcodeproj">
+            ReferencedContainer = "container:PrismPlayer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

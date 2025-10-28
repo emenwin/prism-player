@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:apps/PrismPlayer-iOS/PrismPlayer-iOS.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:apps/PrismPlayer-macOS/PrismPlayer-macOS.xcodeproj">
+      location = "group:apps/PrismPlayer/PrismPlayer.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:packages/PrismASR">
