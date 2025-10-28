@@ -9,7 +9,8 @@ import Foundation
 /// - MockPlayerService: 测试用 Mock（Tests/Mocks）
 ///
 /// - Created: Sprint 0, Task-009
-/// - Last Updated: 2025-10-24
+/// - Last Updated: 2025-10-28
+@MainActor
 public protocol PlayerService: AnyObject {
     /// 当前播放时间（秒）
     var currentTime: TimeInterval { get }
