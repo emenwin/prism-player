@@ -327,6 +327,48 @@
         }
       }
     },
+    "player.error.dismiss" : {
+
+    },
+    "player.error.title" : {
+
+    },
+    "player.no_media" : {
+
+    },
+    "player.pause" : {
+
+    },
+    "player.play" : {
+
+    },
+    "player.select_media" : {
+
+    },
+    "player.status.error" : {
+
+    },
+    "player.status.idle" : {
+
+    },
+    "player.status.loading" : {
+
+    },
+    "player.status.paused" : {
+
+    },
+    "player.status.playing" : {
+
+    },
+    "player.status.ready" : {
+
+    },
+    "player.status.seeking" : {
+
+    },
+    "player.status.stopped" : {
+
+    },
     "settings.about.appName" : {
       "extractionState" : "manual",
       "localizations" : {

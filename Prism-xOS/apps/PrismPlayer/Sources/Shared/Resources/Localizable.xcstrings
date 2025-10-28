@@ -52,24 +52,75 @@
         }
       }
     },
-    "player.time_format": {
+    "player.no_media": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ / %@"
+            "value": "No media selected"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ / %@"
+            "value": "未选择媒体"
           }
         }
       }
     },
-    "player.loading": {
+    "player.error.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Playback Error"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "播放错误"
+          }
+        }
+      }
+    },
+    "player.error.dismiss": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "确定"
+          }
+        }
+      }
+    },
+    "player.status.idle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "就绪"
+          }
+        }
+      }
+    },
+    "player.status.loading": {
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -86,87 +137,104 @@
         }
       }
     },
-    "player.error.file_not_found": {
+    "player.status.ready": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "File not found"
+            "value": "Ready to Play"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "文件未找到"
+            "value": "准备播放"
           }
         }
       }
     },
-    "player.error.unsupported_format": {
+    "player.status.playing": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Unsupported media format. Please select mp4/mov/m4a/wav files."
+            "value": "Playing"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不支持的媒体格式，请选择 mp4/mov/m4a/wav 文件。"
+            "value": "播放中"
           }
         }
       }
     },
-    "player.error.load_failed": {
+    "player.status.paused": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Failed to load media: %@"
+            "value": "Paused"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "加载媒体失败：%@"
+            "value": "已暂停"
           }
         }
       }
     },
-    "player.error.seek_failed": {
+    "player.status.seeking": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Failed to seek"
+            "value": "Seeking"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "跳转失败"
+            "value": "跳转中"
           }
         }
       }
     },
-    "player.macos_coming_soon": {
+    "player.status.stopped": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS file selection coming soon"
+            "value": "Stopped"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS 文件选择功能即将推出"
+            "value": "已停止"
+          }
+        }
+      }
+    },
+    "player.status.error": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "错误"
           }
         }
       }

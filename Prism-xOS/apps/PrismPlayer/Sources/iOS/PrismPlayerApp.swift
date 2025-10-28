@@ -4,7 +4,7 @@ import SwiftUI
 struct PrismPlayerApp: App {
     var body: some Scene {
         WindowGroup {
-            PlayerIntegrationDemoView()
+            PlayerView()
         }
     }
 }

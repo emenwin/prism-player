@@ -30,6 +30,8 @@
 		EE09EDE82EB0C13E0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
 		EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
 		EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */; };
+		EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDF82EB0CA500039163B /* PlayerView.swift */; };
+		EE09EDFA2EB0CA500039163B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDF82EB0CA500039163B /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		EE09EDE52EB0C1310039163B /* MediaPickeriOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickeriOS.swift; sourceTree = "<group>"; };
 		EE09EDE72EB0C13E0039163B /* MediaPickerMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerMac.swift; sourceTree = "<group>"; };
 		EE09EDEF2EB0C6660039163B /* PrismPlayer-macOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PrismPlayer-macOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE09EDF82EB0CA500039163B /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -158,6 +161,7 @@
 		EE09EDA42EB0975A0039163B /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDF82EB0CA500039163B /* PlayerView.swift */,
 				EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */,
 				EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */,
 				EE09EDDE2EB0BCC20039163B /* PlayerViewModel.swift */,
@@ -390,6 +394,7 @@
 				EE09EDDF2EB0BCC20039163B /* MediaPicker.swift in Sources */,
 				EE09EDE02EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
 				EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */,
+				EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */,
 				EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */,
 				EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
@@ -403,6 +408,7 @@
 			files = (
 				EE09EDE82EB0C13E0039163B /* MediaPickerMac.swift in Sources */,
 				EE09EDE22EB0BCC20039163B /* MediaPicker.swift in Sources */,
+				EE09EDFA2EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE32EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
 				EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */,

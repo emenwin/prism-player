@@ -4,7 +4,7 @@ import SwiftUI
 struct PrismPlayerApp: App {
     var body: some Scene {
         WindowGroup {
-            PlayerIntegrationDemoView()
+            PlayerView()
         }
         .defaultSize(width: 1_024, height: 768)
     }
