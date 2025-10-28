@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */; };
 		EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */; };
-		EE09EDC32EB098470039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC02EB098470039163B /* Localizable.xcstrings */; };
 		EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
-		EE09EDC62EB098470039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC02EB098470039163B /* Localizable.xcstrings */; };
 		EE09EDC82EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
 		EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
 		EE09EDD02EB0B7BA0039163B /* PrismASR in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDCF2EB0B7BA0039163B /* PrismASR */; };
@@ -34,6 +32,8 @@
 		EE09EDFA2EB0CA500039163B /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDF82EB0CA500039163B /* PlayerView.swift */; };
 		EE09EDFC2EB0CC1C0039163B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */; };
 		EE09EDFE2EB0CC300039163B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */; };
+		EE09EE002EB0D0610039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */; };
+		EE09EE012EB0D0610039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,6 @@
 		EE09EDA12EB0975A0039163B /* PrismPlayer_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer_macOS.entitlements; sourceTree = "<group>"; };
 		EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerApp.swift; sourceTree = "<group>"; };
 		EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE09EDC02EB098470039163B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EE09EDCB2EB0987B0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE09EDDB2EB0B88E0039163B /* PrismPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer.entitlements; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		EE09EDF82EB0CA500039163B /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -178,6 +178,7 @@
 		EE09EDA52EB0975A0039163B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -218,7 +219,6 @@
 		EE09EDAA2EB0975A0039163B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				EE09EDC02EB098470039163B /* Localizable.xcstrings */,
 				EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */,
 			);
 			path = Shared;
@@ -369,7 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE09EDC62EB098470039163B /* Localizable.xcstrings in Resources */,
+				EE09EE002EB0D0610039163B /* Localizable.xcstrings in Resources */,
 				EE09EDC82EB098470039163B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE09EDC32EB098470039163B /* Localizable.xcstrings in Resources */,
+				EE09EE012EB0D0610039163B /* Localizable.xcstrings in Resources */,
 				EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
