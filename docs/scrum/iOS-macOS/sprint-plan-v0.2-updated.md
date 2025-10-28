@@ -1,4 +1,4 @@
-# Prism Player Scrum Sprint 计划（v0.2，更新稿 r1）
+# Prism Player （iOS、 macOS） Scrum Sprint 计划（v0.2，更新稿 r1）
 
 > 版本：v0.2 更新稿 r1  
 > 日期：2025-10-17  
@@ -39,7 +39,8 @@
   - 隐私与合规：PrivacyInfo.xcprivacy 更新；第三方许可清单。
   - CI：构建 iOS 17+/macOS 14+ 矩阵；启用单元测试与覆盖率报告（可对接 Codecov）。
   - 文档：关键技术决策以 ADR 形式记录；CHANGELOG 持续维护。
-
+- 其他:
+  - 需要同时支持 iOS、macOS
 ---
 
 ## 1. 里程碑与 Sprint 划分（与 PRD §10 对齐）

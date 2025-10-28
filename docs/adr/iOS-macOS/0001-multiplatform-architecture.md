@@ -6,6 +6,8 @@
 决策者：[@team]  
 相关文档：Sprint Plan Sprint 0 Task 2, HLD §13, PRD v0.2
 
+**更新**：2025-10-28 - App 层工程结构细化（见 ADR-0006）
+
 ## 背景与问题陈述
 
 Prism Player 需要同时支持 iOS 17+ 和 macOS 14+，实现以下目标：
@@ -196,6 +198,10 @@ prism-player/
 
 ### 平台差异化处理
 
+> **注**：App 层工程的平台差异化策略详见 **ADR-0006**（单工程双 Target + 条件编译）
+
+**Package 层示例**（通过条件编译实现跨平台）：
+
 ```swift
 // filepath: packages/PrismKit/Sources/PrismKit/FilePickerService.swift
 #if os(iOS)
@@ -215,6 +221,17 @@ public final class FilePickerService {
     }
 }
 #endif
+```
+
+**App 层示例**（通过 Target Membership 隔离）：
+```
+apps/PrismPlayer/Sources/
+├── iOS/          # iOS Target 独占
+│   └── MediaPickerView.swift
+├── macOS/        # macOS Target 独占
+│   └── MediaPickerView.swift
+└── Shared/       # 两 Target 共享
+    └── PlayerViewModel.swift
 ```
 
 ### 测试策略
@@ -365,22 +382,35 @@ let package = Package(
 
 - **延续**：ADR-0002: DI 策略（协议式 DI 与 Package 边界配合）
 - **延续**：ADR-0003: 双后端策略（PrismASR 支持多后端）
+- **补充**：ADR-0006: 统一 App 工程结构（2025-10-28）
+  - 细化 App 层工程组织方式（单工程双 Target vs 双独立工程）
+  - 本 ADR 定义 Workspace + Package 整体架构
+  - ADR-0006 定义 App 层内部结构与代码共享策略
 - **替代**：无
 - **冲突**：无
 
 ## 实施计划
 
 ### Sprint 0（当前）
-- [ ] 创建 Workspace 与基础目录结构
-- [ ] 配置 PrismCore/PrismASR/PrismKit Package
-- [ ] 创建 iOS/macOS App Target
-- [ ] 配置测试目标与 Mock 目录
-- [ ] 验证构建与依赖关系
+- [x] 创建 Workspace 与基础目录结构
+- [x] 配置 PrismCore/PrismASR/PrismKit Package
+- [x] 创建 iOS/macOS App Target（已更新为单工程双 Target，见 ADR-0006）
+- [x] 配置测试目标与 Mock 目录
+- [x] 验证构建与依赖关系
 
 ### Sprint 1
+- [ ] App 层工程迁移（执行 ADR-0006 迁移脚本）
 - [ ] 补充核心协议与实现
 - [ ] 完善测试覆盖率
 - [ ] 优化构建配置
+
+## 后续决策
+
+**ADR-0006: 统一 App 工程结构**（2025-10-28）
+- 问题：App 层采用双独立工程还是单工程双 Target？
+- 决策：单工程双 Target（优化代码共享与维护成本）
+- 影响：App 层目录结构调整，不影响 Package 架构
+- 关系：本 ADR 定义整体架构，ADR-0006 细化 App 层实现
 
 ## 备注
 
