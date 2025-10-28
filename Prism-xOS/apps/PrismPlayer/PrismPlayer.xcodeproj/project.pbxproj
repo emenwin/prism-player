@@ -15,6 +15,12 @@
 		EE09EDC82EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
 		EE09EDCA2EB0986D0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDC92EB0986D0039163B /* ContentView.swift */; };
 		EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
+		EE09EDD02EB0B7BA0039163B /* PrismASR in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDCF2EB0B7BA0039163B /* PrismASR */; };
+		EE09EDD22EB0B7BA0039163B /* PrismCore in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD12EB0B7BA0039163B /* PrismCore */; };
+		EE09EDD42EB0B7BA0039163B /* PrismKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD32EB0B7BA0039163B /* PrismKit */; };
+		EE09EDD62EB0B7C00039163B /* PrismASR in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD52EB0B7C00039163B /* PrismASR */; };
+		EE09EDD82EB0B7C00039163B /* PrismCore in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD72EB0B7C00039163B /* PrismCore */; };
+		EE09EDDA2EB0B7C00039163B /* PrismKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE09EDD92EB0B7C00039163B /* PrismKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,7 @@
 		EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EE09EDC92EB0986D0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE09EDCB2EB0987B0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EE09EDDB2EB0B88E0039163B /* PrismPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +41,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE09EDD02EB0B7BA0039163B /* PrismASR in Frameworks */,
+				EE09EDD42EB0B7BA0039163B /* PrismKit in Frameworks */,
+				EE09EDD22EB0B7BA0039163B /* PrismCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +51,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE09EDD62EB0B7C00039163B /* PrismASR in Frameworks */,
+				EE09EDDA2EB0B7C00039163B /* PrismKit in Frameworks */,
+				EE09EDD82EB0B7C00039163B /* PrismCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				EE09EDAC2EB0975A0039163B /* Sources */,
+				EE09EDCE2EB0B7BA0039163B /* Frameworks */,
 				EE09ED8F2EB0972A0039163B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +89,7 @@
 		EE09ED9F2EB0975A0039163B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				EE09EDDB2EB0B88E0039163B /* PrismPlayer.entitlements */,
 				EE09ED9D2EB0975A0039163B /* Platform */,
 				EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */,
 			);
@@ -174,6 +189,13 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		EE09EDCE2EB0B7BA0039163B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,6 +213,9 @@
 			);
 			name = "PrismPlayer-iOS";
 			packageProductDependencies = (
+				EE09EDCF2EB0B7BA0039163B /* PrismASR */,
+				EE09EDD12EB0B7BA0039163B /* PrismCore */,
+				EE09EDD32EB0B7BA0039163B /* PrismKit */,
 			);
 			productName = PrismPlayer;
 			productReference = EE09ED8E2EB0972A0039163B /* PrismPlayer-iOS.app */;
@@ -210,6 +235,9 @@
 			);
 			name = "PrismPlayer-macOS";
 			packageProductDependencies = (
+				EE09EDD52EB0B7C00039163B /* PrismASR */,
+				EE09EDD72EB0B7C00039163B /* PrismCore */,
+				EE09EDD92EB0B7C00039163B /* PrismKit */,
 			);
 			productName = "PrismPlayer-macOS";
 			productReference = EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */;
@@ -417,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PrismPlayer/PrismPlayer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/PrismPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
@@ -457,7 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PrismPlayer/PrismPlayer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/PrismPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5US9XYQPZ2;
@@ -587,6 +615,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE09EDCF2EB0B7BA0039163B /* PrismASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismASR;
+		};
+		EE09EDD12EB0B7BA0039163B /* PrismCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismCore;
+		};
+		EE09EDD32EB0B7BA0039163B /* PrismKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismKit;
+		};
+		EE09EDD52EB0B7C00039163B /* PrismASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismASR;
+		};
+		EE09EDD72EB0B7C00039163B /* PrismCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismCore;
+		};
+		EE09EDD92EB0B7C00039163B /* PrismKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PrismKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EE09ED862EB0972A0039163B /* Project object */;
 }
