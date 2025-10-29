@@ -997,34 +997,34 @@ actor MetricsService {
 
 ### 8.1 功能完成度
 
-- [ ] iOS 支持本地视频/音频选择（UIDocumentPicker）
-- [ ] 支持播放/暂停，按钮状态正确
-- [ ] 提供稳定的进度回调（≥10Hz），UI 可读当前时间
-- [ ] 错误处理完善，所有 PlayerError 场景有友好提示
-- [ ] macOS 目标可编译通过（占位实现，运行不崩溃）
+- [x] iOS 支持本地视频/音频选择（UIDocumentPicker）
+- [x] 支持播放/暂停，按钮状态正确
+- [x] 提供稳定的进度回调（≥10Hz），UI 可读当前时间
+- [x] 错误处理完善，所有 PlayerError 场景有友好提示
+- [x] macOS 目标可编译通过（占位实现，运行不崩溃）
 
 ### 8.2 质量保证
 
-- [ ] CI 通过（iOS/macOS 构建矩阵）
-- [ ] 单元测试通过，覆盖率达标：
+- [x] CI 通过（iOS/macOS 构建矩阵）
+- [x] 单元测试通过，覆盖率达标：
   - PlayerViewModel ≥70%
   - 关键路径（状态转换、错误处理）≥80%
-- [ ] SwiftLint 严格模式零警告
-- [ ] 无硬编码字符串（通过 grep 验证）
-- [ ] 国际化完整（所有 player.* key 存在，zh-Hans/en-US 齐备）
+- [x] SwiftLint 严格模式零警告
+- [x] 无硬编码字符串（通过 grep 验证）
+- [x] 国际化完整（所有 player.* key 存在，zh-Hans/en-US 齐备）
 
 ### 8.3 文档与可观测性
 
-- [ ] CHANGELOG.md 更新（记录本 Task 新增功能）
-- [ ] 本文档 DoD 清单全部勾选
-- [ ] OSLog 埋点到位（load/play/pause/seek/error）
-- [ ] 首帧时间样本记录（供后续使用）
+- [x] CHANGELOG.md 更新（记录本 Task 新增功能）
+- [x] 本文档 DoD 清单全部勾选
+- [x] OSLog 埋点到位（load/play/pause/seek/error）
+- [x] 首帧时间样本记录（供后续使用）
 
 ### 8.4 跨平台补充
 
-- [ ] macOS 占位实现符合规范（2.4.3）
-- [ ] 共享代码（PlayerViewModel）在两个平台均可用
-- [ ] 条件编译正确（`#if os(iOS)` / `#if os(macOS)`）
+- [x] macOS 占位实现符合规范（2.4.3）
+- [x] 共享代码（PlayerViewModel）在两个平台均可用
+- [x] 条件编译正确（`#if os(iOS)` / `#if os(macOS)`）
 
 ---
 
