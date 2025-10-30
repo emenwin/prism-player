@@ -40,7 +40,7 @@ adr/
 - Task 文档仅落地本任务的执行方案与测试，链接相关 ADR/TDD 即可。
 
 ## 模板
-- ADR 模板参见：`./template.md`
+- ADR 模板参见：`../template/adr.template.md`
 
 如需创建新 ADR：
 1) 复制 `template.md`；2) 更新元信息与标题；3) 提交 PR 并邀请评审；4) 在相关 TDD/Task/PR 中添加链接。

@@ -16,6 +16,6 @@
 - 在 PRD 的“参考与追踪”章节中，链接相关 TDD/ADR/Issue/PR 以形成闭环。
 
 ## 模板
-- PRD 模板参见：`./template-prd.md`
+- PRD 模板参见：`../template/prd.template.md`
 
 > 建议：创建新 PRD 前，复制模板并在顶部填写元信息与状态（Draft/Review/Approved）。
