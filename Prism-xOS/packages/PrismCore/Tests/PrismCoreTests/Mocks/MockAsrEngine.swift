@@ -77,7 +77,7 @@ public actor MockAsrEngine: AsrEngine {
         shouldFailOnCancel = true
         isCancelled = false
     }
-    
+
     /// 获取指定索引的调用记录
     public func getCall(at index: Int) -> (audioData: Data, options: AsrOptions, timestamp: Date)? {
         guard index >= 0 && index < transcribeHistory.count else { return nil }
