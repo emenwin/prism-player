@@ -61,7 +61,7 @@ public actor MediaRepository {
         try await db.writeAsync { db in
             try db.execute(
                 sql: """
-                    UPDATE media_files 
+                    UPDATE media_files
                     SET recognition_progress = ?, updated_at = ?
                     WHERE id = ?
                     """,

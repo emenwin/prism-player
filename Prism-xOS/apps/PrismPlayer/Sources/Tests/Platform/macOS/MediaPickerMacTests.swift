@@ -19,7 +19,6 @@
     /// - 日志功能验证
     @MainActor
     final class MediaPickerMacTests: XCTestCase {
-
         var picker: MediaPickerMac!
 
         override func setUp() async throws {

@@ -12,7 +12,6 @@ import XCTest
 ///
 /// 参考：Task-102 §5.2 PreloadQueue 测试用例
 final class PreloadQueueTests: XCTestCase {
-
     var queue: PreloadQueue!
 
     override func setUp() async throws {
@@ -111,8 +110,7 @@ final class PreloadQueueTests: XCTestCase {
         // 验证：高优先级任务应该在低优先级任务之前完成
         // fastFirstFrame(3) > seek(2) > scroll(1) > preload(0)
         if let fastFirstFrameIndex = completed.firstIndex(of: "fastFirstFrame-1"),
-            let preloadIndex = completed.firstIndex(of: "preload-1")
-        {
+            let preloadIndex = completed.firstIndex(of: "preload-1") {
             XCTAssertLessThan(fastFirstFrameIndex, preloadIndex, "fastFirstFrame 应在 preload 之前完成")
         }
     }

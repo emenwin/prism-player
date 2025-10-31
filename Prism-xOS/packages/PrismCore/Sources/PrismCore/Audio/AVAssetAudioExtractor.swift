@@ -43,12 +43,12 @@ public final class AVAssetAudioExtractor: AudioExtractor {
     /// 在多线程环境中安全使用（只读，无写操作）
     private nonisolated(unsafe) let outputSettings: [String: Any] = [
         AVFormatIDKey: kAudioFormatLinearPCM,  // PCM 格式
-        AVSampleRateKey: 16000,  // 16 kHz 采样率
+        AVSampleRateKey: 16_000,  // 16 kHz 采样率
         AVNumberOfChannelsKey: 1,  // Mono（单声道）
         AVLinearPCMBitDepthKey: 32,  // 32-bit
         AVLinearPCMIsFloatKey: true,  // Float（非整数）
         AVLinearPCMIsBigEndianKey: false,  // 小端序（iOS/macOS 标准）
-        AVLinearPCMIsNonInterleaved: false,  // 交错格式（LRLRLR...）
+        AVLinearPCMIsNonInterleaved: false  // 交错格式（LRLRLR...）
     ]
 
     public init() {}
@@ -112,7 +112,7 @@ public final class AVAssetAudioExtractor: AudioExtractor {
 
         // 8. 读取样本数据
         var samples: [Float] = []
-        let expectedSampleCount = Int(timeRange.duration.seconds * 16000)  // 16kHz
+        let expectedSampleCount = Int(timeRange.duration.seconds * 16_000)  // 16kHz
         samples.reserveCapacity(expectedSampleCount)
 
         while reader.status == .reading {
@@ -143,12 +143,12 @@ public final class AVAssetAudioExtractor: AudioExtractor {
 
         let elapsed = Date().timeIntervalSince(startTime)
         logger.info(
-            "音频抽取完成: 样本数=\(samples.count, privacy: .public), 耗时=\(elapsed * 1000, privacy: .public)ms"
+            "音频抽取完成: 样本数=\(samples.count, privacy: .public), 耗时=\(elapsed * 1_000, privacy: .public)ms"
         )
 
         return AudioBuffer(
             samples: samples,
-            sampleRate: 16000,
+            sampleRate: 16_000,
             channels: 1,
             timeRange: timeRange
         )

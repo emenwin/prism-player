@@ -19,7 +19,7 @@ struct SettingsView: View {
                 } header: {
                     Text(String(localized: "settings.section.about"))
                 }
-                
+
                 // MARK: - 许可证部分
                 Section {
                     NavigationLink {
@@ -30,7 +30,7 @@ struct SettingsView: View {
                             systemImage: "doc.text"
                         )
                     }
-                    
+
                     NavigationLink {
                         ModelLicensesPlaceholderView()
                     } label: {
@@ -42,7 +42,7 @@ struct SettingsView: View {
                 } header: {
                     Text(String(localized: "settings.section.licenses"))
                 }
-                
+
                 // MARK: - 隐私部分
                 Section {
                     NavigationLink {
@@ -74,14 +74,14 @@ struct AboutView: View {
                     Text(String(localized: "app.name"))
                         .foregroundStyle(.secondary)
                 }
-                
+
                 HStack {
                     Text(String(localized: "settings.about.version"))
                     Spacer()
                     Text("0.1.0")
                         .foregroundStyle(.secondary)
                 }
-                
+
                 HStack {
                     Text(String(localized: "settings.about.buildNumber"))
                     Spacer()
@@ -89,7 +89,7 @@ struct AboutView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            
+
             Section {
                 Link(destination: URL(string: "https://github.com/prism-player")!) {
                     HStack {
@@ -117,14 +117,14 @@ struct LicensesPlaceholderView: View {
             Image(systemName: "doc.text.magnifyingglass")
                 .font(.system(size: 60))
                 .foregroundStyle(.secondary)
-            
+
             Text(String(localized: "settings.licenses.title"))
                 .font(.headline)
-            
+
             Text(String(localized: "settings.licenses.comingSoon"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            
+
             Text(String(localized: "settings.licenses.placeholder.description"))
                 .font(.caption)
                 .foregroundStyle(.tertiary)
@@ -143,14 +143,14 @@ struct ModelLicensesPlaceholderView: View {
             Image(systemName: "brain.head.profile")
                 .font(.system(size: 60))
                 .foregroundStyle(.secondary)
-            
+
             Text(String(localized: "settings.modelLicenses.title"))
                 .font(.headline)
-            
+
             Text(String(localized: "settings.licenses.comingSoon"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            
+
             Text(String(localized: "settings.modelLicenses.placeholder.description"))
                 .font(.caption)
                 .foregroundStyle(.tertiary)
@@ -169,33 +169,33 @@ struct PrivacyPolicyView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text(String(localized: "settings.privacy.statement"))
                     .font(.headline)
-                
+
                 Text(String(localized: "settings.privacy.dataCollection.title"))
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                
+
                 Text(String(localized: "settings.privacy.dataCollection.description"))
                     .font(.body)
                     .foregroundStyle(.secondary)
-                
+
                 Text(String(localized: "settings.privacy.permissions.title"))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .padding(.top, 8)
-                
+
                 VStack(alignment: .leading, spacing: 8) {
                     PermissionRow(
                         icon: "mic.fill",
                         title: String(localized: "permission.microphone.title"),
                         description: String(localized: "permission.microphone.description")
                     )
-                    
+
                     PermissionRow(
                         icon: "photo.fill",
                         title: String(localized: "permission.mediaLibrary.title"),
                         description: String(localized: "permission.mediaLibrary.description")
                     )
-                    
+
                     PermissionRow(
                         icon: "waveform",
                         title: String(localized: "permission.speechRecognition.title"),
@@ -213,18 +213,18 @@ struct PermissionRow: View {
     let icon: String
     let title: String
     let description: String
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .foregroundStyle(.blue)
                 .frame(width: 24)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                
+
                 Text(description)
                     .font(.caption)
                     .foregroundStyle(.secondary)

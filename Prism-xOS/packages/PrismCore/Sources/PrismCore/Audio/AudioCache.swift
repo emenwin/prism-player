@@ -67,7 +67,7 @@ public actor AudioCache {
     ///   - maxSizeMB: 最大缓存大小（MB），默认 10 MB
     ///   - maxItems: 最大缓存项数量，默认 100
     public init(maxSizeMB: Int = 10, maxItems: Int = 100) {
-        self.maxSizeBytes = maxSizeMB * 1024 * 1024
+        self.maxSizeBytes = maxSizeMB * 1_024 * 1_024
         self.maxItems = maxItems
     }
 
@@ -174,7 +174,7 @@ public actor AudioCache {
         currentSizeBytes -= removedBytes
 
         logger.notice(
-            "内存压力清理完成: 删除 \(removedCount, privacy: .public) 项, 释放 \(removedBytes / 1024, privacy: .public) KB"
+            "内存压力清理完成: 删除 \(removedCount, privacy: .public) 项, 释放 \(removedBytes / 1_024, privacy: .public) KB"
         )
     }
 
@@ -185,7 +185,7 @@ public actor AudioCache {
 
     /// 获取当前缓存大小（MB）
     public var currentSizeMB: Double {
-        Double(currentSizeBytes) / 1024.0 / 1024.0
+        Double(currentSizeBytes) / 1_024.0 / 1_024.0
     }
 
     // MARK: - Private Methods
@@ -229,8 +229,8 @@ public actor AudioCache {
             return nil
         }
 
-        let start = CMTime(value: CMTimeValue(startMs), timescale: 1000)
-        let end = CMTime(value: CMTimeValue(endMs), timescale: 1000)
+        let start = CMTime(value: CMTimeValue(startMs), timescale: 1_000)
+        let end = CMTime(value: CMTimeValue(endMs), timescale: 1_000)
         return CMTimeRange(start: start, end: end)
     }
 }

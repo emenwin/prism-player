@@ -6,7 +6,7 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v17),
-        .macOS(.v14),
+        .macOS(.v14)
     ],
     products: [
         .library(
@@ -32,6 +32,6 @@ let package = Package(
             name: "PrismCoreTests",
             dependencies: ["PrismCore"],
             path: "Tests/PrismCoreTests"
-        ),
+        )
     ]
 )

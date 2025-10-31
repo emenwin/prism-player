@@ -156,7 +156,7 @@ extension Metric {
         Metric(
             name: name,
             type: .timing,
-            value: duration * 1000,  // 转换为毫秒
+            value: duration * 1_000,  // 转换为毫秒
             metadata: metadata
         )
     }

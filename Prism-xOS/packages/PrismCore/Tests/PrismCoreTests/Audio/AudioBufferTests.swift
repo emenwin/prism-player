@@ -11,12 +11,11 @@ import XCTest
 /// - 时长计算
 /// - CustomStringConvertible
 final class AudioBufferTests: XCTestCase {
-
     // MARK: - 基础属性测试
 
     func testInitialization() {
         // Given: 10s 音频数据（16kHz mono）
-        let samples = Array(repeating: Float(0.5), count: 160000)  // 16000 samples/s × 10s
+        let samples = Array(repeating: Float(0.5), count: 160_000)  // 16000 samples/s × 10s
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 10, preferredTimescale: 600)
@@ -25,14 +24,14 @@ final class AudioBufferTests: XCTestCase {
         // When
         let buffer = AudioBuffer(
             samples: samples,
-            sampleRate: 16000,
+            sampleRate: 16_000,
             channels: 1,
             timeRange: timeRange
         )
 
         // Then
-        XCTAssertEqual(buffer.samples.count, 160000)
-        XCTAssertEqual(buffer.sampleRate, 16000)
+        XCTAssertEqual(buffer.samples.count, 160_000)
+        XCTAssertEqual(buffer.sampleRate, 16_000)
         XCTAssertEqual(buffer.channels, 1)
         XCTAssertEqual(buffer.timeRange.start, .zero)
         XCTAssertEqual(buffer.timeRange.duration.seconds, 10, accuracy: 0.01)
@@ -42,7 +41,7 @@ final class AudioBufferTests: XCTestCase {
 
     func testSizeInBytes() {
         // Given: 1s 音频数据（16kHz mono Float32）
-        let samples = Array(repeating: Float(0.0), count: 16000)
+        let samples = Array(repeating: Float(0.0), count: 16_000)
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 1, preferredTimescale: 600)
@@ -53,12 +52,12 @@ final class AudioBufferTests: XCTestCase {
         let size = buffer.sizeInBytes
 
         // Then: 16000 samples × 4 bytes = 64 KB
-        XCTAssertEqual(size, 64000)
+        XCTAssertEqual(size, 64_000)
     }
 
     func testSizeInBytesFor30Seconds() {
         // Given: 30s 音频数据
-        let samples = Array(repeating: Float(0.0), count: 480000)  // 16000 × 30
+        let samples = Array(repeating: Float(0.0), count: 480_000)  // 16000 × 30
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 30, preferredTimescale: 600)
@@ -80,7 +79,7 @@ final class AudioBufferTests: XCTestCase {
 
     func testDuration() {
         // Given: 10s 音频数据
-        let samples = Array(repeating: Float(0.0), count: 160000)
+        let samples = Array(repeating: Float(0.0), count: 160_000)
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 10, preferredTimescale: 600)
@@ -96,14 +95,14 @@ final class AudioBufferTests: XCTestCase {
 
     func testDurationForStereo() {
         // Given: 5s 立体声音频数据（2 声道）
-        let samples = Array(repeating: Float(0.0), count: 160000)  // 16000 × 2ch × 5s
+        let samples = Array(repeating: Float(0.0), count: 160_000)  // 16000 × 2ch × 5s
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 5, preferredTimescale: 600)
         )
         let buffer = AudioBuffer(
             samples: samples,
-            sampleRate: 16000,
+            sampleRate: 16_000,
             channels: 2,  // Stereo
             timeRange: timeRange
         )
@@ -119,7 +118,7 @@ final class AudioBufferTests: XCTestCase {
 
     func testDescription() {
         // Given
-        let samples = Array(repeating: Float(0.0), count: 160000)
+        let samples = Array(repeating: Float(0.0), count: 160_000)
         let timeRange = CMTimeRange(
             start: CMTime(seconds: 5, preferredTimescale: 600),
             duration: CMTime(seconds: 10, preferredTimescale: 600)
@@ -156,21 +155,21 @@ final class AudioBufferTests: XCTestCase {
 
     func testCustomSampleRate() {
         // Given: 自定义采样率（44.1kHz）
-        let samples = Array(repeating: Float(0.0), count: 44100)  // 1s at 44.1kHz
+        let samples = Array(repeating: Float(0.0), count: 44_100)  // 1s at 44.1kHz
         let timeRange = CMTimeRange(
             start: .zero,
             duration: CMTime(seconds: 1, preferredTimescale: 600)
         )
         let buffer = AudioBuffer(
             samples: samples,
-            sampleRate: 44100,
+            sampleRate: 44_100,
             channels: 1,
             timeRange: timeRange
         )
 
         // Then
-        XCTAssertEqual(buffer.sampleRate, 44100)
+        XCTAssertEqual(buffer.sampleRate, 44_100)
         XCTAssertEqual(buffer.duration, 1.0, accuracy: 0.01)
-        XCTAssertEqual(buffer.sizeInBytes, 176400)  // 44100 × 4 bytes
+        XCTAssertEqual(buffer.sizeInBytes, 176_400)  // 44100 × 4 bytes
     }
 }

@@ -74,7 +74,7 @@ final class DatabaseTests: XCTestCase {
                 startTime: 10.0,
                 endTime: 15.0,
                 text: "Subtitle segment"
-            ),
+            )
         ]
         try await subtitleRepo.saveBatch(segments)
 

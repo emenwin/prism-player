@@ -74,7 +74,7 @@ struct Migration_001_Initial {
         // Whisper Base 模型
         try db.execute(
             sql: """
-                INSERT INTO model_metadata 
+                INSERT INTO model_metadata
                 (id, name, size, backend, version, download_status, supports_timestamps, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
@@ -86,14 +86,14 @@ struct Migration_001_Initial {
                 "v1",
                 "pending",
                 true,
-                now,
+                now
             ]
         )
 
         // Whisper Small 模型
         try db.execute(
             sql: """
-                INSERT INTO model_metadata 
+                INSERT INTO model_metadata
                 (id, name, size, backend, version, download_status, supports_timestamps, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
@@ -105,7 +105,7 @@ struct Migration_001_Initial {
                 "v1",
                 "pending",
                 true,
-                now,
+                now
             ]
         )
     }

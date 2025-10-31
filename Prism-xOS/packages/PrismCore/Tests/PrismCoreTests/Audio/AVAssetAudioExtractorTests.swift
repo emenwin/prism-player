@@ -15,7 +15,6 @@ import XCTest
 /// - 使用程序化生成的音频资源（AVMutableComposition）
 /// - 避免依赖外部音频文件
 final class AVAssetAudioExtractorTests: XCTestCase {
-
     var extractor: AVAssetAudioExtractor!
 
     override func setUp() async throws {
@@ -42,11 +41,11 @@ final class AVAssetAudioExtractorTests: XCTestCase {
         let buffer = try await extractor.extract(from: asset, timeRange: timeRange)
 
         // Then: 验证输出格式
-        XCTAssertEqual(buffer.sampleRate, 16000, "采样率应为 16kHz")
+        XCTAssertEqual(buffer.sampleRate, 16_000, "采样率应为 16kHz")
         XCTAssertEqual(buffer.channels, 1, "应为 Mono 单声道")
 
         // 验证样本数量（允许 ±5% 误差，因为编解码器可能有帧对齐）
-        let expectedSamples = 16000 * 5  // 5s × 16kHz
+        let expectedSamples = 16_000 * 5  // 5s × 16kHz
         let tolerance = Int(Double(expectedSamples) * 0.05)
         XCTAssertEqual(
             buffer.samples.count,
@@ -74,7 +73,7 @@ final class AVAssetAudioExtractorTests: XCTestCase {
         let buffer = try await extractor.extract(from: asset, timeRange: timeRange)
 
         // Then
-        XCTAssertEqual(buffer.sampleRate, 16000)
+        XCTAssertEqual(buffer.sampleRate, 16_000)
         XCTAssertEqual(buffer.channels, 1)
         XCTAssertEqual(buffer.timeRange.start.seconds, 10, accuracy: 0.01)
         XCTAssertEqual(buffer.timeRange.duration.seconds, 5, accuracy: 0.01)
@@ -242,7 +241,7 @@ final class AVAssetAudioExtractorTests: XCTestCase {
         // Then: 所有段都应成功抽取
         XCTAssertEqual(results.count, 3)
         results.forEach { buffer in
-            XCTAssertEqual(buffer.sampleRate, 16000)
+            XCTAssertEqual(buffer.sampleRate, 16_000)
             XCTAssertEqual(buffer.channels, 1)
         }
     }

@@ -233,13 +233,12 @@ public actor AudioPreloadService {
 
             let elapsed = Date().timeIntervalSince(startTime)
             logger.info(
-                "[\(label, privacy: .public)] 抽取完成: 耗时=\(elapsed * 1000, privacy: .public)ms, 样本数=\(buffer.samples.count, privacy: .public)"
+                "[\(label, privacy: .public)] 抽取完成: 耗时=\(elapsed * 1_000, privacy: .public)ms, 样本数=\(buffer.samples.count, privacy: .public)"
             )
 
             // 缓存
             let key = cacheKey(for: timeRange)
             cache[key] = buffer
-
         } catch {
             logger.error(
                 "[\(label, privacy: .public)] 抽取失败: \(error.localizedDescription, privacy: .public)"
@@ -249,8 +248,8 @@ public actor AudioPreloadService {
 
     /// 生成缓存 key
     private func cacheKey(for timeRange: CMTimeRange) -> String {
-        let startMs = Int(timeRange.start.seconds * 1000)
-        let endMs = Int(timeRange.end.seconds * 1000)
+        let startMs = Int(timeRange.start.seconds * 1_000)
+        let endMs = Int(timeRange.end.seconds * 1_000)
         return "\(startMs)-\(endMs)"
     }
 }

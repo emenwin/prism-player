@@ -148,7 +148,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     /// maxCacheSizeBytes = maxCacheSizeMB × 1024 × 1024
     /// ```
     public var maxCacheSizeBytes: Int {
-        maxCacheSizeMB * 1024 * 1024
+        maxCacheSizeMB * 1_024 * 1_024
     }
 
     /// 最大缓存时长（秒）
@@ -164,7 +164,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     /// - 20 MB → 312s
     /// - 5 MB → 78s
     public var maxCacheDuration: TimeInterval {
-        Double(maxCacheSizeBytes) / 64000.0
+        Double(maxCacheSizeBytes) / 64_000.0
     }
 }
 

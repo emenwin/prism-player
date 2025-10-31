@@ -171,8 +171,7 @@ public struct SystemInfo: Codable {
         // 获取可用磁盘空间
         let diskSpace: UInt64?
         if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            .first
-        {
+            .first {
             diskSpace =
                 try? FileManager.default.attributesOfFileSystem(
                     forPath: path

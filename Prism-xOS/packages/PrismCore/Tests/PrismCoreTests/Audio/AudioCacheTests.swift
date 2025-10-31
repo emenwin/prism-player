@@ -13,7 +13,6 @@ import XCTest
 ///
 /// 参考：Task-102 §5.1 单元测试
 final class AudioCacheTests: XCTestCase {
-
     var cache: AudioCache!
 
     override func setUp() async throws {
@@ -31,11 +30,11 @@ final class AudioCacheTests: XCTestCase {
 
     /// 创建测试音频缓冲区
     private func makeTestBuffer(duration: TimeInterval, id: String) -> PrismCore.AudioBuffer {
-        let sampleCount = Int(duration * 16000)  // 16kHz
+        let sampleCount = Int(duration * 16_000)  // 16kHz
         let samples = Array(repeating: Float(0.5), count: sampleCount)
         return PrismCore.AudioBuffer(
             samples: samples,
-            sampleRate: 16000,
+            sampleRate: 16_000,
             channels: 1,
             timeRange: CMTimeRange(
                 start: .zero,
@@ -353,7 +352,7 @@ final class AudioCacheTests: XCTestCase {
         // Given: 创建零时长缓冲区
         let emptyBuffer = AudioBuffer(
             samples: [],
-            sampleRate: 16000,
+            sampleRate: 16_000,
             channels: 1,
             timeRange: CMTimeRange(start: .zero, duration: .zero)
         )

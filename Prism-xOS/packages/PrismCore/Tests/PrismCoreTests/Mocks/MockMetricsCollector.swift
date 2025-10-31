@@ -21,8 +21,7 @@ public actor MockMetricsCollector: MetricsCollector {
     public init() {}
 
     public func recordTiming(_ name: String, duration: TimeInterval, metadata: [String: String]?)
-        async
-    {
+        async {
         recordTimingCalled = true
         lastTimingName = name
         lastTimingDuration = duration
@@ -42,8 +41,7 @@ public actor MockMetricsCollector: MetricsCollector {
         metrics.append(metric)
     }
 
-    public func recordDistribution(_ name: String, value: Double, metadata: [String: String]?) async
-    {
+    public func recordDistribution(_ name: String, value: Double, metadata: [String: String]?) async {
         recordDistributionCalled = true
         lastDistributionName = name
         lastDistributionValue = value
@@ -100,15 +98,15 @@ public actor MockMetricsCollector: MetricsCollector {
     }
 
     public func hasMetric(name: String) -> Bool {
-        return metrics.contains { $0.name == name }
+        metrics.contains { $0.name == name }
     }
 
     public func getAllMetrics() -> [Metric] {
-        return metrics
+        metrics
     }
 
     public func getMetricCount(name: String) -> Int {
-        return metrics.filter { $0.name == name }.count
+        metrics.filter { $0.name == name }.count
     }
 
     public func reset() {

@@ -65,7 +65,7 @@ public enum AppPaths {
             database,
             models,
             audioCache,
-            exports,
+            exports
         ]
 
         let fileManager = FileManager.default

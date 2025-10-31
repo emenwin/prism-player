@@ -42,7 +42,7 @@ final class ExampleMockTests: XCTestCase {
         // Given: 配置 Mock 返回预设结果
         let expectedSegments = [
             AsrSegment.fixture(startTime: 0, endTime: 1, text: "Hello"),
-            AsrSegment.fixture(startTime: 1, endTime: 2, text: "World"),
+            AsrSegment.fixture(startTime: 1, endTime: 2, text: "World")
         ]
         await mockEngine.setSegments(expectedSegments)
 

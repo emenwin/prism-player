@@ -24,19 +24,19 @@ public struct AudioBuffer: Sendable {
     /// PCM Float32 样本数据
     /// 每个样本的取值范围：[-1.0, 1.0]（归一化振幅）
     public let samples: [Float]
-    
+
     /// 采样率（Hz）
     /// 默认：16,000 Hz（16 kHz）
     public let sampleRate: Int
-    
+
     /// 声道数
     /// 默认：1（Mono 单声道）
     public let channels: Int
-    
+
     /// 时间范围（原始媒体时间）
     /// 用于缓存索引和时间对齐
     public let timeRange: CMTimeRange
-    
+
     /// 缓冲区大小（字节）
     ///
     /// 计算公式：
@@ -47,7 +47,7 @@ public struct AudioBuffer: Sendable {
     public var sizeInBytes: Int {
         samples.count * MemoryLayout<Float>.size
     }
-    
+
     /// 音频时长（秒）
     ///
     /// 计算公式：
@@ -57,7 +57,7 @@ public struct AudioBuffer: Sendable {
     public var duration: TimeInterval {
         Double(samples.count) / Double(sampleRate) / Double(channels)
     }
-    
+
     /// 初始化音频缓冲区
     /// - Parameters:
     ///   - samples: PCM Float32 样本数据
@@ -66,7 +66,7 @@ public struct AudioBuffer: Sendable {
     ///   - timeRange: 时间范围（原始媒体时间）
     public init(
         samples: [Float],
-        sampleRate: Int = 16000,
+        sampleRate: Int = 16_000,
         channels: Int = 1,
         timeRange: CMTimeRange
     ) {

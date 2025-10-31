@@ -1,8 +1,4 @@
 import OSLog
-@_exported import OSLog
-
-/// 日志分类枚举
-/// Log category enumeration for different subsystems
 public enum LogCategory: String, CaseIterable {
     // MARK: - 核心业务分类 / Core Business Categories
 

@@ -16,7 +16,6 @@ import UniformTypeIdentifiers
 ///
 /// 职责：跨平台媒体文件选择抽象
 protocol MediaPicker {
-    
      /// 选择媒体文件
     /// - Parameter allowedTypes: 允许的文件类型（UTType）
     /// - Returns: 选中的文件 URL，用户取消返回 nil
@@ -25,7 +24,7 @@ protocol MediaPicker {
 }
 
 /// 预定义的媒体类型集合
- 
+
 /// 支持的媒体类型
 let supportedMediaTypes: [UTType] =
     [
@@ -37,5 +36,3 @@ let supportedMediaTypes: [UTType] =
         .mpeg4Audio,      // m4a/aac
         .wav              // wav
     ]
- 
- 

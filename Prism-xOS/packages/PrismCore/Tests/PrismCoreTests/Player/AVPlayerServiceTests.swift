@@ -249,7 +249,7 @@ final class AVPlayerServiceTests: XCTestCase {
 
         print("📊 抖动统计:")
         print("   平均间隔: \(String(format: "%.3f", avgInterval))s")
-        print("   标准差: \(String(format: "%.3f", stdDev * 1000))ms")
+        print("   标准差: \(String(format: "%.3f", stdDev * 1_000))ms")
         print("   最小间隔: \(String(format: "%.3f", intervals.min() ?? 0))s")
         print("   最大间隔: \(String(format: "%.3f", intervals.max() ?? 0))s")
     }
@@ -331,7 +331,7 @@ final class AVPlayerServiceTests: XCTestCase {
         let possiblePaths = [
             "Tests/Fixtures/audio/sample.m4a",
             "Tests/Fixtures/audio/sample.mp4",
-            "../../../Tests/Fixtures/audio/sample.m4a",
+            "../../../Tests/Fixtures/audio/sample.m4a"
         ]
 
         for path in possiblePaths {

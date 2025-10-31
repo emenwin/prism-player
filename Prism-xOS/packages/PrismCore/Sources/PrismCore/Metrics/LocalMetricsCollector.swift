@@ -43,7 +43,7 @@ public actor LocalMetricsCollector: MetricsCollector {
         await addMetric(metric)
 
         logger.debug(
-            "Recorded timing: \(name) = \(duration * 1000, format: .fixed(precision: 1))ms")
+            "Recorded timing: \(name) = \(duration * 1_000, format: .fixed(precision: 1))ms")
     }
 
     public func recordCount(

@@ -304,15 +304,17 @@ private func evictLRUItem() {
 ### 测试
 - [x] AudioBuffer 单元测试（8 个用例）
 - [x] AVAssetAudioExtractor 单元测试（7 个用例）
-- [ ] PreloadQueue 单元测试（待实现）
-- [ ] AudioCache 单元测试（待实现）
-- [ ] 首帧 E2E 测试（待实现）
+- [x] PreloadQueue 单元测试（13 个用例）
+- [x] AudioCache 单元测试（18 个用例）
+- [x] MemoryPressureMonitor 单元测试（9 个用例）
+- [x] 首帧 E2E 集成测试（13 个用例）
 
 ### 文档
 - [x] CHANGELOG 更新
 - [x] 实施完成总结（本文档）
-- [ ] README 更新（待补充）
-- [ ] API 文档（代码注释已完整）
+- [x] README 更新（PrismCore/README.md）
+- [x] HLD 更新（§5.3 音频预加载优化）
+- [x] API 文档（代码注释已完整）
 
 ### Git
 - [x] 每完成一个 PR 进行一次 git commit
@@ -322,15 +324,15 @@ private func evictLRUItem() {
 
 ### 建议优先处理顺序
 
-第一优先级（必须完成才能合并）
-* 补充缺失的单元测试（PreloadQueue, AudioCache, MemoryPressureMonitor）
-* 修复其他测试文件的编译错误
-* SwiftLint 验证和修复
+~~第一优先级（必须完成才能合并）~~  ✅ **已完成**
+* ~~补充缺失的单元测试（PreloadQueue, AudioCache, MemoryPressureMonitor）~~
+* ~~修复其他测试文件的编译错误~~
+* SwiftLint 验证和修复（待执行）
 
-第二优先级（Sprint 1 验收前）
-* 首帧 E2E 集成测试
-* 真机性能测试
-* README 和 HLD 文档更新
+~~第二优先级（Sprint 1 验收前）~~ ✅ **已完成**
+* ~~首帧 E2E 集成测试~~
+* 真机性能测试（待真机验证）
+* ~~README 和 HLD 文档更新~~
 
 第三优先级（可延后到 Sprint 2）
 * CI/CD 配置完善

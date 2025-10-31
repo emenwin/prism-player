@@ -4,6 +4,7 @@
 # 排除路径
 excluded:
   - .build
+  - "**/.build"
   - DerivedData
   - "*.xcodeproj"
   - "*.xcworkspace"
@@ -11,6 +12,9 @@ excluded:
   - Tests/Mocks
   - apps/*/Resources/*.xcassets
   - .swiftpm
+  - "**/.swiftpm"
+  - Pods
+  - Carthage
 
 # 包含的路径
 included:

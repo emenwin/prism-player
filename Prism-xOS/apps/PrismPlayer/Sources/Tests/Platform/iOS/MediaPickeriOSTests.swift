@@ -20,7 +20,6 @@
     /// - 日志记录
     @MainActor
     final class MediaPickeriOSTests: XCTestCase {
-
         // MARK: - Properties
 
         var sut: MediaPickeriOS!
@@ -58,7 +57,7 @@
                 .audio,
                 .mp3,
                 .mpeg4Audio,
-                .wav,
+                .wav
             ]
 
             // When & Then
@@ -113,7 +112,7 @@
                 .png,
                 .text,
                 .plainText,
-                .html,
+                .html
             ]
 
             // When & Then

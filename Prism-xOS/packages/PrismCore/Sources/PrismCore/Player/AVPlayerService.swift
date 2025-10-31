@@ -71,7 +71,7 @@ public final class AVPlayerService: PlayerService {
     private var rateObserver: NSKeyValueObservation?
     private var currentItem: AVPlayerItem?
 
-    private let timeUpdateInterval: CMTime = CMTime(
+    private let timeUpdateInterval = CMTime(
         value: 1,
         timescale: 10  // 10Hz = 0.1s
     )
@@ -142,7 +142,6 @@ public final class AVPlayerService: PlayerService {
             let durationSeconds = CMTimeGetSeconds(duration)
             logger.info("媒体加载成功，时长: \(durationSeconds)s")
             stateSubject.send(.ready)
-
         } catch let error as PlayerError {
             throw error
         } catch {

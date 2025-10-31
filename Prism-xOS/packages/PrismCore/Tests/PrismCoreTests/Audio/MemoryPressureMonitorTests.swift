@@ -12,7 +12,6 @@ import XCTest
 ///
 /// 参考：Task-102 §5.1 单元测试
 final class MemoryPressureMonitorTests: XCTestCase {
-
     var monitor: MemoryPressureMonitor!
 
     override func setUp() async throws {
@@ -37,7 +36,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
@@ -77,7 +76,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
@@ -117,7 +116,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
@@ -159,7 +158,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
@@ -206,7 +205,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getCount() -> Int {
-                return count
+                count
             }
         }
 
@@ -263,7 +262,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getCount() -> Int {
-                return count
+                count
             }
         }
 
@@ -302,7 +301,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
@@ -356,7 +355,7 @@ final class MemoryPressureMonitorTests: XCTestCase {
             }
 
             func getEvents() -> [MemoryPressureMonitor.PressureEvent] {
-                return events
+                events
             }
         }
 
