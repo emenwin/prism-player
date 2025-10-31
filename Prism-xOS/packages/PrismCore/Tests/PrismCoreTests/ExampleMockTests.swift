@@ -237,7 +237,11 @@ final class ExampleMockTests: XCTestCase {
         XCTAssertEqual(stats?.count, 3)
         XCTAssertEqual(stats?.min, 1.0)
         XCTAssertEqual(stats?.max, 3.0)
-        XCTAssertEqual(stats?.mean, 2.0, accuracy: 0.01)
+        if let mean = stats?.mean {
+            XCTAssertEqual(mean, 2.0, accuracy: 0.01)
+        } else {
+            XCTFail("mean should not be nil")
+        }
     }
 
     // MARK: - Integration Example

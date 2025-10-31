@@ -7,6 +7,7 @@ final class PrismCoreTests: XCTestCase {
 
     func testAsrSegmentCreation() {
         let segment = AsrSegment(
+            mediaId: "test-media-1",
             startTime: 0.0,
             endTime: 5.0,
             text: "Hello, world!",
@@ -21,6 +22,7 @@ final class PrismCoreTests: XCTestCase {
 
     func testAsrSegmentDuration() {
         let segment = AsrSegment(
+            mediaId: "test-media-2",
             startTime: 10.5,
             endTime: 25.0,
             text: "Test",
@@ -32,6 +34,7 @@ final class PrismCoreTests: XCTestCase {
 
     func testAsrSegmentHighConfidence() {
         let highConfidence = AsrSegment(
+            mediaId: "test-media-3",
             startTime: 0.0,
             endTime: 5.0,
             text: "High",
@@ -39,6 +42,7 @@ final class PrismCoreTests: XCTestCase {
         )
 
         let lowConfidence = AsrSegment(
+            mediaId: "test-media-4",
             startTime: 0.0,
             endTime: 5.0,
             text: "Low",
@@ -52,6 +56,7 @@ final class PrismCoreTests: XCTestCase {
     func testAsrSegmentCodable() throws {
         let original = AsrSegment(
             id: UUID(),
+            mediaId: "test-media-5",
             startTime: 0.0,
             endTime: 10.0,
             text: "Codable test",

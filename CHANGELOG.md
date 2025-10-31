@@ -7,6 +7,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Sprint 1, Task-102 (Audio Preload & Fast First Frame)
+
+#### Audio Extraction
+- **AudioBuffer Model**
+  - PCM Float32 audio data encapsulation (16kHz mono)
+  - Metadata tracking (sample rate, channels, time range)
+  - Memory usage calculation (64 KB/s for 16kHz mono)
+  - Custom string representation for debugging
+
+- **AudioExtractor Protocol & Implementation**
+  - Protocol-based abstraction for audio extraction
+  - `AVAssetAudioExtractor` implementation using AVAssetReader
+  - Automatic format conversion: any format → 16kHz mono Float32 PCM
+  - Support for async operations and cancellation
+  - Comprehensive error handling (7 error types)
+  - Performance: 10s audio extraction P95 < 200ms (M1 Mac)
+
+#### Preload Strategy
+- **PreloadStrategy Configuration**
+  - Three preset strategies: conservative/default/aggressive
+  - Configurable parameters:
+    - Preload duration (10s/30s/60s)
+    - Fast first frame window (5s/10s)
+    - Segment duration (15s/20s/30s)
+    - Memory cache limit (5MB/10MB/20MB)
+  - Automatic cache duration calculation
+
+- **PreloadQueue with Priority Scheduling**
+  - Priority-based task queue
+  - Four priority levels: fastFirstFrame > seek > scroll > preload
+  - Concurrent task limit (default: 3 tasks)
+  - Task cancellation support
+  - Wait for all tasks completion
+
+- **AudioPreloadService**
+  - Dual-path parallel first frame strategy:
+    - Path A: 0-5s → immediate ASR (fastest first frame)
+    - Path B: 5-10s → ASR queue (supplement)
+    - Path C: 10-30s → background preload (low priority)
+  - Audio buffer caching (avoid re-extraction)
+  - Integration with AudioExtractor and PreloadQueue
+
+#### Memory Management
+- **MemoryPressureLevel**
+  - Three-tier memory pressure levels:
+    - warning: retain ±60s
+    - urgent: retain ±30s
+    - critical: retain ±15s only
+  - Retention range calculation
+
+- **AudioCache**
+  - LRU (Least Recently Used) eviction strategy
+  - Capacity limits: by size (MB) and item count
+  - Last access time tracking
+  - Three-tier memory pressure response
+  - Current size monitoring (bytes/MB)
+
+- **MemoryPressureMonitor**
+  - System memory warning listener (iOS/macOS)
+  - Graduated pressure detection:
+    - 1 warning → warning
+    - 3 warnings/30s → urgent
+    - 5 warnings/60s → critical
+  - Jitter prevention with sliding window
+  - AsyncStream-based event publishing
+
+#### Internationalization
+- English (en) and Simplified Chinese (zh-Hans) localization
+- 7 audio extraction error messages
+- Resource bundle configuration in Package.swift
+
 ### Added - Sprint 1, Task-101 (Media Selection & Playback)
 
 #### Core Features

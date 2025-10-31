@@ -10,8 +10,14 @@ public actor MockAsrEngine: AsrEngine {
     public private(set) var lastAudioData: Data?
     public private(set) var lastOptions: AsrOptions?
 
+    /// 调用历史（按时间顺序）
+    public private(set) var transcribeHistory:
+        [(audioData: Data, options: AsrOptions, timestamp: Date)] = []
+
     public var transcribeResult: Result<[AsrSegment], AsrError> = .success([])
     public var transcribeDelay: TimeInterval = 0
+    private var isCancelled = false
+    public var shouldFailOnCancel = true
 
     public init() {}
 
@@ -20,9 +26,18 @@ public actor MockAsrEngine: AsrEngine {
         transcribeCallCount += 1
         lastAudioData = audioData
         lastOptions = options
+        transcribeHistory.append((audioData, options, Date()))
+
+        // 重置取消标志
+        isCancelled = false
 
         if transcribeDelay > 0 {
             try await Task.sleep(nanoseconds: UInt64(transcribeDelay * 1_000_000_000))
+        }
+
+        // 检查是否被取消
+        if isCancelled && shouldFailOnCancel {
+            throw AsrError.cancelled
         }
 
         switch transcribeResult {
@@ -35,6 +50,7 @@ public actor MockAsrEngine: AsrEngine {
 
     public func cancel() async {
         cancelCalled = true
+        isCancelled = true
     }
 
     public func setSegments(_ segments: [AsrSegment]) {
@@ -55,7 +71,16 @@ public actor MockAsrEngine: AsrEngine {
         cancelCalled = false
         lastAudioData = nil
         lastOptions = nil
+        transcribeHistory.removeAll()
         transcribeResult = .success([])
         transcribeDelay = 0
+        shouldFailOnCancel = true
+        isCancelled = false
+    }
+    
+    /// 获取指定索引的调用记录
+    public func getCall(at index: Int) -> (audioData: Data, options: AsrOptions, timestamp: Date)? {
+        guard index >= 0 && index < transcribeHistory.count else { return nil }
+        return transcribeHistory[index]
     }
 }

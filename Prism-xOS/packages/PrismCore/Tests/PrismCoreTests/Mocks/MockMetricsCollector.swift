@@ -14,6 +14,7 @@ public actor MockMetricsCollector: MetricsCollector {
     public private(set) var recordDistributionCalled = false
     public private(set) var lastDistributionName: String?
     public private(set) var lastDistributionValue: Double?
+    public private(set) var lastDistributionMetadata: [String: String]?
 
     private var metrics: [Metric] = []
 
@@ -46,6 +47,7 @@ public actor MockMetricsCollector: MetricsCollector {
         recordDistributionCalled = true
         lastDistributionName = name
         lastDistributionValue = value
+        lastDistributionMetadata = metadata
 
         let metric = Metric(
             name: name, type: .distribution, value: value, metadata: metadata, timestamp: Date())
@@ -119,6 +121,7 @@ public actor MockMetricsCollector: MetricsCollector {
         recordDistributionCalled = false
         lastDistributionName = nil
         lastDistributionValue = nil
+        lastDistributionMetadata = nil
         metrics.removeAll()
     }
 }

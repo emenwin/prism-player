@@ -73,7 +73,11 @@ final class AVPlayerServiceTests: XCTestCase {
             try await sut.load(url: url)
             XCTFail("应该抛出 fileNotFound 错误")
         } catch let error as PlayerError {
-            XCTAssertEqual(error, .fileNotFound, "应该是 fileNotFound 错误")
+            if case .fileNotFound = error {
+                // 成功：抛出了预期的错误
+            } else {
+                XCTFail("应该是 fileNotFound 错误，实际是: \(error)")
+            }
         }
     }
 
@@ -94,7 +98,11 @@ final class AVPlayerServiceTests: XCTestCase {
             try await sut.load(url: tempURL)
             XCTFail("应该抛出 unsupportedFormat 错误")
         } catch let error as PlayerError {
-            XCTAssertEqual(error, .unsupportedFormat, "应该是 unsupportedFormat 错误")
+            if case .unsupportedFormat = error {
+                // 成功：抛出了预期的错误
+            } else {
+                XCTFail("应该是 unsupportedFormat 错误，实际是: \(error)")
+            }
         }
     }
 
