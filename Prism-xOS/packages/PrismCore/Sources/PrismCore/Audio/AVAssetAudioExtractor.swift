@@ -185,10 +185,10 @@ public final class AVAssetAudioExtractor: AudioExtractor {
         }
 
         var samples: [Float] = []
-        
+
         // 遍历所有缓冲区（Mono 通常只有 1 个）
         let buffers = UnsafeMutableAudioBufferListPointer(&audioBufferList)
-        
+
         for buffer in buffers {
             guard let data = buffer.mData else { continue }
 
