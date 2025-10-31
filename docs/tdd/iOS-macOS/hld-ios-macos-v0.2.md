@@ -204,9 +204,121 @@ sequenceDiagram
   end
 ```
 
+### 5.3 音频预加载与极速首帧优化（Sprint 1）
+
+**目标**：将首帧字幕可见时间（P95）从 8-12s 降至 3-5s（高端设备）。
+
+**核心策略**：
+
+1. **双路并行首帧策略**
+   ```
+   媒体加载完成
+        ↓
+   ┌────┴────┬────────┬──────────┐
+   │ 路径A   │ 路径B  │  路径C   │
+   │ 0-5s    │ 5-10s  │  10-30s  │
+   │ 极速    │ 补充   │  预加载  │
+   └─────────┴────────┴──────────┘
+   ```
+   
+   - **路径 A**（极速首帧）：
+     - 抽取前 5s 音频 → PCM 转换 → ASR 推理
+     - 优先级最高（fastFirstFrame）
+     - 目标：< 2s 完成，立即显示首字幕
+   
+   - **路径 B**（补充首屏）：
+     - 并行抽取 5-10s 音频
+     - 优先级次高（fastFirstFrame）
+     - 补充首屏字幕，避免白屏
+   
+   - **路径 C**（后台预加载）：
+     - 抽取 10-30s 音频
+     - 优先级低（preload）
+     - 后台执行，不阻塞首帧
+
+2. **音频格式优化**
+   ```
+   原始音频          AVAssetReader 转换      目标格式
+   ─────────────  →  ─────────────────  →  ──────────────
+   AAC/MP3/FLAC      解码                    PCM Float32
+   48kHz/44.1kHz     重采样                  16 kHz
+   Stereo (2ch)      声道混合                Mono (1ch)
+   16-bit Int        位深度转换              32-bit Float
+   
+   数据量减少：67%
+   处理速度提升：3×
+   ```
+
+3. **优先级调度队列**
+   ```swift
+   PreloadQueue(maxConcurrentTasks: 3)
+   
+   优先级：
+   - fastFirstFrame (1000) → 路径A/B，seek后60s窗口
+   - seek (800)             → 拖动后触发
+   - scroll (600)           → 滚动播放正常识别
+   - preload (400)          → 路径C，后台预加载
+   ```
+
+4. **LRU 缓存管理**
+   ```
+   AudioCache(maxSizeMB: 10, maxItems: 50)
+   
+   容量：10MB ≈ 156s 音频（16kHz mono Float32 = 64KB/s）
+   淘汰：最久未使用（lastAccessTime）
+   索引：key = "startMs-endMs"（如 "0-10000"）
+   ```
+
+5. **三级内存压力响应**
+   ```
+   内存压力等级          清理策略              保留范围
+   ─────────────────────────────────────────────────
+   normal              无需清理              全部
+   warning (1次警告)    清理远端缓存           ±60s
+   urgent (3次/30s)    清理更多缓存           ±30s
+   critical (5次/60s)  仅保留播放附近         ±15s
+   ```
+   
+   滑动窗口判断：
+   - 记录最近警告时间戳
+   - 统计 30s/60s 窗口内警告次数
+   - 避免频繁抖动
+
+**实现组件**：
+
+- `AudioBuffer`: 封装 PCM Float32 音频数据 + 元数据
+- `AudioExtractor`: 协议，定义音频抽取接口
+- `AVAssetAudioExtractor`: AVAssetReader 实现，自动格式转换
+- `PreloadStrategy`: 三档预设（aggressive/balanced/conservative）
+- `PreloadQueue`: 优先级调度队列，并发限制
+- `AudioPreloadService`: 双路并行策略协调器
+- `AudioCache`: LRU 缓存，内存压力响应
+- `MemoryPressureMonitor`: 系统内存警告监听 + 分级判断
+
+**性能目标**：
+
+| 设备等级 | 首帧时间 P95 | 音频抽取 | ASR RTF | 总耗时 |
+|---------|-------------|---------|---------|--------|
+| 高端    | < 5s        | < 200ms | < 2s    | < 3s   |
+| 中端    | < 8s        | < 300ms | < 4s    | < 5s   |
+| 低端    | < 12s       | < 500ms | < 8s    | < 9s   |
+
+**技术风险**：
+
+- 并发控制：最多 3 个任务，避免资源竞争
+- 内存峰值：双路并行 + ASR 模型加载（控制在 150MB 内）
+- 取消时机：seek 后立即取消过期任务，避免浪费
+- 缓存命中率：典型场景 > 60%（重复播放、来回拖动）
+
+**参考实现**：
+
+- Sprint 1 Task-102：音频预加载与极速首帧
+- PrismCore/Audio 模块：完整实现
+- Tests/Integration/FirstFrameE2ETests：端到端验证
+
 ## 6. ASR 引擎集成（whisper.cpp 优先）
 
-本节扩展为“双后端 ASR 方案”：WhisperCppBackend 与 MLXSwiftBackend。
+本节扩展为"双后端 ASR 方案"：WhisperCppBackend 与 MLXSwiftBackend。
 
 ### 6.1 统一接口（Swift 协议）
 
