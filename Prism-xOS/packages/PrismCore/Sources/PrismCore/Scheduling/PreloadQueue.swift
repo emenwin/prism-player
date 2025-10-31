@@ -19,16 +19,16 @@ import OSLog
 public enum PreloadPriority: Int, Sendable, Comparable {
     /// 预加载（低优先级）
     case preload = 0
-    
+
     /// 滚动识别（中优先级）
     case scroll = 1
-    
+
     /// 拖动抢占（高优先级）
     case seek = 2
-    
+
     /// 首帧快速窗口（最高优先级）
     case fastFirstFrame = 3
-    
+
     public static func < (lhs: PreloadPriority, rhs: PreloadPriority) -> Bool {
         lhs.rawValue < rhs.rawValue
     }
@@ -70,7 +70,7 @@ public enum PreloadPriority: Int, Sendable, Comparable {
 /// - Task-102 §4 实施计划 PR2
 public actor PreloadQueue {
     private let logger = Logger(subsystem: "com.prismplayer.core", category: "audio.preload")
-    
+
     /// 任务项
     private struct TaskItem {
         let id: UUID
@@ -78,22 +78,22 @@ public actor PreloadQueue {
         let task: Task<Void, Never>
         let createdAt: Date
     }
-    
+
     /// 任务队列（按优先级排序）
     private var tasks: [TaskItem] = []
-    
+
     /// 最大并发任务数
     private let maxConcurrentTasks: Int
-    
+
     /// 当前运行中的任务数
     private var runningCount: Int = 0
-    
+
     /// 初始化预加载队列
     /// - Parameter maxConcurrentTasks: 最大并发任务数，默认 3
     public init(maxConcurrentTasks: Int = 3) {
         self.maxConcurrentTasks = maxConcurrentTasks
     }
-    
+
     /// 入队任务
     ///
     /// - Parameters:
@@ -106,37 +106,43 @@ public actor PreloadQueue {
         operation: @escaping @Sendable () async throws -> T
     ) -> UUID {
         let taskId = UUID()
-        
+
         // 创建任务（包装为 Task<Void, Never>）
         let task = Task {
             // 等待调度
             await waitForSlot()
-            
+
             // 执行任务
             do {
-                logger.debug("开始执行任务: id=\(taskId.uuidString, privacy: .public), priority=\(priority.rawValue, privacy: .public)")
+                logger.debug(
+                    "开始执行任务: id=\(taskId.uuidString, privacy: .public), priority=\(priority.rawValue, privacy: .public)"
+                )
                 _ = try await operation()
                 logger.debug("任务完成: id=\(taskId.uuidString, privacy: .public)")
             } catch is CancellationError {
                 logger.notice("任务已取消: id=\(taskId.uuidString, privacy: .public)")
             } catch {
-                logger.error("任务失败: id=\(taskId.uuidString, privacy: .public), error=\(error.localizedDescription, privacy: .public)")
+                logger.error(
+                    "任务失败: id=\(taskId.uuidString, privacy: .public), error=\(error.localizedDescription, privacy: .public)"
+                )
             }
-            
+
             // 标记完成
             markCompleted(taskId: taskId)
         }
-        
+
         // 加入队列（按优先级排序）
         let item = TaskItem(id: taskId, priority: priority, task: task, createdAt: Date())
         tasks.append(item)
-        tasks.sort { $0.priority > $1.priority } // 高优先级在前
-        
-        logger.info("任务入队: id=\(taskId.uuidString, privacy: .public), priority=\(priority.rawValue, privacy: .public), 队列深度=\(self.tasks.count, privacy: .public)")
-        
+        tasks.sort { $0.priority > $1.priority }  // 高优先级在前
+
+        logger.info(
+            "任务入队: id=\(taskId.uuidString, privacy: .public), priority=\(priority.rawValue, privacy: .public), 队列深度=\(self.tasks.count, privacy: .public)"
+        )
+
         return taskId
     }
-    
+
     /// 取消指定任务
     /// - Parameter taskId: 任务 ID
     public func cancel(taskId: UUID) {
@@ -146,7 +152,7 @@ public actor PreloadQueue {
             logger.notice("任务已取消: id=\(taskId.uuidString, privacy: .public)")
         }
     }
-    
+
     /// 取消所有任务
     public func cancelAll() {
         logger.notice("取消所有任务: 总数=\(self.tasks.count, privacy: .public)")
@@ -154,31 +160,31 @@ public actor PreloadQueue {
         tasks.removeAll()
         runningCount = 0
     }
-    
+
     /// 等待所有任务完成
     public func waitForAll() async {
         logger.debug("等待所有任务完成: 当前队列深度=\(self.tasks.count, privacy: .public)")
-        
+
         // 等待所有任务
         for item in tasks {
             await item.task.value
         }
-        
+
         logger.debug("所有任务已完成")
     }
-    
+
     /// 获取队列深度
     public var depth: Int {
         tasks.count
     }
-    
+
     /// 获取运行中任务数
     public var runningTaskCount: Int {
         runningCount
     }
-    
+
     // MARK: - Private Methods
-    
+
     /// 等待可用槽位
     private func waitForSlot() async {
         while runningCount >= maxConcurrentTasks {
@@ -187,7 +193,7 @@ public actor PreloadQueue {
         }
         runningCount += 1
     }
-    
+
     /// 标记任务完成
     private func markCompleted(taskId: UUID) {
         runningCount -= 1

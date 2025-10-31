@@ -34,7 +34,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     /// - 高端设备可增加至 60s（提升滚动流畅度）
     /// - 低端设备可降至 10s（减少内存压力）
     public let preloadDuration: TimeInterval
-    
+
     /// 首帧快速窗口时长（秒）
     ///
     /// 说明：
@@ -44,7 +44,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     ///   - 路径 A：前 5s → 极速首帧（立即送 ASR）
     ///   - 路径 B：5–10s → 补充首屏（ASR 队列）
     public let fastFirstFrameDuration: TimeInterval
-    
+
     /// 滚动识别段长（秒）
     ///
     /// 说明：
@@ -53,7 +53,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     /// - 过短：上下文不足，WER 上升
     /// - 过长：首字延迟增加
     public let segmentDuration: TimeInterval
-    
+
     /// 内存缓存上限（MB）
     ///
     /// 说明：
@@ -62,9 +62,9 @@ public struct PreloadStrategy: Sendable, Equatable {
     /// - 触发 LRU 淘汰：保留当前播放 ±30s，清理更远的缓存
     /// - 内存压力时：按三级策略清理（±60s/±30s/±15s）
     public let maxCacheSizeMB: Int
-    
+
     // MARK: - 预设策略
-    
+
     /// 默认策略（推荐）
     ///
     /// - 预加载：30s
@@ -82,7 +82,7 @@ public struct PreloadStrategy: Sendable, Equatable {
         segmentDuration: 20,
         maxCacheSizeMB: 10
     )
-    
+
     /// 激进策略
     ///
     /// - 预加载：60s
@@ -100,7 +100,7 @@ public struct PreloadStrategy: Sendable, Equatable {
         segmentDuration: 30,
         maxCacheSizeMB: 20
     )
-    
+
     /// 保守策略
     ///
     /// - 预加载：10s
@@ -118,9 +118,9 @@ public struct PreloadStrategy: Sendable, Equatable {
         segmentDuration: 15,
         maxCacheSizeMB: 5
     )
-    
+
     // MARK: - 初始化
-    
+
     /// 自定义策略
     /// - Parameters:
     ///   - preloadDuration: 预加载时长（秒）
@@ -138,9 +138,9 @@ public struct PreloadStrategy: Sendable, Equatable {
         self.segmentDuration = segmentDuration
         self.maxCacheSizeMB = maxCacheSizeMB
     }
-    
+
     // MARK: - 计算属性
-    
+
     /// 最大缓存字节数
     ///
     /// 计算公式：
@@ -150,7 +150,7 @@ public struct PreloadStrategy: Sendable, Equatable {
     public var maxCacheSizeBytes: Int {
         maxCacheSizeMB * 1024 * 1024
     }
-    
+
     /// 最大缓存时长（秒）
     ///
     /// 计算公式：
