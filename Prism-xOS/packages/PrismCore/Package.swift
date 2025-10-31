@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "PrismCore",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17),
         .macOS(.v14),
@@ -22,7 +23,10 @@ let package = Package(
             dependencies: [
                 .product(name: "GRDB", package: "GRDB.swift")
             ],
-            path: "Sources/PrismCore"
+            path: "Sources/PrismCore",
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "PrismCoreTests",

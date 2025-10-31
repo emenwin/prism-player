@@ -1,0 +1,8 @@
+/* Audio Extraction Errors */
+"audio.error.asset_not_readable" = "Media asset is not readable";
+"audio.error.no_audio_track" = "No audio track found";
+"audio.error.unsupported_format" = "Unsupported audio format";
+"audio.error.reader_init_failed" = "Failed to initialize audio reader: %@";
+"audio.error.read_failed" = "Failed to read audio data: %@";
+"audio.error.time_range_invalid" = "Invalid time range";
+"audio.error.cancelled" = "Operation cancelled";

@@ -1,0 +1,8 @@
+/* Audio Extraction Errors */
+"audio.error.asset_not_readable" = "媒体资源无法读取";
+"audio.error.no_audio_track" = "未找到音频轨道";
+"audio.error.unsupported_format" = "不支持的音频格式";
+"audio.error.reader_init_failed" = "音频读取器初始化失败: %@";
+"audio.error.read_failed" = "音频读取失败: %@";
+"audio.error.time_range_invalid" = "时间范围无效";
+"audio.error.cancelled" = "操作已取消";
