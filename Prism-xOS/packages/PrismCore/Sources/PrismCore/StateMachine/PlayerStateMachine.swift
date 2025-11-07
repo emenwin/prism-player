@@ -44,8 +44,8 @@ public actor PlayerStateMachine: StateMachine {
     /// 当前状态（只读）
     public private(set) var currentState: PlayerRecognitionState = .idle
 
-    /// 状态发布流
-    public let statePublisher: AsyncStream<PlayerRecognitionState>
+    /// 状态发布流（nonisolated 以支持多订阅者并发访问）
+    nonisolated public let statePublisher: AsyncStream<PlayerRecognitionState>
 
     /// 状态流的 Continuation（用于发布新状态）
     private let stateContinuation: AsyncStream<PlayerRecognitionState>.Continuation
