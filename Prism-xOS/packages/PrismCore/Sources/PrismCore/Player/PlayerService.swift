@@ -65,12 +65,26 @@ public enum PlayerState: Equatable, Sendable {
 // MARK: - Player Error
 
 /// 播放器错误
-public enum PlayerError: Error, LocalizedError {
+public enum PlayerError: Error, LocalizedError, Equatable, Sendable {
+    // MARK: - 基础错误（原有）
     case fileNotFound
     case unsupportedFormat
     case loadFailed(String)
     case seekFailed
-    case unknown(Error)
+    case unknown(String)
+
+    // MARK: - 扩展错误（状态机支持）
+    /// 媒体加载失败（带 URL 上下文）
+    case mediaLoadFailed(URL, underlying: String)
+
+    /// 识别失败
+    case recognitionFailed(TimeRange, underlying: String)
+
+    /// 内部错误
+    case internalError(String)
+
+    /// 操作被取消
+    case cancelled(operation: String)
 
     public var errorDescription: String? {
         switch self {
@@ -83,8 +97,75 @@ public enum PlayerError: Error, LocalizedError {
                 format: NSLocalizedString("player.error.load_failed", comment: "加载失败: %@"), message)
         case .seekFailed:
             return NSLocalizedString("player.error.seek_failed", comment: "跳转失败")
-        case .unknown(let error):
-            return error.localizedDescription
+        case .unknown(let message):
+            return message
+        case .mediaLoadFailed(let url, let underlying):
+            return "Failed to load media '\(url.lastPathComponent)': \(underlying)"
+        case .recognitionFailed(let window, let underlying):
+            return "Recognition failed for \(window.description): \(underlying)"
+        case .internalError(let description):
+            return "Internal error: \(description)"
+        case .cancelled(let operation):
+            return "Operation '\(operation)' was cancelled"
         }
+    }
+
+    /// 是否为可恢复的错误
+    public var isRecoverable: Bool {
+        switch self {
+        case .fileNotFound, .unsupportedFormat:
+            return false
+        case .loadFailed, .seekFailed, .unknown,
+            .mediaLoadFailed, .recognitionFailed, .cancelled:
+            return true
+        case .internalError:
+            return false
+        }
+    }
+
+    // MARK: - Equatable
+
+    public static func == (lhs: PlayerError, rhs: PlayerError) -> Bool {
+        switch (lhs, rhs) {
+        case (.fileNotFound, .fileNotFound),
+            (.unsupportedFormat, .unsupportedFormat),
+            (.seekFailed, .seekFailed):
+            return true
+        case (.loadFailed(let lMsg), .loadFailed(let rMsg)),
+            (.unknown(let lMsg), .unknown(let rMsg)),
+            (.internalError(let lMsg), .internalError(let rMsg)):
+            return lMsg == rMsg
+        case (.mediaLoadFailed(let lUrl, let lUnd), .mediaLoadFailed(let rUrl, let rUnd)):
+            return lUrl == rUrl && lUnd == rUnd
+        case (.recognitionFailed(let lWin, let lUnd), .recognitionFailed(let rWin, let rUnd)):
+            return lWin == rWin && lUnd == rUnd
+        case (.cancelled(let lOp), .cancelled(let rOp)):
+            return lOp == rOp
+        default:
+            return false
+        }
+    }
+
+    // MARK: - Error Helpers
+
+    /// 从底层错误创建 PlayerError
+    /// - Parameters:
+    ///   - error: 底层错误
+    ///   - context: 错误上下文（操作描述）
+    /// - Returns: PlayerError 实例
+    public static func from(_ error: Error, context: String) -> PlayerError {
+        if let playerError = error as? PlayerError {
+            return playerError
+        }
+
+        // 检查是否为取消错误
+        let nsError = error as NSError
+        if nsError.code == NSURLErrorCancelled
+            || (nsError.domain == NSCocoaErrorDomain && nsError.code == NSUserCancelledError)
+        {
+            return .cancelled(operation: context)
+        }
+
+        return .internalError("\(context): \(error.localizedDescription)")
     }
 }
