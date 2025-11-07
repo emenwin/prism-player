@@ -13,6 +13,12 @@ import Foundation
 ///
 /// 提供各种测试场景所需的媒体文件 URL
 public enum TestMediaURL {
+    /// 示例视频 1（常用于基础测试）
+    public static let sample1 = URL(fileURLWithPath: "/tmp/test-sample1.mp4")
+
+    /// 示例视频 2（用于多媒体切换测试）
+    public static let sample2 = URL(fileURLWithPath: "/tmp/test-sample2.mp4")
+
     /// 有效的本地视频文件（用于正常流程测试）
     public static let validVideo = URL(fileURLWithPath: "/tmp/test-video.mp4")
 

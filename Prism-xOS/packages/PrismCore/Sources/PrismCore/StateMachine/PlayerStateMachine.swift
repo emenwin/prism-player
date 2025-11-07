@@ -61,6 +61,17 @@ public actor PlayerStateMachine: StateMachine {
         [(from: State, to: State, event: Event, duration: TimeInterval)] = []
     private let maxHistorySize = 20
 
+    // MARK: - seekId 管理（PR3）
+
+    /// 当前活跃的 seekId（用于取消管理）
+    private var activeSeekId: UUID?
+
+    /// 已取消的 seekId 集合（用于幂等取消）
+    private var cancelledSeekIds: Set<UUID> = []
+
+    /// 最大缓存的已取消 seekId 数量（防止内存泄漏）
+    private let maxCancelledSeekIds = 100
+
     // MARK: - Initialization
 
     /// 创建播放器状态机
@@ -119,6 +130,25 @@ public actor PlayerStateMachine: StateMachine {
         }
     }
 
+    // MARK: - seekId 管理（PR3）
+
+    /// 检查指定的 seekId 是否已被取消
+    ///
+    /// 外部任务（如识别引擎）可以调用此方法检查是否应该中止
+    ///
+    /// - Parameter seekId: 要检查的 seekId
+    /// - Returns: true 表示已取消，false 表示仍然有效
+    public func isSeekCancelled(_ seekId: UUID) -> Bool {
+        return cancelledSeekIds.contains(seekId)
+    }
+
+    /// 获取当前活跃的 seekId
+    ///
+    /// - Returns: 当前 seekId，如果没有则返回 nil
+    public func currentSeekId() -> UUID? {
+        return activeSeekId
+    }
+
     // MARK: - Event Handling
 
     /// 处理事件并返回新状态
@@ -166,16 +196,50 @@ public actor PlayerStateMachine: StateMachine {
             return .playing(progress: newProgress)
 
         case (.playing, .seek(let time, let seekId)):
-            // 跳转会触发重新加载
-            // 注意：这里只是状态转移，实际的 seek 操作由外部协调器处理
-            logger.debug("Seek initiated: to \(String(format: "%.1f", time))s, seekId: \(seekId)")
-            // 简化：直接转到 playing 并更新进度
-            // 实际实现中可能需要先进入 loading
+            // PR3: seekId 并发控制
+            // 1. 记录旧 seekId（用于日志）
+            let oldSeekId = activeSeekId
+
+            // 2. 更新活跃 seekId
+            activeSeekId = seekId
+
+            // 3. 如果有旧 seekId，标记为已取消
+            if let old = oldSeekId {
+                cancelledSeekIds.insert(old)
+                logger.debug(
+                    """
+                    Seek replaced previous seek: \
+                    old=\(old.uuidString.prefix(8)), new=\(seekId.uuidString.prefix(8))
+                    """
+                )
+            }
+
+            logger.debug(
+                "Seek initiated: to \(String(format: "%.1f", time))s, seekId: \(seekId.uuidString.prefix(8))"
+            )
+
+            // 4. 清理过多的已取消 seekId（防止内存泄漏）
+            if cancelledSeekIds.count > maxCancelledSeekIds {
+                // 移除最旧的一半
+                let toRemove = cancelledSeekIds.prefix(maxCancelledSeekIds / 2)
+                cancelledSeekIds.subtract(toRemove)
+                logger.debug("Cleaned up \(toRemove.count) old cancelled seekIds")
+            }
+
+            // 5. 转移到 playing 状态（简化实现，实际可能需要 loading）
             return .playing(progress: time)
 
         case (.playing, .startRecognition(let window)):
-            // 不需要使用 progress，状态转移即可
-            return .recognizing(window: window, seekId: nil)
+            // PR3: 将当前 seekId 传递给 recognizing 状态
+            // 这样 seek 事件可以中断识别
+            let currentSeekId = activeSeekId
+            logger.debug(
+                """
+                Starting recognition for window \(window), \
+                seekId: \(currentSeekId?.uuidString.prefix(8) ?? "nil")
+                """
+            )
+            return .recognizing(window: window, seekId: currentSeekId)
 
         case (.playing, .reset):
             return .idle
@@ -189,8 +253,20 @@ public actor PlayerStateMachine: StateMachine {
             throw StateMachineError.internalError("paused state should have position")
 
         case (.paused, .seek(let time, let seekId)):
+            // PR3: 更新 seekId（paused 状态也需要取消管理）
+            let oldSeekId = activeSeekId
+            activeSeekId = seekId
+
+            if let old = oldSeekId {
+                cancelledSeekIds.insert(old)
+            }
+
             logger.debug(
-                "Seek from paused state: to \(String(format: "%.1f", time))s, seekId: \(seekId)")
+                """
+                Seek from paused state: to \(String(format: "%.1f", time))s, \
+                seekId: \(seekId.uuidString.prefix(8))
+                """
+            )
             return .paused(at: time)
 
         case (.paused, .reset):
@@ -206,16 +282,68 @@ public actor PlayerStateMachine: StateMachine {
             }
             throw StateMachineError.internalError("recognizing state should have window")
 
-        case (.recognizing, .cancel):
-            // 取消识别，返回播放状态
-            if case .recognizing(let window, _) = currentState {
-                return .playing(progress: window.start)
+        case (.recognizing, .cancel(let seekId)):
+            // PR3: 幂等取消 - 根据 seekId 判断是否需要取消
+            if case .recognizing(let window, let recognizingSeekId) = currentState {
+                // 如果指定了 seekId，检查是否匹配
+                if let targetSeekId = seekId {
+                    // 检查是否已经取消过
+                    if cancelledSeekIds.contains(targetSeekId) {
+                        logger.debug(
+                            """
+                            Cancel ignored: seekId \(targetSeekId.uuidString.prefix(8)) \
+                            already cancelled (idempotent)
+                            """
+                        )
+                        return currentState  // 幂等：保持当前状态
+                    }
+
+                    // 检查 seekId 是否匹配
+                    if recognizingSeekId == targetSeekId {
+                        cancelledSeekIds.insert(targetSeekId)
+                        logger.info(
+                            """
+                            Recognition cancelled: seekId=\(targetSeekId.uuidString.prefix(8)), \
+                            returning to \(String(format: "%.1f", window.start))s
+                            """
+                        )
+                        return .playing(progress: window.start)
+                    } else {
+                        // seekId 不匹配，忽略取消请求
+                        logger.debug(
+                            """
+                            Cancel ignored: seekId mismatch \
+                            (requested=\(targetSeekId.uuidString.prefix(8)), \
+                            current=\(recognizingSeekId?.uuidString.prefix(8) ?? "nil"))
+                            """
+                        )
+                        return currentState
+                    }
+                } else {
+                    // 未指定 seekId，取消当前识别
+                    logger.info(
+                        "Recognition cancelled (no seekId specified), returning to \(String(format: "%.1f", window.start))s"
+                    )
+                    return .playing(progress: window.start)
+                }
             }
             throw StateMachineError.internalError("recognizing state should have window")
 
-        case (.recognizing, .seek(let time, _)):
-            // seek 中断识别
-            logger.warning("Recognition interrupted by seek to \(String(format: "%.1f", time))s")
+        case (.recognizing, .seek(let time, let seekId)):
+            // PR3: seek 中断识别，更新 seekId
+            let oldSeekId = activeSeekId
+            activeSeekId = seekId
+
+            if let old = oldSeekId {
+                cancelledSeekIds.insert(old)
+            }
+
+            logger.warning(
+                """
+                Recognition interrupted by seek to \(String(format: "%.1f", time))s, \
+                seekId: \(seekId.uuidString.prefix(8))
+                """
+            )
             return .playing(progress: time)
 
         case (.recognizing, .recognitionFailed(let error)):
