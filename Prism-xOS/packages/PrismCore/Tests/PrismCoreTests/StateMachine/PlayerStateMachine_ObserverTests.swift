@@ -76,10 +76,10 @@ struct PlayerStateMachineObserverTests {
         // 注意：Swift 的 AsyncStream 设计为单一消费者
         // 多个订阅者会竞争消费事件，导致每个订阅者接收不同的事件子集
         // 这是预期行为，不是bug
-        
+
         let stateMachine = PlayerStateMachine()
         var receivedStates: [PlayerRecognitionState] = []
-        
+
         // 单一订阅者
         let observer = Task {
             for await state in stateMachine.statePublisher {
@@ -87,28 +87,40 @@ struct PlayerStateMachineObserverTests {
                 if case .paused = state { break }
             }
         }
-        
+
         try await Task.sleep(nanoseconds: 50_000_000)  // 50ms
-        
+
         // 执行状态转移
         try await stateMachine.send(.loadMedia(TestMediaURL.sample1))
         try await stateMachine.send(.play)
         try await stateMachine.send(.pause)
-        
+
         try await Task.sleep(nanoseconds: 100_000_000)  // 100ms
         observer.cancel()
-        
+
         // 验证单一订阅者接收到完整序列
         #expect(receivedStates.count >= 4, "单一订阅者应接收到完整状态序列")
-        
+
         // 验证包含关键状态
-        let hasIdle = receivedStates.contains { if case .idle = $0 { return true }; return false }
-        let hasLoading = receivedStates.contains { if case .loading = $0 { return true }; return false }
-        let hasPlaying = receivedStates.contains { if case .playing = $0 { return true }; return false }
-        let hasPaused = receivedStates.contains { if case .paused = $0 { return true }; return false }
-        
+        let hasIdle = receivedStates.contains {
+            if case .idle = $0 { return true }
+            return false
+        }
+        let hasLoading = receivedStates.contains {
+            if case .loading = $0 { return true }
+            return false
+        }
+        let hasPlaying = receivedStates.contains {
+            if case .playing = $0 { return true }
+            return false
+        }
+        let hasPaused = receivedStates.contains {
+            if case .paused = $0 { return true }
+            return false
+        }
+
         #expect(hasIdle && hasLoading && hasPlaying && hasPaused, "应包含所有关键状态")
-    }    // MARK: - 状态发布时序测试
+    }  // MARK: - 状态发布时序测试
 
     /// 用例3: 状态发布与事件处理同步
     @Test("状态发布与事件处理同步")
@@ -190,16 +202,16 @@ struct PlayerStateMachineObserverTests {
                 }
             }
         }
-        
+
         try await Task.sleep(nanoseconds: 50_000_000)  // 50ms - 等待订阅建立
-        
+
         // 执行状态转移
         try await stateMachine.send(.loadMedia(TestMediaURL.sample1))
         try await stateMachine.send(.play)
         try await stateMachine.send(.pause)
-        
+
         try await Task.sleep(nanoseconds: 150_000_000)  // 150ms - 等待协调器处理
-        coordinator.cancel()        // 验证 PlayerService 调用
+        coordinator.cancel()  // 验证 PlayerService 调用
         #expect(await playerService.didPerform(.loadMedia(TestMediaURL.sample1)))
         #expect(await playerService.didPerform(.play))
         #expect(await playerService.didPerform(.pause))
@@ -279,14 +291,14 @@ struct PlayerStateMachineObserverTests {
                 print("Observer1: \(state)")
             }
         }
-        
+
         try await Task.sleep(nanoseconds: 50_000_000)  // 50ms - 等待订阅建立
         try await stateMachine.send(.loadMedia(TestMediaURL.sample1))
         try await stateMachine.send(.play)
-        
+
         let currentState = await stateMachine.currentState
         #expect(currentState == .playing(progress: 0))
-        
+
         // 创建新观察者应该能接收后续状态
         var receivedPause = false
         let observer2 = Task {
@@ -297,14 +309,14 @@ struct PlayerStateMachineObserverTests {
                 }
             }
         }
-        
+
         try await Task.sleep(nanoseconds: 50_000_000)  // 50ms - 等待新订阅建立
         try await stateMachine.send(.pause)
-        
+
         try await Task.sleep(nanoseconds: 100_000_000)  // 100ms - 等待状态传播
         observer1.cancel()
         observer2.cancel()
-        
+
         #expect(receivedPause, "新观察者应能接收到 pause 状态")
     }
 
