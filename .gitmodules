@@ -1,0 +1,3 @@
+[submodule "Prism-xOS/packages/PrismASR/external/whisper.cpp"]
+	path = Prism-xOS/packages/PrismASR/external/whisper.cpp
+	url = https://github.com/ggerganov/whisper.cpp.git

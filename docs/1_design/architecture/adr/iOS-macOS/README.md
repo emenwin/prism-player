@@ -6,6 +6,8 @@
 
 ## 新增（当前）
 
+- [0007-whisper-cpp-integration-strategy.md](./0007-whisper-cpp-integration-strategy.md)：Whisper.cpp 集成策略（whisper.spm 短期 + Xcode Framework 长期）— 提议中（2025-11-11）
+- [0006-unified-app-target-structure.md](./0006-unified-app-target-structure.md)：统一 App Target 结构（单 Xcode 项目管理 iOS/macOS）— 已接受（2025-10-30）
 - [0005-testing-di-strategy.md](./0005-testing-di-strategy.md)：测试架构与依赖注入策略（Protocol-based DI）— 已接受（2025-10-24）
 - [0004-logging-metrics-strategy.md](./0004-logging-metrics-strategy.md)：日志与性能指标方案（OSLog + 本地存储）— 已接受（2025-10-24）
 - [0003-sqlite-storage-solution.md](./0003-sqlite-storage-solution.md)：SQLite 存储方案选择（SQLite + GRDB）— 已接受（2025-10-24）
@@ -16,18 +18,18 @@
 
 ```text
 docs/adr/
-├── README.md                           # ADR 索引与使用指南
-├── template.md                         # ADR 模板
-├── 0001-multiplatform-architecture.md # 多平台架构选择
-├── 0002-player-view-ui-stack.md       # 播放页 UI 技术栈
-├── 0003-sqlite-storage-solution.md    # SQLite 存储方案（新增）
-├── 0004-di-strategy.md                # DI 方案选择（待创建）
-├── 0005-dual-backend-strategy.md      # 双后端策略（whisper.cpp + MLX）
-├── 0006-state-machine-design.md       # 播放器与识别状态机设计
-├── 0007-cache-strategy.md             # 音频缓存与 LRU 策略
-├── 0008-background-processing.md      # 后台处理策略（iOS/macOS）
-├── 0009-translation-pipeline.md       # 字幕翻译流水线架构
-└── superseded/                         # 已废弃的决策（保留历史）
+├── README.md                                # ADR 索引与使用指南
+├── template.md                              # ADR 模板
+├── 0001-multiplatform-architecture.md      # 多平台架构选择
+├── 0002-player-view-ui-stack.md            # 播放页 UI 技术栈
+├── 0003-sqlite-storage-solution.md         # SQLite 存储方案
+├── 0004-logging-metrics-strategy.md        # 日志与性能指标方案
+├── 0005-testing-di-strategy.md             # 测试架构与依赖注入策略
+├── 0006-unified-app-target-structure.md    # 统一 App Target 结构
+├── 0007-whisper-cpp-integration-strategy.md # Whisper.cpp 集成策略（新增）
+├── 0008-background-processing.md           # 后台处理策略（待创建）
+├── 0009-translation-pipeline.md            # 字幕翻译流水线架构（待创建）
+└── superseded/                              # 已废弃的决策（保留历史）
     └── 0002-old-di-strategy.md
 ```
 
