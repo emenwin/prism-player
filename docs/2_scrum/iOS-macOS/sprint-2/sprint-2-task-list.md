@@ -1,8 +1,10 @@
 # Sprint 2 Task 列表
 
-**Sprint 周期**: 2025-10-29 ~ 2025-11-25（预估 3.5-4 周）  
+**Sprint 周期**: 2025-11-28 ~ 2025-12-23（预估 3.5-4 周）  
 **Sprint 目标**: 完成滚动增量识别与模型管理，改善使用体验与可用性，支持 macOS 基线，并落实后台与并发策略  
 **总故事点**: 75 SP（不含可选 Spike）
+
+**前置条件**: Sprint 1b 完成（播放器基础功能）
 
 ---
 
@@ -26,13 +28,14 @@
 - **故事点**: 13 SP
 - **状态**: ⏳ 待开始
 - **优先级**: P0
-- **依赖**: Task-101 (已完成)
+- **依赖**: Task-101 (已完成), Sprint 1b (播放器基础)
 - **验收标准**:
   - [ ] 按 15–30s 段滚动抽取与识别
   - [ ] 增量落盘并驱动 UI
   - [ ] 滚动字幕平滑显示
+  - [ ] 与播放器控件集成（播放/暂停/Seek 联动）
 - **参考**: PRD §6.4, US §5-2, HLD §5
-- **相关文件**: `PrismASR/`, `PrismCore/`
+- **相关文件**: `PrismASR/`, `PrismCore/`, `PrismPlayer/`
 
 ---
 
@@ -84,11 +87,12 @@
 - **故事点**: 5 SP
 - **状态**: ⏳ 待开始
 - **优先级**: P0
-- **依赖**: Task-101, Task-201
+- **依赖**: Task-101, Task-201, Sprint 1b (播放器控件)
 - **验收标准**:
   - [ ] 字幕显示时长与播放速度等比
   - [ ] 识别明显落后时弱提示
-  - [ ] 倍速控制 UI
+  - [ ] 倍速控制 UI（已在 Sprint 1b 完成基础）
+  - [ ] ASR 字幕与倍速同步测试
 - **参考**: PRD §6.1, §6.4
 - **相关文件**: `PrismPlayer/Sources/`
 
@@ -113,12 +117,13 @@
 - **故事点**: 6 SP
 - **状态**: ⏳ 待开始
 - **优先级**: P0
-- **依赖**: Task-101, Task-201
+- **依赖**: Task-101, Task-201, Sprint 1b (macOS 播放器)
 - **验收标准**:
-  - [ ] NSOpenPanel 打开文件
-  - [ ] 播放、基础识别与渲染
-  - [ ] 导出功能
-  - [ ] UI 适配 macOS
+  - [ ] 基于 Sprint 1b 的 macOS 播放器
+  - [ ] 集成 ASR 识别功能
+  - [ ] 字幕渲染（ASR + SRT 双模式）
+  - [ ] 导出功能（SRT）
+  - [ ] UI 适配 macOS 人机界面指南
 - **参考**: HLD §3
 - **相关文件**: `PrismPlayer/Sources/`, `PrismKit/`
 
@@ -206,14 +211,16 @@
 - **故事点**: 8 SP
 - **状态**: ⏳ 待开始
 - **优先级**: P2
-- **依赖**: Task-201, Task-207
+- **依赖**: Task-201, Task-207, Sprint 1b (完整播放器)
 - **验收标准**:
-  - [ ] 场景：选择媒体→首帧→滚动→seek→导出→验证文件（iOS+macOS）
+  - [ ] 场景测试：选择媒体→首帧→滚动→seek→导出→验证文件（iOS+macOS）
+  - [ ] 播放器控件集成测试：播放/暂停/Seek/倍速 + ASR 联动
+  - [ ] SRT 字幕与 ASR 字幕切换测试
   - [ ] a11y：VoiceOver 朗读关键控件
   - [ ] a11y：动态字体 3 档
   - [ ] a11y：高对比度
   - [ ] 自动化测试用例
-- **参考**: DoD
+- **参考**: DoD, Sprint 1b 播放器基础
 - **相关文件**: `Tests/Integration/`
 
 ---
@@ -271,22 +278,23 @@
 
 ## 📅 里程碑检查点
 
-### Week 1（2025-10-29 ~ 2025-11-04）
+### Week 1（2025-11-28 ~ 2025-12-04）
 - [ ] Task-210: JobScheduler 基础实现（8 SP）
 - [ ] Task-201: 增量识别与滚动字幕 开始（13 SP）
+- [ ] Sprint 1b 成果集成验证
 
-### Week 2（2025-11-05 ~ 2025-11-11）
+### Week 2（2025-12-05 ~ 2025-12-11）
 - [ ] Task-201: 增量识别与滚动字幕 完成
 - [ ] Task-204: 模型管理 开始（13 SP）
 - [ ] Task-203: 缓存与内存策略（8 SP）
 
-### Week 3（2025-11-12 ~ 2025-11-18）
+### Week 3（2025-12-12 ~ 2025-12-18）
 - [ ] Task-204: 模型管理 完成
 - [ ] Task-211: 后台行为与能耗策略（13 SP）
 - [ ] Task-207: macOS 目标最小可用（6 SP）
 - [ ] Task-214: 字幕翻译基础版 开始（8 SP）
 
-### Week 4（2025-11-19 ~ 2025-11-25）
+### Week 4（2025-12-19 ~ 2025-12-23）
 - [ ] Task-214: 字幕翻译基础版 完成
 - [ ] Task-202: 进度拖动后的优先识别（8 SP）
 - [ ] Task-213: 端到端集成测试与 a11y 测试（8 SP）
@@ -307,19 +315,28 @@
 
 ## 📊 风险与依赖
 
+### 前置依赖
+- **Sprint 1b 完成**: 播放器基础功能必须完成，包括：
+  - 完整播放控件（播放/暂停/Seek/倍速/时间显示）
+  - SRT 字幕加载与显示
+  - 视频拖动处理
+  - 字幕时间同步机制
+
 ### 高风险项
 - **Task-211 (后台)**: iOS 系统后台限制，需充分测试
 - **Task-214 (翻译)**: 模型选择与质量平衡
-- **Task-201 (增量)**: 性能与流畅度挑战
+- **Task-201 (增量)**: 性能与流畅度挑战，需与播放器紧密集成
 
 ### 跨任务依赖
 ```
+Sprint 1b (播放器基础) [前置条件]
+  │
 Task-101 (已完成)
-  ├── Task-201 (增量识别)
+  ├── Task-201 (增量识别) [依赖 Sprint 1b]
   │     ├── Task-202 (优先识别)
   │     ├── Task-203 (缓存策略)
-  │     ├── Task-205 (倍速)
-  │     ├── Task-207 (macOS)
+  │     ├── Task-205 (倍速) [依赖 Sprint 1b 控件]
+  │     ├── Task-207 (macOS) [依赖 Sprint 1b macOS 播放器]
   │     └── Task-214 (翻译)
   ├── Task-210 (JobScheduler)
   │     ├── Task-202 (优先识别)
@@ -332,6 +349,16 @@ Task-101 (已完成)
 
 ## 📝 更新日志
 
+### 2025-11-13
+- 调整 Sprint 周期为 2025-11-28 ~ 2025-12-23（Sprint 1b 插入后顺延）
+- 添加 Sprint 1b 前置依赖说明
+- 更新相关任务依赖关系：
+  - Task-201: 依赖 Sprint 1b 播放器基础
+  - Task-205: 依赖 Sprint 1b 播放器控件
+  - Task-207: 依赖 Sprint 1b macOS 播放器
+  - Task-213: 依赖 Sprint 1b 完整播放器
+- 更新里程碑检查点日期
+
 ### 2025-10-29
 - 创建 Sprint 2 Task 列表
 - 根据 sprint-plan-v0.2-updated.md 拆分 16 个任务
@@ -342,8 +369,9 @@ Task-101 (已完成)
 
 ## 📖 参考文档
 
-- **Sprint 计划**: `docs/scrum/iOS-macOS/sprint-plan-v0.2-updated.md`
-- **PRD**: `docs/requirements/prd_v0.2.md`
-- **HLD**: `docs/tdd/iOS-macOS/hld-ios-macos-v0.2.md`
-- **Task 模板**: `docs/scrum/template-task.md`
-- **Sprint 1 总结**: `docs/scrum/iOS-macOS/tasks/sprint-1/`
+- **Sprint 1b 计划**: `docs/2_scrum/iOS-macOS/sprint-1b/sprint-1b-task-list.md` ⭐ 前置依赖
+- **Sprint 计划**: `docs/2_scrum/iOS-macOS/sprint-plan-v0.2-updated.md`
+- **PRD**: `docs/0_prd/prd_v0.2.md`
+- **HLD**: `docs/1_design/hld/iOS-macOS/hld-ios-macos-v0.2.md`
+- **Task 模板**: `docs/template/8.task-detailed.template.md`
+- **Sprint 1 总结**: `docs/2_scrum/iOS-macOS/sprint-1/sprint-1-task-list.md`
