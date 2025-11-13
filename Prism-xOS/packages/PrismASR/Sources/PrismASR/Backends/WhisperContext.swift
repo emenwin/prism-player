@@ -1,5 +1,6 @@
 import Foundation
 import OSLog
+import PrismCore
 import whisper  // Module from CWhisper.xcframework (official whisper.framework)
 
 /// Whisper.cpp 上下文封装（线程安全）
@@ -80,9 +81,10 @@ public actor WhisperContext {
         logger.info("[WhisperContext] Loading model from: \(modelPath.lastPathComponent)")
         let cPath = modelPath.path.cString(using: .utf8)!
 
-        // whisper_init_from_file 可能返回 nil
-        guard let ctx = whisper_init_from_file(cPath) else {
-            logger.error("[WhisperContext] whisper_init_from_file returned nil")
+        // 使用新版 API：whisper_init_from_file_with_params
+        let params = whisper_context_default_params()
+        guard let ctx = whisper_init_from_file_with_params(cPath, params) else {
+            logger.error("[WhisperContext] whisper_init_from_file_with_params returned nil")
             throw AsrError.modelLoadFailed(modelPath)
         }
 
@@ -169,27 +171,5 @@ public actor WhisperContext {
             logger.info("[WhisperContext] deinit: Releasing whisper context")
             whisper_free(ctx)
         }
-    }
-}
-
-// MARK: - AsrSegment (临时定义，PR3 将移至 Models/)
-
-/// ASR 识别的文本片段（带时间戳）
-///
-/// 这是临时定义，PR3 将移至 PrismCore 的共享模型中。
-public struct AsrSegment: Sendable {
-    /// 开始时间（秒）
-    public let startTime: Double
-
-    /// 结束时间（秒）
-    public let endTime: Double
-
-    /// 识别的文本内容
-    public let text: String
-
-    public init(startTime: Double, endTime: Double, text: String) {
-        self.startTime = startTime
-        self.endTime = endTime
-        self.text = text
     }
 }
