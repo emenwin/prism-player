@@ -11,14 +11,71 @@
 | 状态 | 任务数 | 故事点 | 占比 |
 |------|--------|--------|------|
 | ✅ 完成 | 5 | 28 SP | 70.0% |
-| 🚧 进行中 | 0 | 0 SP | 0.0% |
-| ⏳ 待开始 | 2 | 12 SP | 30.0% |
+| 🚧 进行中 | 1 | 3 SP | 7.5% |
+| ⏳ 待开始 | 1 | 9 SP | 22.5% |
 
-**最后更新**: 2025-11-13 17:00
+**最后更新**: 2025-11-13 18:00
 
 ---
 
 ## 📆 每日更新
+
+### 2025-11-13 19:00
+- **完成**: Task-106 PR1 & PR2 ✅（SRT 导出核心实现）
+- **成果**: 
+  - **PR1 完成** ✅:
+    - SRTExporter.swift（329 行）
+    - SRTExporter 协议定义
+    - DefaultSRTExporter 实现
+    - ExportError 错误枚举（5 种错误类型）
+    - formatTimestamp() 时间戳格式化
+    - generateSRTContent() 内容生成
+  - **PR2 完成** ✅:
+    - generateFileName() 文件命名
+    - resolveFileNameConflict() 冲突处理
+    - checkDiskSpace() 空间检查
+    - export() 完整导出流程
+  - **测试完成** ✅:
+    - SRTExporterTests.swift（356 行）
+    - 25 个单元测试全部通过（0 失败）
+    - 覆盖：时间戳格式化、SRT 内容生成、文件操作、错误处理
+    - UTF-8 编码验证（无 BOM）
+    - 文件名冲突自动解决测试
+    - SwiftLint 严格模式通过 ✅
+- **技术实现**:
+  - 时间戳精度：毫秒级（HH:MM:SS,mmm）
+  - 支持 0-99:59:59,999 时间范围
+  - 自动处理文件冲突（-1, -2 后缀）
+  - 完整错误本地化
+  - Sendable 并发安全
+- **测试结果**: 25/25 tests PASSED ✅
+- **下一步**: Task-106 PR3（E2E 测试与 CI）
+- **进度**: 5 完成 + 1 进行中（31 SP），77.5% 完成
+
+### 2025-11-13 18:00
+- **启动**: Task-106 详细设计 🚧（SRT 导出）
+- **成果**: 
+  - 完整详细设计文档（v1.2）
+  - 核心 API 设计（SRTExporter 协议、ExportError 枚举）
+  - 时间戳格式化算法（HH:MM:SS,mmm）
+  - 文件命名策略（`<basename>.<locale>.srt`）
+  - 文件冲突自动处理（追加 -1, -2 后缀）
+  - 空间检查机制
+  - 3 个 PR 实施计划（总计 1.5 天）
+    - PR1: SRT 格式化核心实现（0.5d）
+    - PR2: 文件系统操作与错误处理（0.5d）
+    - PR3: 集成测试与 CI 配置（0.5d）
+  - 23 个单元测试用例设计
+  - 3 个 E2E 测试场景
+  - 完整观测埋点定义（日志、指标、错误码）
+- **技术亮点**:
+  - SRT 标准格式实现（UTF-8，无 BOM）
+  - 文件系统错误处理（空间不足、权限拒绝、写入失败）
+  - 跨平台路径处理（iOS 沙箱 vs macOS 保存面板）
+  - 测试夹具准备（金样本 SRT 文件）
+- **验收标准**: 7 项全部明确
+- **下一步**: Task-106 PR1 实施（SRT 格式化核心）
+- **进度**: 5 完成 + 1 进行中（31 SP），77.5% 完成
 
 ### 2025-11-13 17:00
 - **完成**: Task-104 ✅（播放器与识别状态机）
@@ -329,24 +386,38 @@
 
 #### Task-106: SRT 导出（基础版）
 - **故事点**: 3 SP
-- **状态**: ⏳ 待开始
+- **状态**: 🚧 进行中
 - **优先级**: P0
-- **依赖**: Task-103（有 Segment 数据）
+- **依赖**: Task-103（有 Subtitle 数据）
+- **开始日期**: 2025-11-13
 - **验收标准**:
-  - [ ] UTF-8 编码
-  - [ ] 文件命名：`<源文件名>.<locale>.srt`（如 `video.en.srt`）
+  - [ ] UTF-8 编码，无 BOM
+  - [ ] 文件命名：`<源文件名>.<locale>.srt`（如 `video.zh-Hans.srt`）
   - [ ] 时间戳格式正确（`HH:MM:SS,mmm --> HH:MM:SS,mmm`）
-  - [ ] 避免覆盖（自动重命名或提示）
-  - [ ] 空间检查基础提示（磁盘不足警告）
-  - [ ] 专项导出用例：空字幕/特殊字符/长文本
+  - [ ] 文件名冲突自动处理（追加 -1, -2 后缀）
+  - [ ] 空间检查与错误提示（磁盘不足警告）
+  - [ ] 专项导出用例：空字幕/特殊字符/长文本/边界条件
   - [ ] 导出成功率 ≥ 99%（自动化测试）
-- **参考**: PRD §6.6, US §5-5
-- **相关文件**: `PrismCore/Sources/Exporters/SRTExporter.swift`
-- **详细设计**: ✅ `task-106-srt-export-basic.md`
+- **参考**: PRD §6.6, US §5-5, HLD §12
+- **相关文件**: 
+  - `PrismCore/Sources/PrismCore/Exporters/SRTExporter.swift`
+  - `PrismCore/Sources/PrismCore/Exporters/ExportService.swift`
+  - `PrismCore/Tests/PrismCoreTests/Exporters/SRTExporterTests.swift`
+- **详细设计**: ✅ `task-106-srt-export-basic.md`（v1.2，2025-11-13 完成）
 - **技术要点**:
   - SRT 格式规范（序号、时间戳、文本、空行）
-  - 文件系统错误处理
+  - 时间戳格式化：TimeInterval → `HH:MM:SS,mmm`
+  - 文件系统错误处理（空间、权限、写入）
+  - 跨平台路径处理（iOS 沙箱 vs macOS 保存面板）
   - 导出进度回调（为 UI 准备）
+- **实施计划**:
+  - PR1: SRT 格式化核心实现（0.5d）⏳
+  - PR2: 文件系统操作与错误处理（0.5d）⏳
+  - PR3: 集成测试与 CI 配置（0.5d）⏳
+- **测试计划**:
+  - 20 个单元测试（格式、边界、错误）
+  - 3 个 E2E 测试（完整导出、性能、文件冲突）
+  - 测试夹具：sample-10-lines.json, sample-utf8.json, sample.srt（金样本）
 
 ---
 
