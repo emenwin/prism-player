@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "PrismKit",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17),
         .macOS(.v14)
@@ -22,7 +23,10 @@ let package = Package(
             dependencies: [
                 .product(name: "PrismCore", package: "PrismCore")
             ],
-            path: "Sources/PrismKit"
+            path: "Sources/PrismKit",
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "PrismKitTests",

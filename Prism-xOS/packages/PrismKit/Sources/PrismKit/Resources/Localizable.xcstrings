@@ -1,0 +1,78 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "subtitle_current" : {
+      "comment" : "无障碍：当前字幕",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current subtitle"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前字幕"
+          }
+        }
+      }
+    },
+    "subtitle_error_accessibility" : {
+      "comment" : "无障碍：字幕错误标签",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subtitle error"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字幕错误"
+          }
+        }
+      }
+    },
+    "subtitle_loading" : {
+      "comment" : "字幕加载中提示",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recognizing..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "识别中..."
+          }
+        }
+      }
+    },
+    "subtitle_loading_accessibility" : {
+      "comment" : "无障碍：字幕加载中",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recognizing subtitles"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在识别字幕"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
