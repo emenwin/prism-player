@@ -6,3 +6,9 @@
 "audio.error.read_failed" = "音频读取失败: %@";
 "audio.error.time_range_invalid" = "时间范围无效";
 "audio.error.cancelled" = "操作已取消";
+
+/* Player Errors */
+"player.error.load_failed" = "加载媒体失败";
+"player.error.decoding" = "解码错误";
+"player.error.network" = "网络错误";
+"player.error.unknown" = "未知错误";

@@ -1,6 +1,105 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "/" : {
+
+    },
+    "0.1.0" : {
+
+    },
+    "1" : {
+
+    },
+    "app.name" : {
+
+    },
+    "permission.mediaLibrary.description" : {
+
+    },
+    "permission.mediaLibrary.title" : {
+
+    },
+    "permission.microphone.description" : {
+
+    },
+    "permission.microphone.title" : {
+
+    },
+    "permission.speechRecognition.description" : {
+
+    },
+    "permission.speechRecognition.title" : {
+
+    },
+    "player.error.decoding" : {
+      "comment" : "解码错误"
+    },
+    "player.error.load_failed" : {
+      "comment" : "加载失败"
+    },
+    "player.error.network" : {
+      "comment" : "网络错误"
+    },
+    "player.error.unknown" : {
+      "comment" : "未知错误"
+    },
+    "settings.about.appName" : {
+
+    },
+    "settings.about.buildNumber" : {
+
+    },
+    "settings.about.github" : {
+
+    },
+    "settings.about.title" : {
+
+    },
+    "settings.about.version" : {
+
+    },
+    "settings.licenses.comingSoon" : {
+
+    },
+    "settings.licenses.placeholder.description" : {
+
+    },
+    "settings.licenses.title" : {
+
+    },
+    "settings.modelLicenses.placeholder.description" : {
+
+    },
+    "settings.modelLicenses.title" : {
+
+    },
+    "settings.privacy.dataCollection.description" : {
+
+    },
+    "settings.privacy.dataCollection.title" : {
+
+    },
+    "settings.privacy.permissions.title" : {
+
+    },
+    "settings.privacy.statement" : {
+
+    },
+    "settings.privacy.title" : {
+
+    },
+    "settings.section.about" : {
+
+    },
+    "settings.section.licenses" : {
+
+    },
+    "settings.section.privacy" : {
+
+    },
+    "settings.title" : {
+
+    },
     "subtitle_current" : {
       "comment" : "无障碍：当前字幕",
       "extractionState" : "manual",
@@ -72,6 +171,30 @@
           }
         }
       }
+    },
+    "全屏 (F)" : {
+
+    },
+    "取消静音" : {
+
+    },
+    "播放 (Space)" : {
+
+    },
+    "播放速度" : {
+
+    },
+    "暂停 (Space)" : {
+
+    },
+    "退出全屏 (F)" : {
+
+    },
+    "静音" : {
+
+    },
+    "音量: %lld%%" : {
+
     }
   },
   "version" : "1.0"

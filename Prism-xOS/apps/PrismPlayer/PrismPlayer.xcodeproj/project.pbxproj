@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D1033B802EC61B24004ADA6F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B7E2EC61B24004ADA6F /* AppViewModel.swift */; };
+		D1033B812EC61B24004ADA6F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B7E2EC61B24004ADA6F /* AppViewModel.swift */; };
+		D1033B832EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */; };
+		D1033B842EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */; };
+		D1033B872EC61B40004ADA6F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B852EC61B40004ADA6F /* WelcomeView.swift */; };
+		D1033B882EC61B40004ADA6F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B852EC61B40004ADA6F /* WelcomeView.swift */; };
 		EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */; };
 		EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */; };
 		EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
@@ -47,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D1033B7E2EC61B24004ADA6F /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneView.swift; sourceTree = "<group>"; };
+		D1033B852EC61B40004ADA6F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		EE09ED8E2EB0972A0039163B /* PrismPlayer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerApp.swift; sourceTree = "<group>"; };
 		EE09EDA12EB0975A0039163B /* PrismPlayer_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer_macOS.entitlements; sourceTree = "<group>"; };
@@ -106,6 +115,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D1033B7F2EC61B24004ADA6F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D1033B7E2EC61B24004ADA6F /* AppViewModel.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D1033B862EC61B40004ADA6F /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				D1033B852EC61B40004ADA6F /* WelcomeView.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
 		EE09ED852EB0972A0039163B = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +192,7 @@
 		EE09EDA42EB0975A0039163B /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */,
 				EE09EDF82EB0CA500039163B /* PlayerView.swift */,
 				EE09EDDC2EB0BCC20039163B /* MediaPicker.swift */,
 				EE09EDDD2EB0BCC20039163B /* PlayerIntegrationDemoView.swift */,
@@ -186,6 +212,8 @@
 		EE09EDA62EB0975A0039163B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D1033B7F2EC61B24004ADA6F /* App */,
+				D1033B862EC61B40004ADA6F /* Welcome */,
 				EE09EDA42EB0975A0039163B /* Player */,
 				EE09EDA52EB0975A0039163B /* Resources */,
 				EE09EDCB2EB0987B0039163B /* ContentView.swift */,
@@ -397,11 +425,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1033B812EC61B24004ADA6F /* AppViewModel.swift in Sources */,
+				D1033B832EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */,
 				EE09EDDF2EB0BCC20039163B /* MediaPicker.swift in Sources */,
 				EE09EDE02EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
 				EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */,
 				EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */,
+				D1033B882EC61B40004ADA6F /* WelcomeView.swift in Sources */,
 				EE09EDFC2EB0CC1C0039163B /* VideoPlayerView.swift in Sources */,
 				EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */,
 				EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
@@ -415,8 +446,11 @@
 			files = (
 				EE09EDE82EB0C13E0039163B /* MediaPickerMac.swift in Sources */,
 				EE09EDE22EB0BCC20039163B /* MediaPicker.swift in Sources */,
+				D1033B842EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */,
+				D1033B802EC61B24004ADA6F /* AppViewModel.swift in Sources */,
 				EE09EDFA2EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE32EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
+				D1033B872EC61B40004ADA6F /* WelcomeView.swift in Sources */,
 				EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */,
 				EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */,
@@ -566,7 +600,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/iOS/PrismPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DEVELOPMENT_TEAM = SMYZSMG994;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -606,7 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/iOS/PrismPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DEVELOPMENT_TEAM = SMYZSMG994;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -648,7 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DEVELOPMENT_TEAM = SMYZSMG994;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -680,7 +714,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DEVELOPMENT_TEAM = SMYZSMG994;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

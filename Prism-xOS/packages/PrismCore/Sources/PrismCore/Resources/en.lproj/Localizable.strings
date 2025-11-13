@@ -6,3 +6,9 @@
 "audio.error.read_failed" = "Failed to read audio data: %@";
 "audio.error.time_range_invalid" = "Invalid time range";
 "audio.error.cancelled" = "Operation cancelled";
+
+/* Player Errors */
+"player.error.load_failed" = "Failed to load media";
+"player.error.decoding" = "Decoding error";
+"player.error.network" = "Network error";
+"player.error.unknown" = "Unknown error";
