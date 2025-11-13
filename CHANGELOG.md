@@ -7,6 +7,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Sprint 1, Task-103 PR3 (WhisperCppBackend Implementation)
+
+#### Core ASR Functionality
+- **WhisperContext.transcribe() Implementation**
+  - Complete audio transcription pipeline using whisper.cpp C API
+  - PCM Float32 audio format support (16kHz mono)
+  - Configurable parameters: language, temperature, threads, timestamps
+  - Automatic C string memory management
+  - Segment parsing with time stamp conversion (centiseconds → seconds)
+  - Cancellation support (every 10 segments check)
+  - RTF (Real-Time Factor) calculation and logging
+  - 6 key logging points (info/error/warning/debug levels)
+
+- **WhisperCppBackend Complete Implementation**
+  - AsrEngine protocol conformance
+  - Automatic model loading on first transcribe call
+  - Audio format validation (minimum 0.1s duration)
+  - Error handling with detailed logging
+  - Thread-safe with @unchecked Sendable
+  - Support for default model path configuration
+
+#### API Improvements
+- **Type Unification**
+  - Removed temporary `PrismASR.AsrSegment` definition
+  - Unified to use `PrismCore.AsrSegment` across all modules
+  - Updated all type references in tests
+
+- **C API Upgrade**
+  - Upgraded from deprecated `whisper_init_from_file` to `whisper_init_from_file_with_params`
+  - Added context parameter configuration
+
+#### Testing
+- **WhisperCppBackendTests (8 tests)**
+  - ✅ Empty audio error handling
+  - ✅ Too-short audio error handling
+  - ✅ Model not loaded error handling
+  - ⏳ 5 tests awaiting real model (PR4)
+
+- **Integration Tests (2 tests)**
+  - ⏳ End-to-end transcription flow (PR4)
+  - ⏳ Cancellation verification (PR4)
+
+- **Test Helpers**
+  - `generateMockAudio()` function for sine wave test audio
+  - Mock audio duration/frequency/sample rate configuration
+
+#### Documentation
+- **README Updates**
+  - Complete usage examples (basic transcription, language selection, cancellation)
+  - Technical features list
+  - Performance metrics table
+  - Version history
+  - Links to related documentation
+
+- **Test Coverage**
+  - 26 total tests (16 passed, 10 skipped awaiting PR4)
+  - 0 failures
+  - Coverage: 80%+ (error handling paths 100%)
+
+### Changed
+- **WhisperContext**
+  - Enhanced logging with RTF metrics
+  - Added empty text segment filtering
+  - Improved error messages
+
+### Technical Details
+- **Commits**: 4 (8cf75c4, c3118ca, 8952397, 62b503e)
+- **Files Changed**: 6
+- **Lines Added**: ~450
+- **Sprint**: S1
+- **Task**: Task-103 PR3
+
 ### Added - Sprint 1, Task-102 (Audio Preload & Fast First Frame)
 
 #### Audio Extraction

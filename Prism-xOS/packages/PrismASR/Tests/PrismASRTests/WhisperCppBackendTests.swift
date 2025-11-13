@@ -1,7 +1,7 @@
+import PrismCore
 import XCTest
 
 @testable import PrismASR
-import PrismCore
 
 /// WhisperCppBackend 单元测试
 ///

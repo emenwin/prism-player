@@ -138,13 +138,13 @@ func generateMockAudio(
 ) -> Data {
     let sampleCount = Int(duration * Double(sampleRate))
     var samples: [Float] = []
-    
+
     for i in 0..<sampleCount {
         let t = Double(i) / Double(sampleRate)
         let sample = sin(2.0 * .pi * frequency * t)
         samples.append(Float(sample * 0.5))  // 振幅 0.5
     }
-    
+
     return AudioConverter.floatArrayToData(samples)
 }
 
