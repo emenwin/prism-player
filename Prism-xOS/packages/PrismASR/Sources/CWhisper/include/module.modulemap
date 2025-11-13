@@ -1,4 +1,0 @@
-module CWhisper {
-    umbrella header "CWhisper.h"
-    export *
-}

@@ -1,6 +1,6 @@
-import CWhisper
 import Foundation
 import OSLog
+import whisper  // Module from CWhisper.xcframework (official whisper.framework)
 
 /// Whisper.cpp 上下文封装（线程安全）
 ///
@@ -109,7 +109,7 @@ public actor WhisperContext {
         }
 
         logger.info(
-            "[WhisperContext] Unloading model: \(modelPath?.lastPathComponent ?? "unknown")")
+            "[WhisperContext] Unloading model: \(self.modelPath?.lastPathComponent ?? "unknown")")
         whisper_free(ctx)
 
         self.context = nil

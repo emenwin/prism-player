@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EE38746E2EC48FEF003F94C2 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE38746D2EC48FEF003F94C2 /* Metal.framework */; };
+		EE3874702EC48FFB003F94C2 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE38746F2EC48FFB003F94C2 /* MetalKit.framework */; };
+		EE3874722EC49001003F94C2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3874712EC49001003F94C2 /* Accelerate.framework */; };
+		EE3874742EC49009003F94C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3874732EC49009003F94C2 /* Foundation.framework */; };
+		EE3874762EC49029003F94C2 /* CWhisper.h in Headers */ = {isa = PBXBuildFile; fileRef = EE3874752EC49029003F94C2 /* CWhisper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE387D992EC4931B003F94C2 /* ggml-backend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A042EC4931B003F94C2 /* ggml-backend.cpp */; };
+		EE387DCF2EC4931B003F94C2 /* ggml-quants.c in Sources */ = {isa = PBXBuildFile; fileRef = EE387A0B2EC4931B003F94C2 /* ggml-quants.c */; };
+		EE387DE52EC4931B003F94C2 /* whisper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A5E2EC4931B003F94C2 /* whisper.cpp */; };
+		EE387E0B2EC4931B003F94C2 /* ggml-alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = EE387A032EC4931B003F94C2 /* ggml-alloc.c */; };
+		EE387E1D2EC4931B003F94C2 /* ggml-threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A0D2EC4931B003F94C2 /* ggml-threading.cpp */; };
+		EE387E282EC4931B003F94C2 /* ggml.c in Sources */ = {isa = PBXBuildFile; fileRef = EE387A012EC4931B003F94C2 /* ggml.c */; };
+		EE387E702EC4931B003F94C2 /* gguf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A0E2EC4931B003F94C2 /* gguf.cpp */; };
+		EE387F0C2EC4931B003F94C2 /* ggml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A022EC4931B003F94C2 /* ggml.cpp */; };
+		EE387F272EC4931B003F94C2 /* ggml-backend-reg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387A062EC4931B003F94C2 /* ggml-backend-reg.cpp */; };
+		EE387FF62EC49523003F94C2 /* ggml-metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE387FE42EC49523003F94C2 /* ggml-metal.cpp */; };
+		EE99602C2EC565A6007A0BF1 /* ggml-metal-device.m in Sources */ = {isa = PBXBuildFile; fileRef = EE99602B2EC565A6007A0BF1 /* ggml-metal-device.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EE99602E2EC56616007A0BF1 /* ggml-metal-context.m in Sources */ = {isa = PBXBuildFile; fileRef = EE99602D2EC56616007A0BF1 /* ggml-metal-context.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EE9960302EC56651007A0BF1 /* ggml-metal-common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE99602F2EC56651007A0BF1 /* ggml-metal-common.cpp */; };
+		EE9960322EC566A0007A0BF1 /* ggml-metal-device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE9960312EC566A0007A0BF1 /* ggml-metal-device.cpp */; };
+		EE9960342EC566C4007A0BF1 /* ggml-metal-ops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE9960332EC566C4007A0BF1 /* ggml-metal-ops.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EE385D992EC48AB1003F94C2 /* CWhisper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWhisper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE38746D2EC48FEF003F94C2 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		EE38746F2EC48FFB003F94C2 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		EE3874712EC49001003F94C2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		EE3874732EC49009003F94C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EE3874752EC49029003F94C2 /* CWhisper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWhisper.h; sourceTree = "<group>"; };
+		EE387A012EC4931B003F94C2 /* ggml.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ggml.c; sourceTree = "<group>"; };
+		EE387A022EC4931B003F94C2 /* ggml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ggml.cpp; sourceTree = "<group>"; };
+		EE387A032EC4931B003F94C2 /* ggml-alloc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ggml-alloc.c"; sourceTree = "<group>"; };
+		EE387A042EC4931B003F94C2 /* ggml-backend.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-backend.cpp"; sourceTree = "<group>"; };
+		EE387A062EC4931B003F94C2 /* ggml-backend-reg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-backend-reg.cpp"; sourceTree = "<group>"; };
+		EE387A0B2EC4931B003F94C2 /* ggml-quants.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ggml-quants.c"; sourceTree = "<group>"; };
+		EE387A0D2EC4931B003F94C2 /* ggml-threading.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-threading.cpp"; sourceTree = "<group>"; };
+		EE387A0E2EC4931B003F94C2 /* gguf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gguf.cpp; sourceTree = "<group>"; };
+		EE387A5E2EC4931B003F94C2 /* whisper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = whisper.cpp; sourceTree = "<group>"; };
+		EE387FE42EC49523003F94C2 /* ggml-metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-metal.cpp"; sourceTree = "<group>"; };
+		EE99602B2EC565A6007A0BF1 /* ggml-metal-device.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ggml-metal-device.m"; sourceTree = "<group>"; };
+		EE99602D2EC56616007A0BF1 /* ggml-metal-context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ggml-metal-context.m"; sourceTree = "<group>"; };
+		EE99602F2EC56651007A0BF1 /* ggml-metal-common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-metal-common.cpp"; sourceTree = "<group>"; };
+		EE9960312EC566A0007A0BF1 /* ggml-metal-device.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-metal-device.cpp"; sourceTree = "<group>"; };
+		EE9960332EC566C4007A0BF1 /* ggml-metal-ops.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ggml-metal-ops.cpp"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EE385D962EC48AB1003F94C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE3874742EC49009003F94C2 /* Foundation.framework in Frameworks */,
+				EE3874722EC49001003F94C2 /* Accelerate.framework in Frameworks */,
+				EE3874702EC48FFB003F94C2 /* MetalKit.framework in Frameworks */,
+				EE38746E2EC48FEF003F94C2 /* Metal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EE385D8F2EC48AB1003F94C2 = {
+			isa = PBXGroup;
+			children = (
+				EE386F092EC48D32003F94C2 /* CWhisper */,
+				EE38746C2EC48FEF003F94C2 /* Frameworks */,
+				EE385D9A2EC48AB1003F94C2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE385D9A2EC48AB1003F94C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE385D992EC48AB1003F94C2 /* CWhisper.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE386F092EC48D32003F94C2 /* CWhisper */ = {
+			isa = PBXGroup;
+			children = (
+				EE387A912EC4931B003F94C2 /* whisper.cpp */,
+				EE3874752EC49029003F94C2 /* CWhisper.h */,
+			);
+			path = CWhisper;
+			sourceTree = "<group>";
+		};
+		EE38746C2EC48FEF003F94C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE3874732EC49009003F94C2 /* Foundation.framework */,
+				EE3874712EC49001003F94C2 /* Accelerate.framework */,
+				EE38746F2EC48FFB003F94C2 /* MetalKit.framework */,
+				EE38746D2EC48FEF003F94C2 /* Metal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE387A0F2EC4931B003F94C2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				EE387FF02EC49523003F94C2 /* ggml-metal */,
+				EE387A012EC4931B003F94C2 /* ggml.c */,
+				EE387A022EC4931B003F94C2 /* ggml.cpp */,
+				EE387A032EC4931B003F94C2 /* ggml-alloc.c */,
+				EE387A042EC4931B003F94C2 /* ggml-backend.cpp */,
+				EE387A062EC4931B003F94C2 /* ggml-backend-reg.cpp */,
+				EE387A0B2EC4931B003F94C2 /* ggml-quants.c */,
+				EE387A0D2EC4931B003F94C2 /* ggml-threading.cpp */,
+				EE387A0E2EC4931B003F94C2 /* gguf.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		EE387A122EC4931B003F94C2 /* ggml */ = {
+			isa = PBXGroup;
+			children = (
+				EE387A0F2EC4931B003F94C2 /* src */,
+			);
+			path = ggml;
+			sourceTree = "<group>";
+		};
+		EE387A602EC4931B003F94C2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				EE387A5E2EC4931B003F94C2 /* whisper.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		EE387A912EC4931B003F94C2 /* whisper.cpp */ = {
+			isa = PBXGroup;
+			children = (
+				EE387A122EC4931B003F94C2 /* ggml */,
+				EE387A602EC4931B003F94C2 /* src */,
+			);
+			path = whisper.cpp;
+			sourceTree = "<group>";
+		};
+		EE387FF02EC49523003F94C2 /* ggml-metal */ = {
+			isa = PBXGroup;
+			children = (
+				EE9960332EC566C4007A0BF1 /* ggml-metal-ops.cpp */,
+				EE9960312EC566A0007A0BF1 /* ggml-metal-device.cpp */,
+				EE99602F2EC56651007A0BF1 /* ggml-metal-common.cpp */,
+				EE99602D2EC56616007A0BF1 /* ggml-metal-context.m */,
+				EE99602B2EC565A6007A0BF1 /* ggml-metal-device.m */,
+				EE387FE42EC49523003F94C2 /* ggml-metal.cpp */,
+			);
+			name = "ggml-metal";
+			path = "../external/whisper.cpp/ggml/src/ggml-metal";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EE385D942EC48AB1003F94C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE3874762EC49029003F94C2 /* CWhisper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		EE385D982EC48AB1003F94C2 /* CWhisper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE385DA02EC48AB1003F94C2 /* Build configuration list for PBXNativeTarget "CWhisper" */;
+			buildPhases = (
+				EE385D942EC48AB1003F94C2 /* Headers */,
+				EE385D952EC48AB1003F94C2 /* Sources */,
+				EE385D962EC48AB1003F94C2 /* Frameworks */,
+				EE385D972EC48AB1003F94C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CWhisper;
+			packageProductDependencies = (
+			);
+			productName = CWhisper;
+			productReference = EE385D992EC48AB1003F94C2 /* CWhisper.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE385D902EC48AB1003F94C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					EE385D982EC48AB1003F94C2 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+				};
+			};
+			buildConfigurationList = EE385D932EC48AB1003F94C2 /* Build configuration list for PBXProject "CWhisper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE385D8F2EC48AB1003F94C2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EE385D9A2EC48AB1003F94C2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE385D982EC48AB1003F94C2 /* CWhisper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE385D972EC48AB1003F94C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE385D952EC48AB1003F94C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9960322EC566A0007A0BF1 /* ggml-metal-device.cpp in Sources */,
+				EE387D992EC4931B003F94C2 /* ggml-backend.cpp in Sources */,
+				EE387DCF2EC4931B003F94C2 /* ggml-quants.c in Sources */,
+				EE387DE52EC4931B003F94C2 /* whisper.cpp in Sources */,
+				EE387E0B2EC4931B003F94C2 /* ggml-alloc.c in Sources */,
+				EE99602C2EC565A6007A0BF1 /* ggml-metal-device.m in Sources */,
+				EE9960342EC566C4007A0BF1 /* ggml-metal-ops.cpp in Sources */,
+				EE9960302EC56651007A0BF1 /* ggml-metal-common.cpp in Sources */,
+				EE387E1D2EC4931B003F94C2 /* ggml-threading.cpp in Sources */,
+				EE387E282EC4931B003F94C2 /* ggml.c in Sources */,
+				EE387E702EC4931B003F94C2 /* gguf.cpp in Sources */,
+				EE99602E2EC56616007A0BF1 /* ggml-metal-context.m in Sources */,
+				EE387F0C2EC4931B003F94C2 /* ggml.cpp in Sources */,
+				EE387FF62EC49523003F94C2 /* ggml-metal.cpp in Sources */,
+				EE387F272EC4931B003F94C2 /* ggml-backend-reg.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EE385D9E2EC48AB1003F94C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EE385D9F2EC48AB1003F94C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EE385DA12EC48AB1003F94C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"GGML_USE_METAL=1",
+					"GGML_USE_ACCELERATE=1",
+					"GGML_METAL_NDEBUG=1",
+					"GGML_VERSION=\\\"master\\\"",
+					"GGML_COMMIT=\\\"unknown\\\"",
+					"WHISPER_VERSION=\\\"master\\\"",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/include/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/src/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/include/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/src/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/src/ggml-metal/**",
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_HEADER_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-Wno-shorten-64-to-32",
+					"-Wno-unused-function",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wno-shorten-64-to-32",
+					"-Wno-unused-function",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.prismplayer.CWhisper;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		EE385DA22EC48AB1003F94C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"GGML_USE_METAL=1",
+					"GGML_USE_ACCELERATE=1",
+					"GGML_METAL_NDEBUG=1",
+					"GGML_VERSION=\\\"master\\\"",
+					"GGML_COMMIT=\\\"unknown\\\"",
+					"WHISPER_VERSION=\\\"master\\\"",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/include/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/src/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/include/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/src/**",
+					"$(PROJECT_DIR)/CWhisper/whisper.cpp/ggml/src/ggml-metal/**",
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_HEADER_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-Wno-shorten-64-to-32",
+					"-Wno-unused-function",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wno-shorten-64-to-32",
+					"-Wno-unused-function",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.prismplayer.CWhisper;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE385D932EC48AB1003F94C2 /* Build configuration list for PBXProject "CWhisper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE385D9E2EC48AB1003F94C2 /* Debug */,
+				EE385D9F2EC48AB1003F94C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE385DA02EC48AB1003F94C2 /* Build configuration list for PBXNativeTarget "CWhisper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE385DA12EC48AB1003F94C2 /* Debug */,
+				EE385DA22EC48AB1003F94C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EE385D902EC48AB1003F94C2 /* Project object */;
+}

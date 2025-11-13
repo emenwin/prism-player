@@ -123,7 +123,7 @@ final class AsrEngineProtocolTests: XCTestCase {
 private actor MockAsrEngine: AsrEngine {
     private var isCancelled = false
 
-    func transcribe(audioData: Data, options: AsrOptions) async throws -> [AsrSegment] {
+    func transcribe(audioData: Data, options: AsrOptions) async throws -> [PrismASR.AsrSegment] {
         // 验证音频格式
         guard !audioData.isEmpty else {
             throw AsrError.invalidAudioFormat
@@ -137,14 +137,12 @@ private actor MockAsrEngine: AsrEngine {
             throw AsrError.cancelled
         }
 
-        // 返回 mock 数据
+        // 返回 mock 数据（使用 PrismASR.AsrSegment）
         return [
-            AsrSegment(
-                mediaId: "test",
+            PrismASR.AsrSegment(
                 startTime: 0.0,
                 endTime: 1.0,
-                text: "Mock transcription",
-                confidence: 0.95
+                text: "Mock transcription"
             )
         ]
     }
