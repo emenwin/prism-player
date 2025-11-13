@@ -142,23 +142,166 @@ public actor WhisperContext {
             logger.error("[WhisperContext] Transcribe called but model not loaded")
             throw AsrError.modelNotLoaded
         }
+        
+        guard let ctx = context else {
+            throw AsrError.modelNotLoaded
+        }
 
-        // PR3: 实现音频转写逻辑
-        // 1. 转换 Data → Float32 buffer
+        let startTime = Date()
+        
+        // 日志：转写开始
+        logger.info(
+            """
+            [WhisperContext] Transcription started: \
+            audioSize=\(audioData.count) bytes, \
+            language=\(options.language?.code ?? "auto"), \
+            temperature=\(options.temperature)
+            """
+        )
+
+        // 1. 音频数据转换（Data → [Float]）
+        let samples = AudioConverter.dataToFloatArray(audioData)
+        let sampleCount = samples.count
+        
+        logger.debug(
+            "[WhisperContext] Audio converted: \(sampleCount) samples (\(String(format: "%.2f", Double(sampleCount) / 16000.0))s)"
+        )
+
         // 2. 配置 whisper_full_params
-        // 3. 调用 whisper_full()
-        // 4. 解析结果并转换为 AsrSegment
+        var params = whisper_full_default_params(WHISPER_SAMPLING_GREEDY)
+        
+        // 语言设置
+        if let language = options.language {
+            let languageCode = language.code
+            params.language = languageCode.withCString { ptr in
+                // 复制字符串到 C 风格内存
+                UnsafePointer(strdup(ptr))
+            }
+        }
+        
+        // 温度参数
+        params.temperature = options.temperature
+        
+        // 线程数配置（使用系统核心数）
+        params.n_threads = Int32(ProcessInfo.processInfo.activeProcessorCount)
+        
+        // 时间戳启用
+        params.no_timestamps = !options.enableTimestamps
+        
+        // 禁用实时打印（避免干扰日志）
+        params.print_realtime = false
+        params.print_progress = false
+        params.print_timestamps = false
+        params.print_special = false
+        
+        // 初始提示词（如有）
+        if let prompt = options.prompt {
+            params.initial_prompt = prompt.withCString { ptr in
+                UnsafePointer(strdup(ptr))
+            }
+        }
 
-        logger.warning("[WhisperContext] transcribe() not implemented yet (PR3)")
-        throw AsrError.internalError("Transcription not implemented in PR2")
+        logger.debug(
+            """
+            [WhisperContext] Params configured: \
+            threads=\(params.n_threads), \
+            no_timestamps=\(params.no_timestamps)
+            """
+        )
+
+        // 3. 调用 whisper_full() C API
+        let result = samples.withUnsafeBufferPointer { buffer in
+            whisper_full(ctx, params, buffer.baseAddress, Int32(buffer.count))
+        }
+        
+        // 释放字符串内存（如果分配了）
+        if let languagePtr = params.language {
+            free(UnsafeMutableRawPointer(mutating: languagePtr))
+        }
+        if let promptPtr = params.initial_prompt {
+            free(UnsafeMutableRawPointer(mutating: promptPtr))
+        }
+        
+        // 检查返回值
+        guard result == 0 else {
+            logger.error("[WhisperContext] whisper_full() returned error code: \(result)")
+            throw AsrError.transcriptionFailed("whisper_full returned \(result)")
+        }
+
+        // 4. 解析结果并转换为 AsrSegment
+        let nSegments = whisper_full_n_segments(ctx)
+        var segments: [AsrSegment] = []
+        
+        logger.debug("[WhisperContext] Parsing \(nSegments) segments")
+        
+        for i in 0..<nSegments {
+            // 取消检查（每 10 个片段检查一次，减少开销）
+            if i % 10 == 0 {
+                try Task.checkCancellation()
+            }
+            
+            // 获取片段文本
+            guard let textPtr = whisper_full_get_segment_text(ctx, i) else {
+                logger.warning("[WhisperContext] Segment \(i) has nil text, skipping")
+                continue
+            }
+            let text = String(cString: textPtr)
+            
+            // 跳过空文本
+            guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                continue
+            }
+            
+            // 获取时间戳（单位：百分之一秒）
+            let t0 = whisper_full_get_segment_t0(ctx, i)
+            let t1 = whisper_full_get_segment_t1(ctx, i)
+            
+            // 转换为秒
+            let startTime = Double(t0) / 100.0
+            let endTime = Double(t1) / 100.0
+            
+            // 创建 AsrSegment（mediaId 由调用方设置）
+            let segment = AsrSegment(
+                mediaId: "unknown",  // 占位符，由上层设置
+                startTime: startTime,
+                endTime: endTime,
+                text: text
+            )
+            segments.append(segment)
+            
+            logger.debug(
+                """
+                [WhisperContext] Segment \(i): \
+                [\(String(format: "%.2f", startTime)) → \(String(format: "%.2f", endTime))s] \
+                "\(text.prefix(50))\(text.count > 50 ? "..." : "")"
+                """
+            )
+        }
+
+        let elapsed = Date().timeIntervalSince(startTime)
+        let audioDuration = Double(sampleCount) / 16000.0
+        let rtf = audioDuration > 0 ? elapsed / audioDuration : 0
+        
+        // 日志：转写成功
+        logger.info(
+            """
+            [WhisperContext] Transcription completed: \
+            segmentCount=\(segments.count), \
+            duration=\(String(format: "%.2f", elapsed))s, \
+            audioDuration=\(String(format: "%.2f", audioDuration))s, \
+            RTF=\(String(format: "%.2f", rtf))
+            """
+        )
+
+        return segments
     }
 
     /// 取消当前转写任务
     ///
-    /// PR3 将实现此功能。
+    /// 通过 Swift Concurrency 的取消机制实现。
+    /// 调用方应取消包含 transcribe() 的 Task。
     public func cancel() async {
-        // PR3: 实现取消机制
-        logger.warning("[WhisperContext] cancel() not implemented yet (PR3)")
+        logger.warning("[WhisperContext] Cancel requested (handled via Task.checkCancellation())")
     }
 
     // MARK: - Cleanup
