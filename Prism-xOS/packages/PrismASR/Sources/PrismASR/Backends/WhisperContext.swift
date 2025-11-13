@@ -142,13 +142,13 @@ public actor WhisperContext {
             logger.error("[WhisperContext] Transcribe called but model not loaded")
             throw AsrError.modelNotLoaded
         }
-        
+
         guard let ctx = context else {
             throw AsrError.modelNotLoaded
         }
 
         let startTime = Date()
-        
+
         // 日志：转写开始
         logger.info(
             """
@@ -162,14 +162,14 @@ public actor WhisperContext {
         // 1. 音频数据转换（Data → [Float]）
         let samples = AudioConverter.dataToFloatArray(audioData)
         let sampleCount = samples.count
-        
+
         logger.debug(
             "[WhisperContext] Audio converted: \(sampleCount) samples (\(String(format: "%.2f", Double(sampleCount) / 16000.0))s)"
         )
 
         // 2. 配置 whisper_full_params
         var params = whisper_full_default_params(WHISPER_SAMPLING_GREEDY)
-        
+
         // 语言设置
         if let language = options.language {
             let languageCode = language.code
@@ -178,22 +178,22 @@ public actor WhisperContext {
                 UnsafePointer(strdup(ptr))
             }
         }
-        
+
         // 温度参数
         params.temperature = options.temperature
-        
+
         // 线程数配置（使用系统核心数）
         params.n_threads = Int32(ProcessInfo.processInfo.activeProcessorCount)
-        
+
         // 时间戳启用
         params.no_timestamps = !options.enableTimestamps
-        
+
         // 禁用实时打印（避免干扰日志）
         params.print_realtime = false
         params.print_progress = false
         params.print_timestamps = false
         params.print_special = false
-        
+
         // 初始提示词（如有）
         if let prompt = options.prompt {
             params.initial_prompt = prompt.withCString { ptr in
@@ -213,7 +213,7 @@ public actor WhisperContext {
         let result = samples.withUnsafeBufferPointer { buffer in
             whisper_full(ctx, params, buffer.baseAddress, Int32(buffer.count))
         }
-        
+
         // 释放字符串内存（如果分配了）
         if let languagePtr = params.language {
             free(UnsafeMutableRawPointer(mutating: languagePtr))
@@ -221,7 +221,7 @@ public actor WhisperContext {
         if let promptPtr = params.initial_prompt {
             free(UnsafeMutableRawPointer(mutating: promptPtr))
         }
-        
+
         // 检查返回值
         guard result == 0 else {
             logger.error("[WhisperContext] whisper_full() returned error code: \(result)")
@@ -231,35 +231,35 @@ public actor WhisperContext {
         // 4. 解析结果并转换为 AsrSegment
         let nSegments = whisper_full_n_segments(ctx)
         var segments: [AsrSegment] = []
-        
+
         logger.debug("[WhisperContext] Parsing \(nSegments) segments")
-        
+
         for i in 0..<nSegments {
             // 取消检查（每 10 个片段检查一次，减少开销）
             if i % 10 == 0 {
                 try Task.checkCancellation()
             }
-            
+
             // 获取片段文本
             guard let textPtr = whisper_full_get_segment_text(ctx, i) else {
                 logger.warning("[WhisperContext] Segment \(i) has nil text, skipping")
                 continue
             }
             let text = String(cString: textPtr)
-            
+
             // 跳过空文本
             guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 continue
             }
-            
+
             // 获取时间戳（单位：百分之一秒）
             let t0 = whisper_full_get_segment_t0(ctx, i)
             let t1 = whisper_full_get_segment_t1(ctx, i)
-            
+
             // 转换为秒
             let startTime = Double(t0) / 100.0
             let endTime = Double(t1) / 100.0
-            
+
             // 创建 AsrSegment（mediaId 由调用方设置）
             let segment = AsrSegment(
                 mediaId: "unknown",  // 占位符，由上层设置
@@ -268,7 +268,7 @@ public actor WhisperContext {
                 text: text
             )
             segments.append(segment)
-            
+
             logger.debug(
                 """
                 [WhisperContext] Segment \(i): \
@@ -281,7 +281,7 @@ public actor WhisperContext {
         let elapsed = Date().timeIntervalSince(startTime)
         let audioDuration = Double(sampleCount) / 16000.0
         let rtf = audioDuration > 0 ? elapsed / audioDuration : 0
-        
+
         // 日志：转写成功
         logger.info(
             """
