@@ -74,7 +74,7 @@ final class DatabaseTests: XCTestCase {
                 startTime: 10.0,
                 endTime: 15.0,
                 text: "Subtitle segment"
-            )
+            ),
         ]
         try await subtitleRepo.saveBatch(segments)
 
@@ -82,15 +82,19 @@ final class DatabaseTests: XCTestCase {
         let all = try await subtitleRepo.findAll(mediaId: "test-media")
         XCTAssertEqual(all.count, 3)
 
-        // 时间范围查询
+        // 时间范围查询（查询4.0-11.0，应返回所有与此范围有重叠的片段）
         let range = try await subtitleRepo.findInTimeRange(
             mediaId: "test-media",
             startTime: 4.0,
             endTime: 11.0
         )
-        XCTAssertEqual(range.count, 2)
+        // Segment 1 (0-5): 与4.0-11.0重叠 ✓
+        // Segment 2 (5-10): 与4.0-11.0重叠 ✓
+        // Segment 3 (10-15): 与4.0-11.0重叠 ✓
+        XCTAssertEqual(range.count, 3)
         XCTAssertEqual(range[0].text, "Hello world")
         XCTAssertEqual(range[1].text, "This is a test")
+        XCTAssertEqual(range[2].text, "Subtitle segment")
 
         // 计数
         let count = try await subtitleRepo.count(mediaId: "test-media")

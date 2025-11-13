@@ -35,6 +35,20 @@ public struct ModelMetadata: Codable, Sendable {
     /// 创建时间（Unix timestamp）
     public var createdAt: Int64
 
+    /// 定义数据库列映射（snake_case）
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case size
+        case backend
+        case version
+        case filePath = "file_path"
+        case downloadStatus = "download_status"
+        case sha256
+        case supportsTimestamps = "supports_timestamps"
+        case createdAt = "created_at"
+    }
+
     /// 初始化模型元数据
     public init(
         id: String = UUID().uuidString,

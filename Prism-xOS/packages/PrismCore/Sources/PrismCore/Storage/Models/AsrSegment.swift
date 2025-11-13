@@ -71,6 +71,18 @@ extension AsrSegment: FetchableRecord, PersistableRecord {
         case createdAt = "created_at"
     }
 
+    /// 自定义解码（String → UUID）
+    public init(row: Row) throws {
+        let idString: String = row[Columns.id]
+        id = UUID(uuidString: idString) ?? UUID()
+        mediaId = row[Columns.mediaId]
+        startTime = row[Columns.startTime]
+        endTime = row[Columns.endTime]
+        text = row[Columns.text]
+        confidence = row[Columns.confidence]
+        createdAt = row[Columns.createdAt]
+    }
+
     /// 自定义编码（UUID → String）
     public func encode(to container: inout PersistenceContainer) {
         container[Columns.id] = id.uuidString

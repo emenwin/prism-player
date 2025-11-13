@@ -29,6 +29,18 @@ public struct MediaRecord: Codable, Sendable {
     /// 最后更新时间（Unix timestamp）
     public var updatedAt: Int64
 
+    /// 定义数据库列映射（snake_case）
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case filePath = "file_path"
+        case duration
+        case recognitionProgress = "recognition_progress"
+        case modelId = "model_id"
+        case language
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+
     /// 初始化媒体记录
     public init(
         id: String = UUID().uuidString,

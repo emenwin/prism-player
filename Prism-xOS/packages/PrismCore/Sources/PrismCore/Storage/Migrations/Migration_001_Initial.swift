@@ -16,10 +16,14 @@ struct Migration_001_Initial {
             table.column("language", .text)
             table.column("created_at", .integer).notNull()
             table.column("updated_at", .integer).notNull()
-
-            // 索引
-            table.column("file_path").indexed()
         }
+
+        // 为 file_path 创建索引（单独创建，避免重复列定义）
+        try db.create(
+            index: "media_files_on_file_path",
+            on: "media_files",
+            columns: ["file_path"]
+        )
 
         // 2. 创建字幕片段表
         try db.create(table: "subtitle_segments") { table in
@@ -31,11 +35,6 @@ struct Migration_001_Initial {
             table.column("text", .text).notNull()
             table.column("confidence", .double)
             table.column("created_at", .integer).notNull()
-
-            // 复合索引：支持高效时间范围查询
-            table.column("media_id").indexed()
-            table.column("start_time").indexed()
-            table.column("end_time").indexed()
         }
 
         // 为时间范围查询创建复合索引
@@ -57,11 +56,19 @@ struct Migration_001_Initial {
             table.column("sha256", .text)
             table.column("supports_timestamps", .boolean).notNull().defaults(to: true)
             table.column("created_at", .integer).notNull()
-
-            // 索引
-            table.column("backend").indexed()
-            table.column("download_status").indexed()
         }
+
+        // 为 backend 和 download_status 创建索引
+        try db.create(
+            index: "model_metadata_on_backend",
+            on: "model_metadata",
+            columns: ["backend"]
+        )
+        try db.create(
+            index: "model_metadata_on_download_status",
+            on: "model_metadata",
+            columns: ["download_status"]
+        )
 
         // 插入示例模型（占位）
         try insertSampleModels(db)
@@ -86,7 +93,7 @@ struct Migration_001_Initial {
                 "v1",
                 "pending",
                 true,
-                now
+                now,
             ]
         )
 
@@ -105,7 +112,7 @@ struct Migration_001_Initial {
                 "v1",
                 "pending",
                 true,
-                now
+                now,
             ]
         )
     }
