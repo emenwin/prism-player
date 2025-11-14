@@ -2,7 +2,7 @@ import SwiftUI
 
 /// macOS 主应用入口
 @main
-struct PrismPlayerApp: App {
+struct PrismPlayerMacOSApp: App {
     /// 应用视图模型，管理场景切换
     @StateObject private var appViewModel = AppViewModel()
     
@@ -39,7 +39,7 @@ struct ContentRootView: View {
                 WelcomeView(viewModel: viewModel)
                 
             case .player(let url):
-                PlayerSceneView(url: url)
+                PlayerSceneView(appViewModel: viewModel, url: url)
             }
         }
         .alert(

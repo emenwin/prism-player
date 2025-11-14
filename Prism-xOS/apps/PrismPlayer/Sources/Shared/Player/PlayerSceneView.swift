@@ -25,6 +25,9 @@ struct PlayerSceneView: View {
     
     // MARK: - Properties
     
+    /// 应用视图模型（用于场景切换）
+    @ObservedObject var appViewModel: AppViewModel
+    
     /// 播放器视图模型（使用 PrismKit 的 ViewModel）
     @StateObject private var viewModel: PrismKit.PlayerViewModel
     
@@ -37,57 +40,116 @@ struct PlayerSceneView: View {
     // MARK: - Initialization
     
     /// 初始化播放器场景视图
-    /// - Parameter url: 媒体文件 URL
-    init(url: URL) {
+    /// - Parameters:
+    ///   - appViewModel: 应用视图模型
+    ///   - url: 媒体文件 URL
+    init(appViewModel: AppViewModel, url: URL) {
+        self.appViewModel = appViewModel
         let player = AVPlayer(url: url)
         _viewModel = StateObject(wrappedValue: PrismKit.PlayerViewModel(player: player))
     }
     
     /// 初始化播放器场景视图（用于测试）
-    /// - Parameter player: AVPlayer 实例
-    init(player: AVPlayer) {
+    /// - Parameters:
+    ///   - appViewModel: 应用视图模型
+    ///   - player: AVPlayer 实例
+    init(appViewModel: AppViewModel, player: AVPlayer) {
+        self.appViewModel = appViewModel
         _viewModel = StateObject(wrappedValue: PrismKit.PlayerViewModel(player: player))
     }
     
     // MARK: - Body
     
     var body: some View {
-        ZStack {
-            // 视频画布
-            VideoPlayerLayer(player: viewModel)
-                .background(Color.black)
-            
-            // 错误提示（如果有）
-            if let error = viewModel.error {
-                errorOverlay(error)
-            }
-            
-            // 底部控制条
-            VStack {
-                Spacer()
+        HStack(spacing: 0) {
+            // 主播放区域
+            ZStack {
+                // 视频画布
+                VideoPlayerLayer(player: viewModel)
+                    .background(Color.black)
                 
-                if showControls {
-                    BottomControlBarView(viewModel: viewModel)
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                // 顶部工具栏（显示关闭按钮等）
+                VStack {
+                    topBar
+                        .opacity(showControls ? 1 : 0)
+                    Spacer()
+                }
+                
+                // 错误提示（如果有）
+                if let error = viewModel.error {
+                    errorOverlay(error)
+                }
+                
+                // 底部控制条
+                VStack {
+                    Spacer()
+                    
+                    if showControls {
+                        BottomControlBarView(viewModel: viewModel)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 20)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
                 }
             }
-        }
-        .onHover { isHovering in
-            handleHover(isHovering)
-        }
-        .onTapGesture {
-            handleTap()
-        }
-        .addKeyboardShortcuts(viewModel: viewModel)
-        .onChange(of: viewModel.isFullScreen) { _, isFullScreen in
-            handleFullScreenChange(isFullScreen)
+            .onHover { isHovering in
+                handleHover(isHovering)
+            }
+            .onTapGesture {
+                handleTap()
+            }
+            .addKeyboardShortcuts(viewModel: viewModel)
+            .onChange(of: viewModel.isFullScreen) { _, isFullScreen in
+                handleFullScreenChange(isFullScreen)
+            }
+            
+            // 播放列表抽屉（右侧）
+            if appViewModel.showPlaylistDrawer {
+                PlaylistDrawerView(viewModel: appViewModel)
+                    .transition(.move(edge: .trailing))
+            }
         }
         .animation(.easeInOut(duration: 0.3), value: showControls)
+        .animation(.easeInOut(duration: 0.3), value: appViewModel.showPlaylistDrawer)
     }
     
     // MARK: - Subviews
+    
+    /// 顶部工具栏
+    private var topBar: some View {
+        HStack {
+            // 关闭按钮（返回到欢迎页）
+            Button {
+                appViewModel.closePlayer(player: viewModel.player)
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(Color.black.opacity(0.5))
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .help(String(localized: "player.close"))
+            
+            Spacer()
+            
+            // 播放列表按钮
+            Button {
+                appViewModel.togglePlaylistDrawer()
+            } label: {
+                Image(systemName: appViewModel.showPlaylistDrawer ? "sidebar.right" : "sidebar.left")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(Color.black.opacity(0.5))
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .help(String(localized: appViewModel.showPlaylistDrawer ? "playlist.hide" : "playlist.show"))
+        }
+        .padding(20)
+    }
     
     /// 错误覆盖层
     private func errorOverlay(_ error: PlayerError) -> some View {
@@ -261,8 +323,9 @@ extension View {
 
 #Preview("播放器场景") {
     // 创建示例 URL（使用本地测试视频）
+    let appViewModel = AppViewModel()
     if let url = Bundle.main.url(forResource: "sample-10s", withExtension: "mp4") {
-        PlayerSceneView(url: url)
+        PlayerSceneView(appViewModel: appViewModel, url: url)
     } else {
         Text("未找到测试视频")
     }

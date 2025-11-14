@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 /// 应用场景枚举
 enum AppScene {
@@ -40,6 +41,9 @@ class AppViewModel: ObservableObject {
     /// 错误消息
     @Published var errorMessage: String?
     
+    /// 是否显示播放列表抽屉
+    @Published var showPlaylistDrawer: Bool = false
+    
     // MARK: - Private Properties
     
     /// 用户默认设置
@@ -66,6 +70,22 @@ class AppViewModel: ObservableObject {
     func navigateToPlayer(url: URL) {
         addToRecentItems(url: url)
         currentScene = .player(url: url)
+    }
+    
+    /// 关闭播放器，返回到欢迎页
+    /// - Parameter player: 需要停止的 AVPlayer 实例（可选）
+    func closePlayer(player: AVPlayer? = nil) {
+        // 停止视频播放
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)
+        
+        // 返回到欢迎页
+        currentScene = .welcome
+    }
+    
+    /// 切换播放列表抽屉的显示状态
+    func togglePlaylistDrawer() {
+        showPlaylistDrawer.toggle()
     }
     
     /// 打开文件选择器

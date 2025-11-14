@@ -27,42 +27,52 @@ struct WelcomeView: View {
     // MARK: - Body
     
     var body: some View {
-        VStack(spacing: 0) {
-            // 顶部工具栏
-            topBar
-            
+        HStack(spacing: 0) {
             // 主内容区域
-            ScrollView {
-                VStack(spacing: 40) {
-                    Spacer()
-                        .frame(height: 40)
-                    
-                    // 功能卡片与操作卡片（横向布局）
-                    HStack(alignment: .top, spacing: 24) {
-                        // 左侧：功能简介卡
-                        featureCard
-                            .frame(maxWidth: 320)
+            VStack(spacing: 0) {
+                // 顶部工具栏
+                topBar
+                
+                // 主内容区域
+                ScrollView {
+                    VStack(spacing: 40) {
+                        Spacer()
+                            .frame(height: 40)
                         
-                        // 右侧：操作卡
-                        actionCard
-                            .frame(maxWidth: 320)
+                        // 功能卡片与操作卡片（横向布局）
+                        HStack(alignment: .top, spacing: 24) {
+                            // 左侧：功能简介卡
+                            featureCard
+                                .frame(maxWidth: 320)
+                            
+                            // 右侧：操作卡
+                            actionCard
+                                .frame(maxWidth: 320)
+                        }
+                        
+                        // 最近历史区域
+                        if !viewModel.recentItems.isEmpty {
+                            historySection
+                                .padding(.top, 20)
+                        }
+                        
+                        Spacer()
+                            .frame(height: 40)
                     }
-                    
-                    // 最近历史区域
-                    if !viewModel.recentItems.isEmpty {
-                        historySection
-                            .padding(.top, 20)
-                    }
-                    
-                    Spacer()
-                        .frame(height: 40)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 40)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 40)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(nsColor: .windowBackgroundColor))
+            
+            // 播放列表抽屉（右侧）
+            if viewModel.showPlaylistDrawer {
+                PlaylistDrawerView(viewModel: viewModel)
+                    .transition(.move(edge: .trailing))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(nsColor: .windowBackgroundColor))
+        .animation(.easeInOut(duration: 0.3), value: viewModel.showPlaylistDrawer)
     }
     
     // MARK: - Subviews
@@ -75,6 +85,18 @@ struct WelcomeView: View {
                 .fontWeight(.semibold)
             
             Spacer()
+            
+            // 播放列表按钮
+            Button {
+                viewModel.togglePlaylistDrawer()
+            } label: {
+                Label(
+                    String(localized: "playlist.toggle"),
+                    systemImage: viewModel.showPlaylistDrawer ? "sidebar.right" : "sidebar.left"
+                )
+            }
+            .buttonStyle(.link)
+            .help(String(localized: viewModel.showPlaylistDrawer ? "playlist.hide" : "playlist.show"))
             
             Button {
                 // TODO: 打开反馈页面

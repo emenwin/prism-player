@@ -13,8 +13,8 @@
 		D1033B842EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */; };
 		D1033B872EC61B40004ADA6F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B852EC61B40004ADA6F /* WelcomeView.swift */; };
 		D1033B882EC61B40004ADA6F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1033B852EC61B40004ADA6F /* WelcomeView.swift */; };
-		EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */; };
-		EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */; };
+		EE09EDBD2EB0980A0039163B /* PrismPlayerIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09ED9E2EB0975A0039163B /* PrismPlayerIOSApp.swift */; };
+		EE09EDBE2EB098120039163B /* PrismPlayerMacOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDA22EB0975A0039163B /* PrismPlayerMacOSApp.swift */; };
 		EE09EDC52EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
 		EE09EDC82EB098470039163B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */; };
 		EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDCB2EB0987B0039163B /* ContentView.swift */; };
@@ -40,6 +40,8 @@
 		EE09EDFE2EB0CC300039163B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */; };
 		EE09EE002EB0D0610039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */; };
 		EE09EE012EB0D0610039163B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */; };
+		EE44CB212EC6B545000E8498 /* PlaylistDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44CB1F2EC6B545000E8498 /* PlaylistDrawerView.swift */; };
+		EE44CB222EC6B545000E8498 /* PlaylistDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44CB1F2EC6B545000E8498 /* PlaylistDrawerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +59,9 @@
 		D1033B822EC61B2E004ADA6F /* PlayerSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneView.swift; sourceTree = "<group>"; };
 		D1033B852EC61B40004ADA6F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		EE09ED8E2EB0972A0039163B /* PrismPlayer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerApp.swift; sourceTree = "<group>"; };
+		EE09ED9E2EB0975A0039163B /* PrismPlayerIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerIOSApp.swift; sourceTree = "<group>"; };
 		EE09EDA12EB0975A0039163B /* PrismPlayer_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismPlayer_macOS.entitlements; sourceTree = "<group>"; };
-		EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerApp.swift; sourceTree = "<group>"; };
+		EE09EDA22EB0975A0039163B /* PrismPlayerMacOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismPlayerMacOSApp.swift; sourceTree = "<group>"; };
 		EE09EDB12EB097D70039163B /* PrismPlayer-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrismPlayer-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE09EDC12EB098470039163B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EE09EDCB2EB0987B0039163B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		EE09EDFB2EB0CC1C0039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		EE09EDFD2EB0CC300039163B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		EE09EDFF2EB0D0610039163B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		EE44CB1F2EC6B545000E8498 /* PlaylistDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDrawerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -165,7 +168,7 @@
 			children = (
 				EE09EDDB2EB0B88E0039163B /* PrismPlayer.entitlements */,
 				EE09ED9D2EB0975A0039163B /* Platform */,
-				EE09ED9E2EB0975A0039163B /* PrismPlayerApp.swift */,
+				EE09ED9E2EB0975A0039163B /* PrismPlayerIOSApp.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -183,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				EE09EDA02EB0975A0039163B /* Platform */,
-				EE09EDA22EB0975A0039163B /* PrismPlayerApp.swift */,
+				EE09EDA22EB0975A0039163B /* PrismPlayerMacOSApp.swift */,
 				EE09EDA12EB0975A0039163B /* PrismPlayer_macOS.entitlements */,
 			);
 			path = macOS;
@@ -215,6 +218,7 @@
 				D1033B7F2EC61B24004ADA6F /* App */,
 				D1033B862EC61B40004ADA6F /* Welcome */,
 				EE09EDA42EB0975A0039163B /* Player */,
+				EE44CB202EC6B545000E8498 /* Playlist */,
 				EE09EDA52EB0975A0039163B /* Resources */,
 				EE09EDCB2EB0987B0039163B /* ContentView.swift */,
 			);
@@ -277,6 +281,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE44CB202EC6B545000E8498 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				EE44CB1F2EC6B545000E8498 /* PlaylistDrawerView.swift */,
+			);
+			path = Playlist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +441,7 @@
 				D1033B832EC61B2E004ADA6F /* PlayerSceneView.swift in Sources */,
 				EE09EDDF2EB0BCC20039163B /* MediaPicker.swift in Sources */,
 				EE09EDE02EB0BCC20039163B /* PlayerViewModel.swift in Sources */,
+				EE44CB212EC6B545000E8498 /* PlaylistDrawerView.swift in Sources */,
 				EE09EDEA2EB0C1DC0039163B /* MediaPickerMac.swift in Sources */,
 				EE09EDF92EB0CA500039163B /* PlayerView.swift in Sources */,
 				EE09EDE92EB0C1C30039163B /* ContentView.swift in Sources */,
@@ -436,7 +449,7 @@
 				EE09EDFC2EB0CC1C0039163B /* VideoPlayerView.swift in Sources */,
 				EE09EDE62EB0C1310039163B /* MediaPickeriOS.swift in Sources */,
 				EE09EDE12EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
-				EE09EDBD2EB0980A0039163B /* PrismPlayerApp.swift in Sources */,
+				EE09EDBD2EB0980A0039163B /* PrismPlayerIOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +466,8 @@
 				D1033B872EC61B40004ADA6F /* WelcomeView.swift in Sources */,
 				EE09EDE42EB0BCC20039163B /* PlayerIntegrationDemoView.swift in Sources */,
 				EE09EDCC2EB0987B0039163B /* ContentView.swift in Sources */,
-				EE09EDBE2EB098120039163B /* PrismPlayerApp.swift in Sources */,
+				EE44CB222EC6B545000E8498 /* PlaylistDrawerView.swift in Sources */,
+				EE09EDBE2EB098120039163B /* PrismPlayerMacOSApp.swift in Sources */,
 				EE09EDFE2EB0CC300039163B /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,7 +696,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SMYZSMG994;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -714,7 +728,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SMYZSMG994;
+				DEVELOPMENT_TEAM = 5US9XYQPZ2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
