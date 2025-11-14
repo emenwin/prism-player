@@ -7,6 +7,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Sprint 1b, Task-1b02 (播放控件增强)
+
+#### 播放器核心功能
+- **PlayerViewModel 完整实现**
+  - 完整的播放状态管理（播放/暂停、时间、速度、音量等）
+  - AVPlayer 封装与生命周期管理
+  - 30 FPS 时间观察器（0.033s 间隔）
+  - 播放状态 KVO 观察（timeControlStatus, status）
+  - 错误处理与 PlayerError 转换
+  - 进度拖拽防抖机制（拖拽时暂停时间更新）
+  - 完整日志记录（info/error/debug 级别）
+
+- **BottomControlBarView 播放控制条**
+  - 三段式布局（Leading/Center/Trailing Groups）
+  - 播放/暂停、进度条、时间显示
+  - 音量控制、静音切换
+  - 播放速度选择（0.5x ~ 2.0x）
+  - 全屏切换支持
+  - 毛玻璃背景效果（Material.ultraThin）
+
+- **TimelineSliderView 进度条组件**
+  - 拖拽跳转支持
+  - 缓冲进度显示
+  - 拖拽时显示进度指示器
+  - 点击跳转支持
+  - 热区扩大（20pt 高度）
+
+- **键盘快捷键支持（macOS）**
+  - Space: 播放/暂停
+  - Left/Right: ±5秒跳转
+  - Up/Down: 音量调节（±10%）
+  - F: 全屏切换
+  - M: 静音切换
+
+- **PlayerError 错误模型**
+  - 4 类错误类型：loadFailed, decodingError, networkError, unknownError
+  - 本地化错误描述、失败原因、恢复建议
+  - AVFoundation 错误自动转换
+  - 错误 UI 显示（黄色警告图标 + 重试按钮）
+
+- **TimeInterval 格式化扩展**
+  - HH:MM:SS 或 MM:SS 格式自动选择
+  - 无效值处理（NaN, Infinite, 负数）
+  - 性能优化（平均 0.002秒）
+
+#### 测试覆盖
+- **单元测试（27 个测试全部通过）**
+  - PlayerViewModelTests: 16个测试
+    - 初始状态、播放控制、进度跳转
+    - 播放速度、音量控制、静音切换
+    - 边界条件、错误处理
+  - TimeIntervalFormattingTests: 11个测试
+    - 各种时长格式化、边界值处理
+    - 性能测试（0.002秒/次）
+  - 测试覆盖率: ≥ 80%
+
+#### 架构改进
+- **MVVM 模式严格实施**
+  - View 层：SwiftUI 视图组件
+  - ViewModel 层：PlayerViewModel 状态管理
+  - Model 层：AVPlayer + PlayerError
+- **Combine 响应式编程**
+  - @Published 属性自动发布状态变化
+  - ObservableObject 驱动 UI 更新
+- **线程安全**
+  - @MainActor 确保 UI 操作在主线程
+  - nonisolated(unsafe) 用于 deinit 中的观察器清理
+
 ### Added - Sprint 1, Task-103 PR3 (WhisperCppBackend Implementation)
 
 #### Core ASR Functionality
